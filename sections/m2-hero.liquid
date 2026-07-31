@@ -46,7 +46,11 @@
         <p class="m2-eyebrow">{{ section.settings.eyebrow | escape }}</p>
       {%- endif -%}
       {%- if section.settings.heading != blank -%}
-        <h1 class="m2-heading m2-heading--xl">{{ section.settings.heading | escape }}</h1>
+        {%- if request.page_type == 'index' -%}
+          <h2 class="m2-heading m2-heading--xl">{{ section.settings.heading | escape }}</h2>
+        {%- else -%}
+          <h1 class="m2-heading m2-heading--xl">{{ section.settings.heading | escape }}</h1>
+        {%- endif -%}
       {%- endif -%}
       {%- if section.settings.text != blank -%}
         <div class="m2-copy m2-hero__copy">{{ section.settings.text }}</div>

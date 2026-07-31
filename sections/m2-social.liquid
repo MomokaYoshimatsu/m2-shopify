@@ -1,6 +1,13 @@
 {%- assign social_link = section.settings.link | default: settings.social_instagram_link -%}
+{%- liquid
+  assign should_render = false
+  if section.blocks.size > 0 or social_link != blank or request.design_mode
+    assign should_render = true
+  endif
+-%}
 
-<section class="m2-section m2-section--{{ section.settings.background }}">
+{%- if should_render -%}
+  <section class="m2-section m2-section--{{ section.settings.background }}">
   <div class="m2-container">
     <div class="m2-section-header">
       {%- if section.settings.eyebrow != blank -%}
@@ -45,7 +52,8 @@
       </div>
     {%- endif -%}
   </div>
-</section>
+  </section>
+{%- endif -%}
 
 {% schema %}
 {

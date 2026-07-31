@@ -111,7 +111,7 @@
         "text": "",
         "show_page_content": false,
         "button_label": "FAQページへ",
-        "button_link": "/pages/faq",
+        "button_link": "",
         "background": "paper"
       }
     },

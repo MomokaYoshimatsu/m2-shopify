@@ -1,6 +1,15 @@
 {%- assign selected_blog = section.settings.blog -%}
+{%- liquid
+  assign should_render = false
+  if selected_blog != blank and selected_blog.articles_count > 0
+    assign should_render = true
+  elsif request.design_mode
+    assign should_render = true
+  endif
+-%}
 
-<section class="m2-section m2-section--{{ section.settings.background }}">
+{%- if should_render -%}
+  <section class="m2-section m2-section--{{ section.settings.background }}">
   <div class="m2-container">
     <div class="m2-section-header">
       {%- if section.settings.eyebrow != blank -%}
@@ -32,7 +41,8 @@
       <p class="m2-copy">テーマエディターで記事のあるブログを選択してください。</p>
     {%- endif -%}
   </div>
-</section>
+  </section>
+{%- endif -%}
 
 {% schema %}
 {
