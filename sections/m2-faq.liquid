@@ -1,0 +1,121 @@
+<section class="m2-section m2-section--{{ section.settings.background }}">
+  <div class="m2-container m2-container--narrow">
+    <div class="m2-section-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="m2-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="m2-heading m2-heading--md">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="m2-copy">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.show_page_content and page != blank and page.content != blank -%}
+        <div class="m2-copy">{{ page.content }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- assign current_category = '' -%}
+    {%- for block in section.blocks -%}
+      {%- if block.settings.question != blank and block.settings.answer != blank -%}
+        {%- if block.settings.category != blank and block.settings.category != current_category -%}
+          <h3 class="m2-faq-group__title">{{ block.settings.category | escape }}</h3>
+        {%- endif -%}
+        {%- assign current_category = block.settings.category -%}
+        <details class="m2-faq-item" {{ block.shopify_attributes }}>
+          <summary>{{ block.settings.question | escape }}</summary>
+          <div class="m2-faq-item__answer rte">{{ block.settings.answer }}</div>
+        </details>
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      <div class="m2-faq__action">
+        <a class="m2-link" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "M2 FAQ",
+  "tag": "div",
+  "class": "m2-section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "英字ラベル",
+      "default": "FAQ"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "見出し",
+      "default": "よくあるご質問"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "導入文"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_page_content",
+      "label": "固定ページ本文を表示",
+      "default": false
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "ボタン名"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "ボタンリンク"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "背景",
+      "options": [
+        { "value": "paper", "label": "白" },
+        { "value": "soft", "label": "ライトグレー" },
+        { "value": "sand", "label": "ベージュ" }
+      ],
+      "default": "paper"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "質問と回答",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category",
+          "label": "カテゴリ"
+        },
+        {
+          "type": "text",
+          "id": "question",
+          "label": "質問"
+        },
+        {
+          "type": "richtext",
+          "id": "answer",
+          "label": "回答"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 30,
+  "presets": [
+    {
+      "name": "M2 FAQ"
+    }
+  ]
+}
+{% endschema %}

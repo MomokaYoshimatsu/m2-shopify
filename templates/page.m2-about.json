@@ -1,0 +1,98 @@
+{
+  "sections": {
+    "hero": {
+      "type": "m2-hero",
+      "settings": {
+        "eyebrow": "ABOUT M2",
+        "heading": "BE YOU, BE CONFIDENT",
+        "text": "<p>自分らしくあることが、自信につながる。<br/>M2は、毎日の美容習慣に寄り添います。</p>",
+        "alignment": "center",
+        "height": "compact",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "concept": {
+      "type": "m2-editorial",
+      "settings": {
+        "eyebrow": "CONCEPT",
+        "heading": "自分自身を大切にする時間を。",
+        "text": "<p>誰かのためだけではなく、自分のために選ぶこと。頑張る日も、立ち止まる日も、自分らしいリズムを大切にすること。M2は、その積み重ねに寄り添うブランドでありたいと考えています。</p>",
+        "layout": "media-first",
+        "background": "paper",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "values": {
+      "type": "m2-card-grid",
+      "blocks": {
+        "value_1": {
+          "type": "card",
+          "settings": {
+            "kicker": "BE YOU",
+            "heading": "自分らしく",
+            "text": "<p>決められた美しさではなく、自分が心地よいと思える選択を。</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "value_2": {
+          "type": "card",
+          "settings": {
+            "kicker": "YOUR RHYTHM",
+            "heading": "自分のリズムで",
+            "text": "<p>忙しい毎日の中でも、無理なく続けられる時間を大切に。</p>",
+            "link_label": "",
+            "link": ""
+          }
+        },
+        "value_3": {
+          "type": "card",
+          "settings": {
+            "kicker": "MORE ME",
+            "heading": "もっと自由に",
+            "text": "<p>今日の自分を受け入れながら、未来へ続く習慣を育てます。</p>",
+            "link_label": "",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["value_1", "value_2", "value_3"],
+      "settings": {
+        "eyebrow": "FOR YOU",
+        "heading": "あなたらしい毎日のために",
+        "text": "",
+        "columns": "3",
+        "show_numbers": true,
+        "background": "soft"
+      }
+    },
+    "ambassador": {
+      "type": "m2-editorial",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "AMBASSADOR",
+        "heading": "ブランドアンバサダー",
+        "text": "",
+        "layout": "reverse",
+        "background": "paper",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "cta": {
+      "type": "m2-editorial",
+      "settings": {
+        "eyebrow": "PRODUCTS",
+        "heading": "毎日の美容習慣に。",
+        "text": "<p>M2の商品ラインナップをご覧ください。</p>",
+        "layout": "media-first",
+        "background": "dark",
+        "button_label": "VIEW PRODUCTS",
+        "button_link": "/collections/all"
+      }
+    }
+  },
+  "order": ["hero", "concept", "values", "ambassador", "cta"]
+}

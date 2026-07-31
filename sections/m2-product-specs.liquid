@@ -1,0 +1,95 @@
+<section class="m2-section m2-section--{{ section.settings.background }}">
+  <div class="m2-container m2-container--narrow">
+    <div class="m2-section-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="m2-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="m2-heading m2-heading--md">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+    </div>
+
+    {%- if section.settings.show_product_description and product.description != blank -%}
+      <div class="m2-copy m2-product-description rte">{{ product.description }}</div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <dl class="m2-spec-list">
+        {%- for block in section.blocks -%}
+          {%- if block.settings.label != blank and block.settings.value != blank -%}
+            <div class="m2-spec-row" {{ block.shopify_attributes }}>
+              <dt>{{ block.settings.label | escape }}</dt>
+              <dd class="rte">{{ block.settings.value }}</dd>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </dl>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "M2 商品仕様",
+  "tag": "div",
+  "class": "m2-section-wrapper",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "英字ラベル",
+      "default": "DETAILS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "見出し",
+      "default": "商品情報"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_description",
+      "label": "商品説明を表示",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "背景",
+      "options": [
+        { "value": "paper", "label": "白" },
+        { "value": "soft", "label": "ライトグレー" },
+        { "value": "sand", "label": "ベージュ" }
+      ],
+      "default": "soft"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "spec",
+      "name": "仕様行",
+      "settings": [
+        {
+          "type": "text",
+          "id": "label",
+          "label": "項目名"
+        },
+        {
+          "type": "richtext",
+          "id": "value",
+          "label": "内容"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "M2 商品仕様"
+    }
+  ]
+}
+{% endschema %}

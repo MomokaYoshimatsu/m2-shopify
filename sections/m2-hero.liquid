@@ -1,0 +1,133 @@
+{%- liquid
+  assign desktop_image = section.settings.image
+  assign mobile_image = section.settings.mobile_image | default: desktop_image
+  assign has_image = false
+  if desktop_image != blank or mobile_image != blank
+    assign has_image = true
+  endif
+-%}
+
+<section
+  class="m2-section m2-hero m2-hero--{{ section.settings.height }}{% if has_image %} m2-hero--with-image{% else %} m2-hero--no-image{% endif %}"
+>
+  {%- if has_image -%}
+    <div class="m2-hero__media" aria-hidden="true">
+      {%- if mobile_image != blank -%}
+        {{
+          mobile_image
+          | image_url: width: 1200
+          | image_tag:
+            class: 'm2-hero__media--mobile',
+            widths: '375, 550, 750, 900, 1200',
+            sizes: '100vw',
+            loading: 'eager',
+            fetchpriority: 'high'
+        }}
+      {%- endif -%}
+      {%- if desktop_image != blank -%}
+        {{
+          desktop_image
+          | image_url: width: 2400
+          | image_tag:
+            class: 'm2-hero__media--desktop',
+            widths: '1024, 1280, 1600, 2000, 2400',
+            sizes: 'calc(100vw - 12rem)',
+            loading: 'eager',
+            fetchpriority: 'high'
+        }}
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+  <div class="m2-hero__shade" aria-hidden="true"></div>
+
+  <div class="m2-container m2-hero__inner">
+    <div class="m2-hero__content m2-hero__content--{{ section.settings.alignment }}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="m2-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h1 class="m2-heading m2-heading--xl">{{ section.settings.heading | escape }}</h1>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="m2-copy m2-hero__copy">{{ section.settings.text }}</div>
+      {%- endif -%}
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <div class="m2-hero__action">
+          <a class="m2-link" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "M2 ヒーロー",
+  "tag": "div",
+  "class": "m2-section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "英字ラベル"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "見出し",
+      "default": "自分らしい美しさを"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "本文"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "PC画像"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_image",
+      "label": "スマートフォン画像"
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "文字位置",
+      "options": [
+        { "value": "left", "label": "左" },
+        { "value": "center", "label": "中央" },
+        { "value": "right", "label": "右" }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "select",
+      "id": "height",
+      "label": "高さ",
+      "options": [
+        { "value": "compact", "label": "コンパクト" },
+        { "value": "tall", "label": "大きい" }
+      ],
+      "default": "tall"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "ボタン名"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "ボタンリンク"
+    }
+  ],
+  "presets": [
+    {
+      "name": "M2 ヒーロー"
+    }
+  ]
+}
+{% endschema %}

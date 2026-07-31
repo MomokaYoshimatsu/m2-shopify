@@ -1,138 +1,99 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "hero-slideshow": {
-      "type": "slideshow",
-      "blocks": {
-        "slide-0": {
-          "type": "slide",
-          "settings": {
-            "heading_size": "h1",
-            "subheading": "",
-            "link": "shopify://collections",
-            "button_style_secondary": false,
-            "box_align": "middle-right",
-            "show_text_box": false,
-            "text_alignment": "left",
-            "image_overlay_opacity": 0,
-            "color_scheme": "scheme-1",
-            "text_alignment_mobile": "center"
-          }
-        }
-      },
-      "block_order": [
-        "slide-0"
-      ],
+    "m2_hero": {
+      "type": "m2-hero",
       "settings": {
-        "layout": "full_bleed",
-        "slide_height": "small",
-        "slider_visual": "dots",
-        "auto_rotate": false,
-        "change_slides_speed": 5,
-        "image_behavior": "none",
-        "show_text_below": true
+        "eyebrow": "M2 INNER BEAUTY",
+        "heading": "360度、自信に満ちた輝きへ。",
+        "text": "<p>自分自身を大切にする時間を、毎日の美容習慣へ。<br/>もっと自由に、もっと自然体に、自分らしい美しさを。</p>",
+        "alignment": "center",
+        "height": "tall",
+        "button_label": "",
+        "button_link": ""
       }
     },
-    "all-products": {
-      "type": "featured-collection",
+    "m2_about": {
+      "type": "m2-editorial",
       "settings": {
-        "heading_size": "h2",
-        "show_description": true,
-        "description_style": "subtitle",
+        "eyebrow": "ABOUT",
+        "heading": "More Me｜自分らしい美しさを",
+        "text": "<p>美しさは、自分自身を大切にする日々の積み重ねから。頑張る日も、立ち止まる日も、自分らしいリズムで過ごす時間を大切にします。</p>",
+        "layout": "media-first",
+        "background": "paper",
+        "button_label": "ABOUT M2",
+        "button_link": "/pages/about"
+      }
+    },
+    "m2_movie": {
+      "type": "m2-editorial",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "MOVIE",
+        "heading": "Brand Movie",
+        "text": "",
+        "layout": "media-first",
+        "background": "soft",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "m2_products": {
+      "type": "m2-product-showcase",
+      "settings": {
+        "eyebrow": "PRODUCTS",
+        "heading": "商品ラインナップ",
+        "text": "",
         "collection": "all",
-        "products_to_show": 24,
-        "columns_desktop": 6,
-        "full_width": false,
+        "products_to_show": 4,
         "show_view_all": true,
-        "view_all_style": "solid",
-        "enable_desktop_slider": false,
-        "color_scheme": "scheme-1",
-        "image_ratio": "adapt",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": false,
-        "padding_top": 24,
-        "padding_bottom": 24
+        "view_all_label": "VIEW ALL",
+        "background": "soft"
       }
     },
-    "collection-list": {
-      "type": "collection-list",
-      "blocks": {
-        "collection-0": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection-1": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection-2": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": ""
-          }
-        },
-        "collection-3": {
-          "type": "featured_collection",
-          "settings": {
-            "collection": ""
-          }
-        }
-      },
-      "block_order": [
-        "collection-0",
-        "collection-1",
-        "collection-2",
-        "collection-3"
-      ],
+    "m2_science": {
+      "type": "m2-editorial",
       "settings": {
-        "heading_size": "h2",
-        "image_ratio": "square",
-        "columns_desktop": 4,
-        "color_scheme": "",
-        "show_view_all": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "eyebrow": "OUR APPROACH",
+        "heading": "毎日に寄り添う、商品づくり。",
+        "text": "<p>商品ごとの特長や原材料、召し上がり方は、それぞれの商品ページで丁寧にご案内します。</p>",
+        "layout": "reverse",
+        "background": "dark",
+        "button_label": "VIEW PRODUCTS",
+        "button_link": "/collections/all"
       }
     },
-    "image-banner": {
-      "type": "image-banner",
+    "m2_news": {
+      "type": "m2-news",
       "settings": {
-        "image_overlay_opacity": 0,
-        "image_height": "small",
-        "desktop_content_position": "top-left",
-        "show_text_box": false,
-        "desktop_content_alignment": "center",
-        "color_scheme": "",
-        "image_behavior": "none",
-        "mobile_content_alignment": "center",
-        "stack_images_on_mobile": true,
-        "show_text_below": true
+        "eyebrow": "INFO",
+        "heading": "お知らせ",
+        "blog": "news",
+        "articles_to_show": 3,
+        "default_tag": "NEWS",
+        "show_view_all": true,
+        "view_all_label": "VIEW ALL",
+        "background": "soft"
+      }
+    },
+    "m2_social": {
+      "type": "m2-social",
+      "settings": {
+        "eyebrow": "FOLLOW US",
+        "heading": "Instagram",
+        "text": "<p>ブランドからのお知らせをお届けします。</p>",
+        "link": "",
+        "button_label": "FOLLOW",
+        "background": "paper"
       }
     }
   },
   "order": [
-    "hero-slideshow",
-    "all-products",
-    "collection-list",
-    "image-banner"
+    "m2_hero",
+    "m2_about",
+    "m2_movie",
+    "m2_products",
+    "m2_science",
+    "m2_news",
+    "m2_social"
   ]
 }

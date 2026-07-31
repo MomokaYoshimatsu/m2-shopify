@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "hero": {
+      "type": "m2-hero",
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "よくあるご質問",
+        "text": "<p>商品やご購入について、よくお寄せいただくご質問をご案内します。</p>",
+        "alignment": "center",
+        "height": "compact",
+        "button_label": "",
+        "button_link": ""
+      }
+    },
+    "faq": {
+      "type": "m2-faq",
+      "settings": {
+        "eyebrow": "QUESTIONS & ANSWERS",
+        "heading": "ご質問をお選びください",
+        "text": "",
+        "show_page_content": true,
+        "button_label": "お問い合わせ",
+        "button_link": "/pages/contact",
+        "background": "paper"
+      }
+    }
+  },
+  "order": ["hero", "faq"]
+}
