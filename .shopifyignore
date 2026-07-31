@@ -1,0 +1,9 @@
+.git/*
+.github/*
+.shopify/*
+files/*
+.DS_Store
+.env
+.env.*
+README.md
+shopify.theme.toml

@@ -1,0 +1,6 @@
+[environments.default]
+store = "m2-test-zyzvnzan.myshopify.com"
+
+[environments.production]
+store = "m2-test-zyzvnzan.myshopify.com"
+theme = "187100430627"
