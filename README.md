@@ -4,9 +4,19 @@ Shopifyストア `m2-test-zyzvnzan.myshopify.com` のテーマ開発用リポジ
 
 - ベーステーマ: Rise 15.5.0
 - ライブテーマID: `187100430627`
+- GitHub連携テーマ: `m2-shopify/develop`（テーマID: `187246870819`）
 - GitHubの既定ブランチ: `main`
 - 開発ブランチ: `develop`
 - ワイヤーフレーム: `files/`
+
+## GitHubとShopifyの同期
+
+GitHubの `develop` ブランチは、Shopifyの下書きテーマ `m2-shopify/develop` に接続されています。
+
+- `develop` へのpushは下書きテーマへ自動同期されます。
+- 下書きテーマで確認するまで、ライブテーマ `Rise` は変更されません。
+- Shopify管理画面上でテーマコードを編集した場合、その変更は `develop` にコミットされます。
+- 本番公開は、確認済みの変更を `main` にマージした後に行います。
 
 ## セットアップ
 
