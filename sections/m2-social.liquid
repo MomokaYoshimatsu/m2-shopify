@@ -1,0 +1,135 @@
+{%- assign social_link = section.settings.link | default: settings.social_instagram_link -%}
+{%- liquid
+  assign should_render = false
+  if section.blocks.size > 0 or social_link != blank or request.design_mode
+    assign should_render = true
+  endif
+-%}
+
+{%- if should_render -%}
+  <section class="m2-section m2-section--{{ section.settings.background }}">
+  <div class="m2-container">
+    <div class="m2-section-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="m2-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="m2-heading m2-heading--md">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="m2-copy">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="m2-social-grid">
+        {%- for block in section.blocks -%}
+          {%- assign item_link = block.settings.link | default: social_link -%}
+          <div class="m2-media m2-social-card" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              {{
+                block.settings.image
+                | image_url: width: 900
+                | image_tag:
+                  widths: '240, 360, 480, 640, 900',
+                  sizes: '(min-width: 750px) 25vw, 50vw',
+                  loading: 'lazy'
+              }}
+            {%- elsif request.design_mode -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+            {%- if item_link != blank -%}
+              <a href="{{ item_link }}" aria-label="{{ block.settings.accessibility_label | default: section.settings.heading | escape }}"></a>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if social_link != blank and section.settings.button_label != blank -%}
+      <div class="m2-social__action">
+        <a class="m2-link" href="{{ social_link }}">{{ section.settings.button_label | escape }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "M2 ソーシャル",
+  "tag": "div",
+  "class": "m2-section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "英字ラベル",
+      "default": "FOLLOW US"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "見出し",
+      "default": "Instagram"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "本文"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "アカウントURL",
+      "info": "未入力時はテーマ設定のInstagram URLを使用します。"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "ボタン名",
+      "default": "FOLLOW"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "背景",
+      "options": [
+        { "value": "paper", "label": "白" },
+        { "value": "soft", "label": "ライトグレー" },
+        { "value": "sand", "label": "ベージュ" }
+      ],
+      "default": "paper"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "post",
+      "name": "投稿画像",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "画像"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "投稿URL"
+        },
+        {
+          "type": "text",
+          "id": "accessibility_label",
+          "label": "画像の説明"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "M2 ソーシャル"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,160 @@
+<section class="m2-section m2-section--{{ section.settings.background }}">
+  <div class="m2-container">
+    {%- if section.settings.eyebrow != blank or section.settings.heading != blank or section.settings.text != blank -%}
+      <div class="m2-section-header">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="m2-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="m2-heading m2-heading--md">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="m2-copy">{{ section.settings.text }}</div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="m2-card-grid m2-card-grid--{{ section.settings.columns }}">
+        {%- for block in section.blocks -%}
+          <article class="m2-card" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <div class="m2-media m2-card__image">
+                {{
+                  block.settings.image
+                  | image_url: width: 1200
+                  | image_tag:
+                    widths: '320, 480, 640, 900, 1200',
+                    sizes: '(min-width: 1024px) 33vw, (min-width: 750px) 50vw, 100vw',
+                    loading: 'lazy'
+                }}
+              </div>
+            {%- endif -%}
+            {%- if section.settings.show_numbers -%}
+              <div class="m2-card__number" aria-hidden="true">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</div>
+            {%- endif -%}
+            {%- if block.settings.kicker != blank -%}
+              <p class="m2-card__kicker">{{ block.settings.kicker | escape }}</p>
+            {%- endif -%}
+            {%- if block.settings.heading != blank -%}
+              <h3 class="m2-card__title">{{ block.settings.heading | escape }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="m2-card__text rte">{{ block.settings.text }}</div>
+            {%- endif -%}
+            {%- if block.settings.link_label != blank and block.settings.link != blank -%}
+              <div class="m2-card__link">
+                <a class="m2-link m2-link--text" href="{{ block.settings.link }}">{{ block.settings.link_label | escape }}</a>
+              </div>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "M2 カードグリッド",
+  "tag": "div",
+  "class": "m2-section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "英字ラベル"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "見出し",
+      "default": "大切にしていること"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "導入文"
+    },
+    {
+      "type": "select",
+      "id": "columns",
+      "label": "PC列数",
+      "options": [
+        { "value": "2", "label": "2列" },
+        { "value": "3", "label": "3列" },
+        { "value": "4", "label": "4列" }
+      ],
+      "default": "3"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_numbers",
+      "label": "連番を表示",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "背景",
+      "options": [
+        { "value": "paper", "label": "白" },
+        { "value": "soft", "label": "ライトグレー" },
+        { "value": "sand", "label": "ベージュ" },
+        { "value": "dark", "label": "ダーク" }
+      ],
+      "default": "soft"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "カード",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "画像"
+        },
+        {
+          "type": "text",
+          "id": "kicker",
+          "label": "補助ラベル"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "見出し",
+          "default": "カードの見出し"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "本文"
+        },
+        {
+          "type": "text",
+          "id": "link_label",
+          "label": "リンク名"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "リンク先"
+        }
+      ]
+    }
+  ],
+  "max_blocks": 8,
+  "presets": [
+    {
+      "name": "M2 カードグリッド",
+      "blocks": [
+        { "type": "card" },
+        { "type": "card" },
+        { "type": "card" }
+      ]
+    }
+  ]
+}
+{% endschema %}

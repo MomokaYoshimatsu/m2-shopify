@@ -1,0 +1,140 @@
+{%- assign selected_collection = section.settings.collection -%}
+{%- liquid
+  assign should_render = false
+  if selected_collection != blank and selected_collection.products_count > 0
+    assign should_render = true
+  elsif request.design_mode
+    assign should_render = true
+  endif
+-%}
+
+{%- if should_render -%}
+  <section class="m2-section m2-section--{{ section.settings.background }}">
+  <div class="m2-container">
+    <div class="m2-section-header">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="m2-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.heading != blank -%}
+        <h2 class="m2-heading m2-heading--md">{{ section.settings.heading | escape }}</h2>
+      {%- endif -%}
+      {%- if section.settings.text != blank -%}
+        <div class="m2-copy">{{ section.settings.text }}</div>
+      {%- endif -%}
+    </div>
+
+    {%- if selected_collection != blank -%}
+      <div class="m2-products">
+        {%- for product in selected_collection.products limit: section.settings.products_to_show -%}
+          <article class="m2-product-card">
+            <div class="m2-media m2-product-card__media">
+              {%- if product.featured_image != blank -%}
+                {{
+                  product.featured_image
+                  | image_url: width: 1400
+                  | image_tag:
+                    widths: '320, 480, 640, 900, 1200, 1400',
+                    sizes: '(min-width: 750px) 50vw, 100vw',
+                    loading: 'lazy'
+                }}
+              {%- else -%}
+                {{ 'product-apparel-2' | placeholder_svg_tag: 'm2-product-card__placeholder' }}
+              {%- endif -%}
+            </div>
+            <h3 class="m2-product-card__title">
+              <a href="{{ product.url }}">{{ product.title | escape }}</a>
+            </h3>
+            <div class="m2-product-card__meta">
+              <span class="m2-product-card__availability">
+                {%- if product.available -%}
+                  {{ 'products.product.add_to_cart' | t }}
+                {%- else -%}
+                  {{ 'products.product.sold_out' | t }}
+                {%- endif -%}
+              </span>
+              {% render 'price', product: product, price_class: '', show_compare_at_price: true %}
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.show_view_all and selected_collection.url != blank -%}
+        <div class="m2-news__action">
+          <a class="m2-link" href="{{ selected_collection.url }}">{{ section.settings.view_all_label | escape }}</a>
+        </div>
+      {%- endif -%}
+    {%- elsif request.design_mode -%}
+      <p class="m2-copy">テーマエディターで表示するコレクションを選択してください。</p>
+    {%- endif -%}
+  </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "M2 商品一覧",
+  "tag": "div",
+  "class": "m2-section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "英字ラベル",
+      "default": "PRODUCTS"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "見出し",
+      "default": "商品ラインナップ"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "導入文"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "コレクション"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "表示商品数",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_view_all",
+      "label": "一覧リンクを表示",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "view_all_label",
+      "label": "一覧リンク名",
+      "default": "VIEW ALL"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "背景",
+      "options": [
+        { "value": "paper", "label": "白" },
+        { "value": "soft", "label": "ライトグレー" },
+        { "value": "sand", "label": "ベージュ" }
+      ],
+      "default": "paper"
+    }
+  ],
+  "presets": [
+    {
+      "name": "M2 商品一覧"
+    }
+  ]
+}
+{% endschema %}

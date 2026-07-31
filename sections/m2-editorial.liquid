@@ -1,0 +1,119 @@
+{%- liquid
+  assign has_media = false
+  if section.settings.video != blank or section.settings.image != blank
+    assign has_media = true
+  endif
+-%}
+
+<section class="m2-section m2-section--{{ section.settings.background }}">
+  <div class="m2-container{% unless has_media %} m2-container--narrow{% endunless %}">
+    <div class="m2-editorial m2-editorial--{{ section.settings.layout }}{% unless has_media %} m2-editorial--text-only{% endunless %}">
+      {%- if has_media -%}
+        <div class="m2-media m2-editorial__media">
+          {%- if section.settings.video != blank -%}
+            {{ section.settings.video | video_tag: controls: true, image_size: '1600x', preload: 'metadata' }}
+          {%- else -%}
+            {{
+              section.settings.image
+              | image_url: width: 1800
+              | image_tag:
+                widths: '375, 550, 750, 1000, 1400, 1800',
+                sizes: '(min-width: 1024px) 50vw, 100vw',
+                loading: 'lazy'
+            }}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="m2-editorial__content">
+        {%- if section.settings.eyebrow != blank -%}
+          <p class="m2-eyebrow">{{ section.settings.eyebrow | escape }}</p>
+        {%- endif -%}
+        {%- if section.settings.heading != blank -%}
+          <h2 class="m2-heading m2-heading--lg">{{ section.settings.heading | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}
+          <div class="m2-copy m2-editorial__copy">{{ section.settings.text }}</div>
+        {%- endif -%}
+        {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+          <div class="m2-editorial__action">
+            <a class="m2-link" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "M2 メディア＋文章",
+  "tag": "div",
+  "class": "m2-section-wrapper",
+  "settings": [
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "英字ラベル"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "見出し",
+      "default": "自分らしい美しさを"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "本文"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "画像"
+    },
+    {
+      "type": "video",
+      "id": "video",
+      "label": "Shopify動画"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "PCレイアウト",
+      "options": [
+        { "value": "media-first", "label": "画像を左" },
+        { "value": "reverse", "label": "画像を右" }
+      ],
+      "default": "media-first"
+    },
+    {
+      "type": "select",
+      "id": "background",
+      "label": "背景",
+      "options": [
+        { "value": "paper", "label": "白" },
+        { "value": "soft", "label": "ライトグレー" },
+        { "value": "sand", "label": "ベージュ" },
+        { "value": "dark", "label": "ダーク" }
+      ],
+      "default": "paper"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "ボタン名"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "ボタンリンク"
+    }
+  ],
+  "presets": [
+    {
+      "name": "M2 メディア＋文章"
+    }
+  ]
+}
+{% endschema %}

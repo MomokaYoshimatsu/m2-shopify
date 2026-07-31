@@ -1,0 +1,144 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "vendor": {
+          "type": "text",
+          "disabled": true,
+          "settings": {
+            "text": "{{ product.vendor }}",
+            "text_style": "uppercase"
+          }
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "variant-picker": {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "button",
+            "swatch_shape": "circle"
+          }
+        },
+        "quantity-selector": {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true
+          }
+        },
+        "product-inventory": {
+          "type": "inventory",
+          "settings": {
+            "text_style": "body",
+            "inventory_threshold": 10,
+            "show_inventory_quantity": true
+          }
+        }
+      },
+      "block_order": [
+        "vendor",
+        "title",
+        "price",
+        "variant-picker",
+        "quantity-selector",
+        "buy_buttons",
+        "product-inventory"
+      ],
+      "settings": {
+        "enable_sticky_info": true,
+        "color_scheme": "scheme-1",
+        "media_size": "medium",
+        "constrain_to_viewport": true,
+        "media_fit": "contain",
+        "gallery_layout": "thumbnail_slider",
+        "media_position": "left",
+        "image_zoom": "lightbox",
+        "mobile_thumbnails": "show",
+        "hide_variants": true,
+        "enable_video_looping": false,
+        "padding_top": 36,
+        "padding_bottom": 36
+      }
+    },
+    "features": {
+      "type": "m2-card-grid",
+      "disabled": true,
+      "settings": {
+        "eyebrow": "FORMULA",
+        "heading": "商品の特長",
+        "text": "",
+        "columns": "3",
+        "show_numbers": true,
+        "background": "soft"
+      }
+    },
+    "how_to": {
+      "type": "m2-card-grid",
+      "settings": {
+        "eyebrow": "HOW TO USE",
+        "heading": "お召し上がり方",
+        "text": "<p>お召し上がりの際は、商品パッケージに記載された方法をご確認ください。</p>",
+        "columns": "3",
+        "show_numbers": false,
+        "background": "paper"
+      }
+    },
+    "specs": {
+      "type": "m2-product-specs",
+      "settings": {
+        "eyebrow": "DETAILS",
+        "heading": "商品情報",
+        "show_product_description": true,
+        "background": "soft"
+      }
+    },
+    "faq": {
+      "type": "m2-faq",
+      "settings": {
+        "eyebrow": "FAQ",
+        "heading": "この商品についてのよくあるご質問",
+        "text": "",
+        "show_page_content": false,
+        "button_label": "FAQページへ",
+        "button_link": "",
+        "background": "paper"
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "settings": {
+        "heading_size": "h2",
+        "products_to_show": 4,
+        "columns_desktop": 4,
+        "color_scheme": "scheme-1",
+        "image_ratio": "square",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "columns_mobile": "2",
+        "padding_top": 72,
+        "padding_bottom": 72
+      }
+    },
+    "disclosures": {
+      "type": "disclosures",
+      "settings": {
+        "padding_top": 36,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": ["main", "disclosures", "features", "how_to", "specs", "faq", "related-products"]
+}
