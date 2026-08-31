@@ -28,6 +28,84 @@
 {%- endstyle -%}
 
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
+  {%- if request.page_type == 'index' -%}
+    {%- liquid
+      assign m2_about_link = section.settings.m2_about_link | default: '#about'
+      assign m2_clinical_link = section.settings.m2_clinical_link | default: '#science'
+      assign m2_product_1_link = section.settings.m2_product_1_link | default: '#products'
+      assign m2_product_2_link = section.settings.m2_product_2_link | default: '#products'
+      assign m2_product_3_link = section.settings.m2_product_3_link | default: '#products'
+      assign m2_faq_link = section.settings.m2_faq_link | default: '/pages/faq'
+      assign m2_contact_link = section.settings.m2_contact_link | default: '/pages/contact'
+      assign m2_shop_list_link = section.settings.m2_shop_list_link | default: '/pages/shop-list'
+      assign m2_news_link = section.settings.m2_news_link | default: '/blogs/news'
+      assign m2_legal_link = section.settings.m2_legal_link | default: routes.root_url
+      assign m2_privacy_link = section.settings.m2_privacy_link
+      assign m2_terms_link = section.settings.m2_terms_link
+      assign m2_shipping_link = section.settings.m2_shipping_link
+
+      if m2_privacy_link == blank and shop.privacy_policy != blank
+        assign m2_privacy_link = shop.privacy_policy.url
+      endif
+      if m2_terms_link == blank and shop.terms_of_service != blank
+        assign m2_terms_link = shop.terms_of_service.url
+      endif
+      if m2_shipping_link == blank and shop.refund_policy != blank
+        assign m2_shipping_link = shop.refund_policy.url
+      endif
+
+      assign m2_privacy_link = m2_privacy_link | default: routes.root_url
+      assign m2_terms_link = m2_terms_link | default: routes.root_url
+      assign m2_shipping_link = m2_shipping_link | default: routes.root_url
+    -%}
+    <div class="m2-footer">
+      <div class="m2-footer__main">
+        <div class="m2-footer__brand">
+          <a href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }} ホーム">
+            <img src="{{ 'm2-header-logo.svg' | asset_url }}" alt="{{ shop.name | escape }}" width="53" height="32">
+          </a>
+          <p>{{ section.settings.m2_footer_tagline | escape | newline_to_br }}</p>
+        </div>
+
+        <nav class="m2-footer__nav" aria-label="フッターナビゲーション">
+          <div class="m2-footer__group">
+            <h2>ABOUT</h2>
+            <ul>
+              <li><a href="{{ m2_about_link }}">ブランドについて</a></li>
+              <li><a href="{{ m2_clinical_link }}">臨床データ</a></li>
+            </ul>
+          </div>
+          <div class="m2-footer__group">
+            <h2>PRODUCTS</h2>
+            <ul>
+              <li><a href="{{ m2_product_1_link }}">コラーゲン 6000</a></li>
+              <li><a href="{{ m2_product_2_link }}">PDRN 3000+</a></li>
+              <li><a href="{{ m2_product_3_link }}">ゼリー（近日）</a></li>
+            </ul>
+          </div>
+          <div class="m2-footer__group">
+            <h2>SUPPORT</h2>
+            <ul>
+              <li><a href="{{ m2_faq_link }}">FAQ</a></li>
+              <li><a href="{{ m2_contact_link }}">お問い合わせ</a></li>
+              <li><a href="{{ m2_shop_list_link }}">SHOP LIST</a></li>
+              <li><a href="{{ m2_news_link }}">NEWS</a></li>
+            </ul>
+          </div>
+          <div class="m2-footer__group">
+            <h2>POLICY</h2>
+            <ul>
+              <li><a href="{{ m2_legal_link }}">特定商取引法に基づく表記</a></li>
+              <li><a href="{{ m2_privacy_link }}">プライバシーポリシー</a></li>
+              <li><a href="{{ m2_terms_link }}">利用規約</a></li>
+              <li><a href="{{ m2_shipping_link }}">配送・返品について</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <p class="m2-footer__copyright">{{ section.settings.m2_copyright | escape }}</p>
+    </div>
+  {%- else -%}
   {%- liquid
     assign has_social_icons = true
     if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
@@ -319,6 +397,7 @@
       </div>
     </div>
   </div>
+  {%- endif -%}
 </footer>
 
 {% schema %}
@@ -424,6 +503,87 @@
     }
   ],
   "settings": [
+    {
+      "type": "header",
+      "content": "M2 TOP フッター"
+    },
+    {
+      "type": "textarea",
+      "id": "m2_footer_tagline",
+      "label": "ブランドメッセージ",
+      "default": "飲む、次世代美容。\n韓国美容の最先端インナーケア。"
+    },
+    {
+      "type": "text",
+      "id": "m2_copyright",
+      "label": "コピーライト",
+      "default": "© 2026 Shiny Brands Japan. All Rights Reserved."
+    },
+    {
+      "type": "url",
+      "id": "m2_about_link",
+      "label": "ブランドについて リンク"
+    },
+    {
+      "type": "url",
+      "id": "m2_clinical_link",
+      "label": "臨床データ リンク"
+    },
+    {
+      "type": "url",
+      "id": "m2_product_1_link",
+      "label": "コラーゲン6000 リンク"
+    },
+    {
+      "type": "url",
+      "id": "m2_product_2_link",
+      "label": "PDRN 3000+ リンク"
+    },
+    {
+      "type": "url",
+      "id": "m2_product_3_link",
+      "label": "ゼリー リンク"
+    },
+    {
+      "type": "url",
+      "id": "m2_faq_link",
+      "label": "FAQ リンク"
+    },
+    {
+      "type": "url",
+      "id": "m2_contact_link",
+      "label": "お問い合わせ リンク"
+    },
+    {
+      "type": "url",
+      "id": "m2_shop_list_link",
+      "label": "SHOP LIST リンク"
+    },
+    {
+      "type": "url",
+      "id": "m2_news_link",
+      "label": "NEWS リンク"
+    },
+    {
+      "type": "url",
+      "id": "m2_legal_link",
+      "label": "特定商取引法 リンク"
+    },
+    {
+      "type": "url",
+      "id": "m2_privacy_link",
+      "label": "プライバシーポリシー リンク"
+    },
+    {
+      "type": "url",
+      "id": "m2_terms_link",
+      "label": "利用規約 リンク"
+    },
+    {
+      "type": "url",
+      "id": "m2_shipping_link",
+      "label": "配送・返品 リンク"
+    },
     {
       "type": "color_scheme",
       "id": "color_scheme",

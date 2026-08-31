@@ -1,0 +1,86 @@
+<section class="m2-top-science" id="science" aria-labelledby="M2TopScienceHeading-{{ section.id }}">
+  <img
+    class="m2-top-haze m2-top-science__drop"
+    src="{{ 'm2-top-drop-06.png' | asset_url }}"
+    alt=""
+    width="800"
+    height="818"
+    loading="lazy"
+  >
+
+  <div class="m2-top-width">
+    <div class="m2-top-heading m2-top-heading--center m2-top-heading--light">
+      <p class="m2-top-label">{{ section.settings.eyebrow | escape }}</p>
+      <h2 id="M2TopScienceHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    </div>
+
+    <div class="m2-top-science__panel">
+      <div class="m2-top-science__intro">
+        <div>
+          <h3>{{ section.settings.intro_heading | escape | newline_to_br }}</h3>
+          <div class="m2-top-copy">{{ section.settings.intro_text }}</div>
+        </div>
+        <div class="m2-top-science__image">
+          {%- if section.settings.intro_image != blank -%}
+            {{ section.settings.intro_image | image_url: width: 1200 | image_tag: widths: '480, 750, 1000, 1200', sizes: '(min-width: 1024px) 371px, 100vw', loading: 'lazy' }}
+          {%- else -%}
+            <img src="{{ 'm2-top-science-main.jpg' | asset_url }}" alt="" width="512" height="288" loading="lazy">
+          {%- endif -%}
+        </div>
+      </div>
+
+      <div class="m2-top-science__cards">
+        <article>
+          <h3>{{ section.settings.card_1_heading | escape }}</h3>
+          <div class="m2-top-science__image">
+            {%- if section.settings.card_1_image != blank -%}
+              {{ section.settings.card_1_image | image_url: width: 1000 | image_tag: widths: '400, 600, 800, 1000', sizes: '(min-width: 1024px) 400px, 100vw', loading: 'lazy' }}
+            {%- else -%}
+              <img src="{{ 'm2-top-science-collagen.jpg' | asset_url }}" alt="" width="512" height="285" loading="lazy">
+            {%- endif -%}
+          </div>
+          <div class="m2-top-copy">{{ section.settings.card_1_text }}</div>
+        </article>
+        <article>
+          <h3>{{ section.settings.card_2_heading | escape }}</h3>
+          <div class="m2-top-science__image">
+            {%- if section.settings.card_2_image != blank -%}
+              {{ section.settings.card_2_image | image_url: width: 1000 | image_tag: widths: '400, 600, 800, 1000', sizes: '(min-width: 1024px) 400px, 100vw', loading: 'lazy' }}
+            {%- else -%}
+              <img src="{{ 'm2-top-science-pdrn.jpg' | asset_url }}" alt="" width="512" height="287" loading="lazy">
+            {%- endif -%}
+          </div>
+          <div class="m2-top-copy">{{ section.settings.card_2_text }}</div>
+        </article>
+      </div>
+
+      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+        <a class="m2-top-button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "M2 TOP SCIENCE",
+  "tag": "div",
+  "class": "m2-section-wrapper",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "英字見出し", "default": "SCIENCE" },
+    { "type": "text", "id": "heading", "label": "見出し", "default": "科学で証明された美" },
+    { "type": "textarea", "id": "intro_heading", "label": "導入見出し", "default": "m2がこだわった\n「コラーゲン」と「PDRN」を知る。" },
+    { "type": "richtext", "id": "intro_text", "label": "導入本文", "default": "<p>900Daまで超低分子化した超微細コラーゲンと、サーモン由来の希少なコンディショニング成分「PDRN（整肌成分）」。m2が採用する日本大手Maruha Nichiro原料と韓国特許技術、独自の3層アプローチについて詳しく解説します。</p>" },
+    { "type": "image_picker", "id": "intro_image", "label": "導入画像" },
+    { "type": "text", "id": "card_1_heading", "label": "左カード見出し", "default": "超微細コラーゲン" },
+    { "type": "image_picker", "id": "card_1_image", "label": "左カード画像" },
+    { "type": "richtext", "id": "card_1_text", "label": "左カード本文", "default": "<p>韓国特許技術により900Daまで超低分子化。内側から弾むようなハリ感をもたらす独自ペプチド。</p>" },
+    { "type": "text", "id": "card_2_heading", "label": "右カード見出し", "default": "整肌成分PDRN" },
+    { "type": "image_picker", "id": "card_2_image", "label": "右カード画像" },
+    { "type": "richtext", "id": "card_2_text", "label": "右カード本文", "default": "<p>サーモン由来。日本大手Maruha Nichiro原料を採用し、乾燥や環境ストレスに負けない肌環境をサポート。</p>" },
+    { "type": "text", "id": "button_label", "label": "ボタン名", "default": "もっとみる" },
+    { "type": "url", "id": "button_link", "label": "ボタンリンク" }
+  ],
+  "presets": [{ "name": "M2 TOP SCIENCE" }]
+}
+{% endschema %}

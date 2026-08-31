@@ -1,114 +1,80 @@
 {%- assign selected_blog = section.settings.blog -%}
-{%- liquid
-  assign should_render = false
-  if selected_blog != blank and selected_blog.articles_count > 0
-    assign should_render = true
-  elsif request.design_mode
-    assign should_render = true
-  endif
--%}
 
-{%- if should_render -%}
-  <section class="m2-section m2-section--{{ section.settings.background }}">
-  <div class="m2-container">
-    <div class="m2-section-header">
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="m2-eyebrow">{{ section.settings.eyebrow | escape }}</p>
-      {%- endif -%}
-      {%- if section.settings.heading != blank -%}
-        <h2 class="m2-heading m2-heading--md">{{ section.settings.heading | escape }}</h2>
-      {%- endif -%}
+<section class="m2-top-news m2-top-width" id="news" aria-labelledby="M2TopNewsHeading-{{ section.id }}">
+  <div class="m2-top-heading m2-top-heading--row">
+    <div>
+      <p class="m2-top-label">{{ section.settings.eyebrow | escape }}</p>
+      <h2 id="M2TopNewsHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
     </div>
-
-    {%- if selected_blog != blank and selected_blog.articles_count > 0 -%}
-      <div class="m2-news-list">
-        {%- for article in selected_blog.articles limit: section.settings.articles_to_show -%}
-          <article class="m2-news-item">
-            <time class="m2-news-item__date" datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
-              {{ article.published_at | date: '%Y.%m.%d' }}
-            </time>
-            <span class="m2-news-item__tag">{{ article.tags.first | default: section.settings.default_tag | escape }}</span>
-            <h3 class="m2-news-item__title"><a href="{{ article.url }}">{{ article.title | escape }}</a></h3>
-          </article>
-        {%- endfor -%}
-      </div>
-      {%- if section.settings.show_view_all -%}
-        <div class="m2-news__action">
-          <a class="m2-link" href="{{ selected_blog.url }}">{{ section.settings.view_all_label | escape }}</a>
-        </div>
-      {%- endif -%}
-    {%- elsif request.design_mode -%}
-      <p class="m2-copy">テーマエディターで記事のあるブログを選択してください。</p>
+    {%- if section.settings.show_view_all and selected_blog.url != blank -%}
+      <a class="m2-top-text-link" href="{{ selected_blog.url }}">{{ section.settings.view_all_label | escape }} <span aria-hidden="true">›</span></a>
     {%- endif -%}
   </div>
-  </section>
-{%- endif -%}
+
+  <div class="m2-top-news__list">
+    {%- if selected_blog != blank and selected_blog.articles_count > 0 -%}
+      {%- for article in selected_blog.articles limit: section.settings.articles_to_show -%}
+        <article class="m2-top-news__item">
+          <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">{{ article.published_at | date: '%Y.%m.%d' }}</time>
+          <span class="m2-top-news__tag">{{ article.tags.first | default: section.settings.default_tag | escape }}</span>
+          <h3><a href="{{ article.url }}">{{ article.title | escape }}</a></h3>
+        </article>
+      {%- endfor -%}
+    {%- else -%}
+      {%- for block in section.blocks limit: section.settings.articles_to_show -%}
+        <article class="m2-top-news__item" {{ block.shopify_attributes }}>
+          <time datetime="{{ block.settings.date | replace: '.', '-' }}">{{ block.settings.date | escape }}</time>
+          <span class="m2-top-news__tag">{{ block.settings.tag | default: section.settings.default_tag | escape }}</span>
+          <h3>
+            {%- if block.settings.link != blank -%}
+              <a href="{{ block.settings.link }}">{{ block.settings.title | escape }}</a>
+            {%- else -%}
+              <span>{{ block.settings.title | escape }}</span>
+            {%- endif -%}
+          </h3>
+        </article>
+      {%- else -%}
+        <p class="m2-top-editor-note">ブログ記事または代替記事を設定してください。</p>
+      {%- endfor -%}
+    {%- endif -%}
+  </div>
+</section>
 
 {% schema %}
 {
-  "name": "M2 お知らせ",
+  "name": "M2 TOP お知らせ",
   "tag": "div",
   "class": "m2-section-wrapper",
   "settings": [
+    { "type": "text", "id": "eyebrow", "label": "英字見出し", "default": "NEWS" },
+    { "type": "text", "id": "heading", "label": "見出し", "default": "お知らせ" },
+    { "type": "blog", "id": "blog", "label": "ブログ" },
+    { "type": "range", "id": "articles_to_show", "min": 2, "max": 8, "step": 1, "label": "表示記事数", "default": 3 },
+    { "type": "text", "id": "default_tag", "label": "タグがない場合の表示", "default": "INFO" },
+    { "type": "checkbox", "id": "show_view_all", "label": "一覧リンクを表示", "default": true },
+    { "type": "text", "id": "view_all_label", "label": "一覧リンク名", "default": "VIEW MORE" }
+  ],
+  "blocks": [
     {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "英字ラベル",
-      "default": "INFO"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "見出し",
-      "default": "お知らせ"
-    },
-    {
-      "type": "blog",
-      "id": "blog",
-      "label": "ブログ"
-    },
-    {
-      "type": "range",
-      "id": "articles_to_show",
-      "min": 2,
-      "max": 8,
-      "step": 1,
-      "label": "表示記事数",
-      "default": 3
-    },
-    {
-      "type": "text",
-      "id": "default_tag",
-      "label": "タグがない場合の表示",
-      "default": "NEWS"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_view_all",
-      "label": "一覧リンクを表示",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "view_all_label",
-      "label": "一覧リンク名",
-      "default": "VIEW ALL"
-    },
-    {
-      "type": "select",
-      "id": "background",
-      "label": "背景",
-      "options": [
-        { "value": "paper", "label": "白" },
-        { "value": "soft", "label": "ライトグレー" },
-        { "value": "sand", "label": "ベージュ" }
-      ],
-      "default": "soft"
+      "type": "fallback_article",
+      "name": "代替記事",
+      "settings": [
+        { "type": "text", "id": "date", "label": "日付", "default": "2026.09.01" },
+        { "type": "text", "id": "tag", "label": "カテゴリー", "default": "INFO" },
+        { "type": "text", "id": "title", "label": "タイトル", "default": "お知らせタイトル" },
+        { "type": "url", "id": "link", "label": "リンク" }
+      ]
     }
   ],
+  "max_blocks": 8,
   "presets": [
     {
-      "name": "M2 お知らせ"
+      "name": "M2 TOP お知らせ",
+      "blocks": [
+        { "type": "fallback_article" },
+        { "type": "fallback_article" },
+        { "type": "fallback_article" }
+      ]
     }
   ]
 }

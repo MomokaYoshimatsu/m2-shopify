@@ -2,39 +2,110 @@
   "sections": {
     "m2_hero": {
       "type": "m2-hero",
+      "blocks": {
+        "slide_01": {
+          "type": "slide",
+          "settings": {
+            "heading": "360度、\n自信に満ちた\n輝きへ。",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "slide_02": {
+          "type": "slide",
+          "settings": {
+            "heading": "360度、\n自信に満ちた\n輝きへ。",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "slide_03": {
+          "type": "slide",
+          "settings": {
+            "heading": "360度、\n自信に満ちた\n輝きへ。",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": ["slide_01", "slide_02", "slide_03"],
       "settings": {
-        "eyebrow": "M2 INNER BEAUTY",
-        "heading": "360度、自信に満ちた輝きへ。",
-        "text": "<p>自分自身を大切にする時間を、毎日の美容習慣へ。<br/>もっと自由に、もっと自然体に、自分らしい美しさを。</p>",
-        "alignment": "center",
-        "height": "tall",
+        "heading": "360度、\n自信に満ちた\n輝きへ。",
+        "show_pagination": true,
+        "autoplay": true,
+        "change_slides_speed": 5,
         "button_label": "",
         "button_link": ""
       }
     },
     "m2_about": {
-      "type": "m2-editorial",
+      "type": "m2-top-about",
       "settings": {
         "eyebrow": "ABOUT",
-        "heading": "More Me｜自分らしい美しさを",
-        "text": "<p>美しさは、自分自身を大切にする日々の積み重ねから。頑張る日も、立ち止まる日も、自分らしいリズムで過ごす時間を大切にします。</p>",
-        "layout": "media-first",
-        "background": "paper",
-        "button_label": "ABOUT M2",
+        "heading": "Me and More",
+        "subheading": "自分らしい美しさを",
+        "text": "<p>美しさとは、誰かのために追い求めるものではなく、<br>自分自身を大切にする日々の積み重ねから生まれるもの。<br>頑張る日も、立ち止まる日も。<br>ありのままの自分を受け入れ、自分らしいリズムで過ごす時間が、未来の輝きを育んでいく。</p><p>もっと自由に。<br>もっと自然体に。<br>もっと、自分らしく美しく。<br>あなたが、あなたらしく輝き続けるために。</p>",
+        "image_alt": "m2ブランドアンバサダー",
+        "ambassador_caption": "m2ブランドアンバサダー",
+        "ambassador_name": "ソン・イェジン",
+        "button_label": "もっとみる",
         "button_link": ""
       }
     },
     "m2_movie": {
-      "type": "m2-editorial",
-      "disabled": true,
+      "type": "m2-brand-movie",
       "settings": {
-        "eyebrow": "MOVIE",
-        "heading": "Brand Movie",
-        "text": "",
-        "layout": "media-first",
-        "background": "soft",
-        "button_label": "",
-        "button_link": ""
+        "eyebrow": "BRAND MOVIE",
+        "heading": "360度、自信に満ちた輝きへ。",
+        "video_url": "https://www.youtube.com/watch?v=rmi7Wh20SQI",
+        "play_label": "ブランドムービーを再生"
+      }
+    },
+    "m2_trust": {
+      "type": "m2-trust",
+      "blocks": {
+        "award_01": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 1" } },
+        "award_02": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 2" } },
+        "award_03": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 3" } },
+        "award_04": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 4" } },
+        "award_05": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 5" } },
+        "award_06": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 6" } },
+        "award_07": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 7" } },
+        "award_08": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 8" } },
+        "award_09": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 9" } },
+        "award_10": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 10" } },
+        "award_11": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 11" } }
+      },
+      "block_order": [
+        "award_01",
+        "award_02",
+        "award_03",
+        "award_04",
+        "award_05",
+        "award_06",
+        "award_07",
+        "award_08",
+        "award_09",
+        "award_10",
+        "award_11"
+      ],
+      "settings": {
+        "eyebrow": "TRUST BY",
+        "heading": "選ばれてきた、確かな理由。",
+        "primary_label": "ブランド\n累計販売個数",
+        "primary_value": "50,000,000個",
+        "primary_note": "※1",
+        "metric_1_value": "No.1",
+        "metric_1_note": "※2",
+        "metric_1_label": "台湾コラーゲンカテゴリー※3\n3年連続",
+        "metric_2_value": "300+",
+        "metric_2_note": "",
+        "metric_2_label": "国際的な認証機関SGSによる\n300項目以上ある安全基準をクリア",
+        "metric_3_value": "5認証",
+        "metric_3_note": "",
+        "metric_3_label": "世界水準の安全と品質\n5つのグローバル認証※4を取得",
+        "notes": "<p>※1 2022年4月〜2026年6月における「m2 コラーゲンドリンク」全チャネル累計出荷・販売実績（自社調べ）。 ※2 momo：美容ヘルスケア部門 NO.1（2023年〜2026年）Shopee：ヘルスケア部門 最優秀貢献賞（2023年〜2025年）Watsons：ヘルスケアドリンク 年間最優秀新人賞（2023年）／ 美容ヘルスケア部門 売上NO.1（2024年〜2025年）※3 「コラーゲンカテゴリー」とは、コラーゲンを中心成分とし、美容と健康をサポートするインナーケア商品（粉末、ドリンク、ゼリー、錠剤など）の総称です。 ※4 A.A.クリーンラベル（A.A. Clean Label）/ MSC認証（海洋管理協議会認証）/ Halal（ハラール認証）/ Kosher（コーシャ認証）/ GMP認証</p>",
+        "awards_label": "受賞・認証実績"
       }
     },
     "m2_products": {
@@ -42,48 +113,89 @@
       "settings": {
         "eyebrow": "PRODUCTS",
         "heading": "商品ラインナップ",
-        "text": "",
         "collection": "all",
-        "products_to_show": 4,
-        "show_view_all": true,
-        "view_all_label": "VIEW ALL",
-        "background": "soft"
+        "products_to_show": 3,
+        "show_description": true,
+        "badge_text": "NEW",
+        "show_feature_badges": true,
+        "feature_badge_1": "高濃度\nコラーゲン\n6000mg",
+        "feature_badge_2": "コラーゲン\n＋\nPDRN",
+        "unavailable_label": "coming soon",
+        "show_view_all": false,
+        "view_all_label": "VIEW ALL"
       }
     },
     "m2_science": {
-      "type": "m2-editorial",
+      "type": "m2-science",
       "settings": {
-        "eyebrow": "OUR APPROACH",
-        "heading": "毎日に寄り添う、商品づくり。",
-        "text": "<p>商品ごとの特長や原材料、召し上がり方は、それぞれの商品ページで丁寧にご案内します。</p>",
-        "layout": "reverse",
-        "background": "dark",
-        "button_label": "VIEW PRODUCTS",
-        "button_link": "/collections/all"
+        "eyebrow": "SCIENCE",
+        "heading": "科学で証明された美",
+        "intro_heading": "m2がこだわった\n「コラーゲン」と「PDRN」を知る。",
+        "intro_text": "<p>900Daまで超低分子化した超微細コラーゲンと、サーモン由来の希少なコンディショニング成分「PDRN（整肌成分）」。m2が採用する日本大手Maruha Nichiro原料と韓国特許技術、独自の3層アプローチについて詳しく解説します。</p>",
+        "card_1_heading": "超微細コラーゲン",
+        "card_1_text": "<p>韓国特許技術により900Daまで超低分子化。内側から弾むようなハリ感をもたらす独自ペプチド。</p>",
+        "card_2_heading": "整肌成分PDRN",
+        "card_2_text": "<p>サーモン由来。日本大手Maruha Nichiro原料を採用し、乾燥や環境ストレスに負けない肌環境をサポート。</p>",
+        "button_label": "もっとみる",
+        "button_link": ""
       }
     },
     "m2_news": {
       "type": "m2-news",
+      "blocks": {
+        "fallback_01": {
+          "type": "fallback_article",
+          "settings": {
+            "date": "2026.09.01",
+            "tag": "INFO",
+            "title": "韓国発・プレミアム美容サプリメントブランド「m2（美度）」日本公式Shopifyストアがオープン！",
+            "link": ""
+          }
+        },
+        "fallback_02": {
+          "type": "fallback_article",
+          "settings": {
+            "date": "2026.09.01",
+            "tag": "PRODUCT",
+            "title": "【注目の新成分】最先端インナーケアに着目した「m2 プレミアムPDRNコラーゲンドリンク」が新登場！",
+            "link": ""
+          }
+        },
+        "fallback_03": {
+          "type": "fallback_article",
+          "settings": {
+            "date": "2026.09.01",
+            "tag": "EVENT",
+            "title": "【イベント情報】Qoo10公式ショップ出店＆秋のBIGセール参加のお知らせ",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["fallback_01", "fallback_02", "fallback_03"],
       "settings": {
-        "eyebrow": "INFO",
+        "eyebrow": "NEWS",
         "heading": "お知らせ",
         "blog": "news",
         "articles_to_show": 3,
-        "default_tag": "NEWS",
+        "default_tag": "INFO",
         "show_view_all": true,
-        "view_all_label": "VIEW ALL",
-        "background": "soft"
+        "view_all_label": "VIEW MORE"
       }
     },
     "m2_social": {
       "type": "m2-social",
+      "blocks": {
+        "post_01": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 1" } },
+        "post_02": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 2" } },
+        "post_03": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 3" } },
+        "post_04": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 4" } },
+        "post_05": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 5" } }
+      },
+      "block_order": ["post_01", "post_02", "post_03", "post_04", "post_05"],
       "settings": {
-        "eyebrow": "FOLLOW US",
-        "heading": "Instagram",
-        "text": "<p>ブランドからのお知らせをお届けします。</p>",
+        "eyebrow": "INSTAGRAM",
         "link": "",
-        "button_label": "FOLLOW",
-        "background": "paper"
+        "button_label": "VIEW MORE"
       }
     }
   },
@@ -91,6 +203,7 @@
     "m2_hero",
     "m2_about",
     "m2_movie",
+    "m2_trust",
     "m2_products",
     "m2_science",
     "m2_news",

@@ -9,132 +9,104 @@
 -%}
 
 {%- if should_render -%}
-  <section class="m2-section m2-section--{{ section.settings.background }}">
-  <div class="m2-container">
-    <div class="m2-section-header">
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="m2-eyebrow">{{ section.settings.eyebrow | escape }}</p>
-      {%- endif -%}
-      {%- if section.settings.heading != blank -%}
-        <h2 class="m2-heading m2-heading--md">{{ section.settings.heading | escape }}</h2>
-      {%- endif -%}
-      {%- if section.settings.text != blank -%}
-        <div class="m2-copy">{{ section.settings.text }}</div>
-      {%- endif -%}
+  <section class="m2-top-products m2-top-width" id="products" aria-labelledby="M2TopProductsHeading-{{ section.id }}">
+    <img
+      class="m2-top-haze m2-top-products__drop"
+      src="{{ 'm2-top-drop-05.png' | asset_url }}"
+      alt=""
+      width="800"
+      height="818"
+      loading="lazy"
+    >
+
+    <div class="m2-top-heading m2-top-heading--center">
+      <p class="m2-top-label">{{ section.settings.eyebrow | escape }}</p>
+      <h2 id="M2TopProductsHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
     </div>
 
-    {%- if selected_collection != blank -%}
-      <div class="m2-products">
+    {%- if selected_collection != blank and selected_collection.products_count > 0 -%}
+      <div class="m2-top-products__grid">
         {%- for product in selected_collection.products limit: section.settings.products_to_show -%}
-          <article class="m2-product-card">
-            <div class="m2-media m2-product-card__media">
+          <article class="m2-top-product">
+            {%- if forloop.index <= 2 and section.settings.show_feature_badges -%}
+              <span class="m2-top-product__feature">
+                {%- if forloop.index == 1 -%}
+                  {{ section.settings.feature_badge_1 | escape | newline_to_br }}
+                {%- else -%}
+                  {{ section.settings.feature_badge_2 | escape | newline_to_br }}
+                {%- endif -%}
+              </span>
+            {%- endif -%}
+            <div class="m2-top-product__media">
               {%- if product.featured_image != blank -%}
                 {{
                   product.featured_image
-                  | image_url: width: 1400
+                  | image_url: width: 1200
                   | image_tag:
-                    widths: '320, 480, 640, 900, 1200, 1400',
-                    sizes: '(min-width: 750px) 50vw, 100vw',
+                    widths: '360, 540, 720, 960, 1200',
+                    sizes: '(min-width: 1024px) 350px, 82vw',
                     loading: 'lazy'
                 }}
               {%- else -%}
-                {{ 'product-apparel-2' | placeholder_svg_tag: 'm2-product-card__placeholder' }}
+                {{ 'product-apparel-2' | placeholder_svg_tag: 'm2-top-product__placeholder' }}
               {%- endif -%}
             </div>
-            <h3 class="m2-product-card__title">
-              <a href="{{ product.url }}">{{ product.title | escape }}</a>
-            </h3>
-            <div class="m2-product-card__meta">
-              <span class="m2-product-card__availability">
+
+            <div class="m2-top-product__body">
+              {%- if section.settings.badge_text != blank -%}
+                <span class="m2-top-product__badge">{{ section.settings.badge_text | escape }}</span>
+              {%- endif -%}
+              <h3><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+              {%- if section.settings.show_description and product.description != blank -%}
+                <p class="m2-top-product__description">{{ product.description | strip_html | truncate: 90 }}</p>
+              {%- endif -%}
+              <div class="m2-top-product__meta">
+                <span>
+                  {%- unless product.has_only_default_variant -%}
+                    {{ product.selected_or_first_available_variant.title | escape }}
+                  {%- endunless -%}
+                </span>
                 {%- if product.available -%}
-                  {{ 'products.product.add_to_cart' | t }}
+                  {% render 'price', product: product, price_class: '', show_compare_at_price: true %}
                 {%- else -%}
-                  {{ 'products.product.sold_out' | t }}
+                  <strong class="m2-top-product__unavailable">{{ section.settings.unavailable_label | escape }}</strong>
                 {%- endif -%}
-              </span>
-              {% render 'price', product: product, price_class: '', show_compare_at_price: true %}
+              </div>
             </div>
           </article>
         {%- endfor -%}
       </div>
 
       {%- if section.settings.show_view_all and selected_collection.url != blank -%}
-        <div class="m2-news__action">
-          <a class="m2-link" href="{{ selected_collection.url }}">{{ section.settings.view_all_label | escape }}</a>
+        <div class="m2-top-products__action">
+          <a class="m2-top-button" href="{{ selected_collection.url }}">{{ section.settings.view_all_label | escape }}</a>
         </div>
       {%- endif -%}
     {%- elsif request.design_mode -%}
-      <p class="m2-copy">テーマエディターで表示するコレクションを選択してください。</p>
+      <p class="m2-top-editor-note">テーマエディターで表示するコレクションを選択してください。</p>
     {%- endif -%}
-  </div>
   </section>
 {%- endif -%}
 
 {% schema %}
 {
-  "name": "M2 商品一覧",
+  "name": "M2 TOP 商品一覧",
   "tag": "div",
   "class": "m2-section-wrapper",
   "settings": [
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "英字ラベル",
-      "default": "PRODUCTS"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "見出し",
-      "default": "商品ラインナップ"
-    },
-    {
-      "type": "richtext",
-      "id": "text",
-      "label": "導入文"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "コレクション"
-    },
-    {
-      "type": "range",
-      "id": "products_to_show",
-      "min": 2,
-      "max": 8,
-      "step": 1,
-      "label": "表示商品数",
-      "default": 4
-    },
-    {
-      "type": "checkbox",
-      "id": "show_view_all",
-      "label": "一覧リンクを表示",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "view_all_label",
-      "label": "一覧リンク名",
-      "default": "VIEW ALL"
-    },
-    {
-      "type": "select",
-      "id": "background",
-      "label": "背景",
-      "options": [
-        { "value": "paper", "label": "白" },
-        { "value": "soft", "label": "ライトグレー" },
-        { "value": "sand", "label": "ベージュ" }
-      ],
-      "default": "paper"
-    }
+    { "type": "text", "id": "eyebrow", "label": "英字見出し", "default": "PRODUCTS" },
+    { "type": "text", "id": "heading", "label": "見出し", "default": "商品ラインナップ" },
+    { "type": "collection", "id": "collection", "label": "コレクション" },
+    { "type": "range", "id": "products_to_show", "min": 2, "max": 6, "step": 1, "label": "表示商品数", "default": 3 },
+    { "type": "checkbox", "id": "show_description", "label": "商品説明を表示", "default": true },
+    { "type": "text", "id": "badge_text", "label": "商品ラベル", "default": "NEW" },
+    { "type": "checkbox", "id": "show_feature_badges", "label": "特徴バッジを表示", "default": true },
+    { "type": "textarea", "id": "feature_badge_1", "label": "1商品目の特徴", "default": "高濃度\nコラーゲン\n6000mg" },
+    { "type": "textarea", "id": "feature_badge_2", "label": "2商品目の特徴", "default": "コラーゲン\n＋\nPDRN" },
+    { "type": "text", "id": "unavailable_label", "label": "販売前・売り切れ表示", "default": "coming soon" },
+    { "type": "checkbox", "id": "show_view_all", "label": "一覧リンクを表示", "default": false },
+    { "type": "text", "id": "view_all_label", "label": "一覧リンク名", "default": "VIEW ALL" }
   ],
-  "presets": [
-    {
-      "name": "M2 商品一覧"
-    }
-  ]
+  "presets": [{ "name": "M2 TOP 商品一覧" }]
 }
 {% endschema %}

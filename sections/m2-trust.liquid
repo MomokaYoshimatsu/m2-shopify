@@ -1,0 +1,98 @@
+<section class="m2-top-trust" aria-labelledby="M2TopTrustHeading-{{ section.id }}">
+  <div class="m2-top-width">
+    <div class="m2-top-heading m2-top-heading--center m2-top-heading--light">
+      <p class="m2-top-label">{{ section.settings.eyebrow | escape }}</p>
+      <h2 id="M2TopTrustHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    </div>
+
+    <div class="m2-top-trust__metrics">
+      <div class="m2-top-trust__metric m2-top-trust__metric--wide">
+        <span>{{ section.settings.primary_label | escape | newline_to_br }}</span>
+        <strong>{{ section.settings.primary_value | escape }}</strong>
+        <small>{{ section.settings.primary_note | escape }}</small>
+      </div>
+      <div class="m2-top-trust__metric">
+        <div><strong>{{ section.settings.metric_1_value | escape }}</strong><small>{{ section.settings.metric_1_note | escape }}</small></div>
+        <span>{{ section.settings.metric_1_label | escape | newline_to_br }}</span>
+      </div>
+      <div class="m2-top-trust__metric">
+        <div><strong>{{ section.settings.metric_2_value | escape }}</strong><small>{{ section.settings.metric_2_note | escape }}</small></div>
+        <span>{{ section.settings.metric_2_label | escape | newline_to_br }}</span>
+      </div>
+      <div class="m2-top-trust__metric">
+        <div><strong>{{ section.settings.metric_3_value | escape }}</strong><small>{{ section.settings.metric_3_note | escape }}</small></div>
+        <span>{{ section.settings.metric_3_label | escape | newline_to_br }}</span>
+      </div>
+    </div>
+    <div class="m2-top-trust__notes">{{ section.settings.notes }}</div>
+  </div>
+
+  {%- if section.blocks.size > 0 -%}
+    <div class="m2-top-trust__awards" aria-label="{{ section.settings.awards_label | escape }}">
+      <div class="m2-top-trust__track">
+        {%- for duplicate in (1..2) -%}
+          <div class="m2-top-trust__group"{% if duplicate == 2 %} aria-hidden="true"{% endif %}>
+            {%- for block in section.blocks -%}
+              {%- assign award_number = forloop.index | prepend: '0' | slice: -2, 2 -%}
+              {%- capture fallback_asset -%}m2-top-award-{{ award_number }}.png{%- endcapture -%}
+              <div class="m2-top-trust__award"{% if duplicate == 1 %} {{ block.shopify_attributes }}{% endif %}>
+                {%- if block.settings.image != blank -%}
+                  {{ block.settings.image | image_url: width: 240 | image_tag: widths: '100, 160, 240', sizes: '100px', loading: 'lazy', alt: block.settings.alt }}
+                {%- else -%}
+                  <img src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.alt | escape }}" width="100" height="100" loading="lazy">
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "M2 TOP TRUST BY",
+  "tag": "div",
+  "class": "m2-section-wrapper",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "英字見出し", "default": "TRUST BY" },
+    { "type": "text", "id": "heading", "label": "見出し", "default": "選ばれてきた、確かな理由。" },
+    { "type": "textarea", "id": "primary_label", "label": "累計実績ラベル", "default": "ブランド\n累計販売個数" },
+    { "type": "text", "id": "primary_value", "label": "累計実績数値", "default": "50,000,000個" },
+    { "type": "text", "id": "primary_note", "label": "累計実績注記", "default": "※1" },
+    { "type": "text", "id": "metric_1_value", "label": "実績1 数値", "default": "No.1" },
+    { "type": "text", "id": "metric_1_note", "label": "実績1 注記", "default": "※2" },
+    { "type": "textarea", "id": "metric_1_label", "label": "実績1 説明", "default": "台湾コラーゲンカテゴリー※3\n3年連続" },
+    { "type": "text", "id": "metric_2_value", "label": "実績2 数値", "default": "300+" },
+    { "type": "text", "id": "metric_2_note", "label": "実績2 注記" },
+    { "type": "textarea", "id": "metric_2_label", "label": "実績2 説明", "default": "国際的な認証機関SGSによる\n300項目以上ある安全基準をクリア" },
+    { "type": "text", "id": "metric_3_value", "label": "実績3 数値", "default": "5認証" },
+    { "type": "text", "id": "metric_3_note", "label": "実績3 注記" },
+    { "type": "textarea", "id": "metric_3_label", "label": "実績3 説明", "default": "世界水準の安全と品質\n5つのグローバル認証※4を取得" },
+    { "type": "richtext", "id": "notes", "label": "注記", "default": "<p>※1 2022年4月〜2026年6月における「m2 コラーゲンドリンク」全チャネル累計出荷・販売実績（自社調べ）。 ※2 momo：美容ヘルスケア部門 NO.1（2023年〜2026年）Shopee：ヘルスケア部門 最優秀貢献賞（2023年〜2025年）Watsons：ヘルスケアドリンク 年間最優秀新人賞（2023年）／ 美容ヘルスケア部門 売上NO.1（2024年〜2025年）※3 「コラーゲンカテゴリー」とは、コラーゲンを中心成分とし、美容と健康をサポートするインナーケア商品（粉末、ドリンク、ゼリー、錠剤など）の総称です。 ※4 A.A.クリーンラベル（A.A. Clean Label）/ MSC認証（海洋管理協議会認証）/ Halal（ハラール認証）/ Kosher（コーシャ認証）/ GMP認証</p>" },
+    { "type": "text", "id": "awards_label", "label": "認証ロゴ一覧の説明", "default": "受賞・認証実績" }
+  ],
+  "blocks": [
+    {
+      "type": "award",
+      "name": "受賞・認証ロゴ",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "画像" },
+        { "type": "text", "id": "alt", "label": "画像の代替テキスト", "default": "受賞・認証ロゴ" }
+      ]
+    }
+  ],
+  "max_blocks": 11,
+  "presets": [
+    {
+      "name": "M2 TOP TRUST BY",
+      "blocks": [
+        { "type": "award" }, { "type": "award" }, { "type": "award" }, { "type": "award" },
+        { "type": "award" }, { "type": "award" }, { "type": "award" }, { "type": "award" },
+        { "type": "award" }, { "type": "award" }, { "type": "award" }
+      ]
+    }
+  ]
+}
+{% endschema %}

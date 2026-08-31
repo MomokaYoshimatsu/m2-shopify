@@ -1,0 +1,100 @@
+<section class="m2-top-about" id="about" aria-labelledby="M2TopAboutHeading-{{ section.id }}">
+  <p class="m2-top-label m2-top-about__label">{{ section.settings.eyebrow | escape }}</p>
+
+  <img
+    class="m2-top-about__drop m2-top-about__drop--02"
+    src="{{ 'm2-top-drop-02.png' | asset_url }}"
+    alt=""
+    width="600"
+    height="613"
+    loading="lazy"
+  >
+  <img
+    class="m2-top-about__drop m2-top-about__drop--03"
+    src="{{ 'm2-top-drop-03.png' | asset_url }}"
+    alt=""
+    width="150"
+    height="153"
+    loading="lazy"
+  >
+  <img
+    class="m2-top-about__drop m2-top-about__drop--04"
+    src="{{ 'm2-top-drop-04.png' | asset_url }}"
+    alt=""
+    width="350"
+    height="358"
+    loading="lazy"
+  >
+
+  <div class="m2-top-about__media">
+    <div class="m2-top-about__red" aria-hidden="true"></div>
+    {%- if section.settings.image != blank -%}
+      {{
+        section.settings.image
+        | image_url: width: 1800
+        | image_tag:
+          widths: '480, 750, 1000, 1400, 1800',
+          sizes: '(min-width: 1024px) 47vw, 100vw',
+          loading: 'lazy',
+          class: 'm2-top-about__portrait'
+      }}
+    {%- else -%}
+      <img
+        class="m2-top-about__portrait"
+        src="{{ 'm2-top-about.png' | asset_url }}"
+        alt="{{ section.settings.image_alt | escape }}"
+        width="1400"
+        height="2100"
+        loading="lazy"
+      >
+    {%- endif -%}
+    {%- if section.settings.ambassador_name != blank -%}
+      <div class="m2-top-about__ambassador">
+        <small>{{ section.settings.ambassador_caption | escape }}</small>
+        <strong>{{ section.settings.ambassador_name | escape }}</strong>
+        <img src="{{ 'm2-top-ambassador-signature.svg' | asset_url }}" alt="" width="133" height="66" loading="lazy">
+      </div>
+    {%- endif -%}
+  </div>
+
+  <div class="m2-top-about__content m2-top-width">
+    <div class="m2-top-about__titles">
+      <h2 id="M2TopAboutHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+      <p>{{ section.settings.subheading | escape }}</p>
+    </div>
+    <div class="m2-top-copy m2-top-about__copy">{{ section.settings.text }}</div>
+    {%- if section.settings.button_label != blank -%}
+      {%- if section.settings.button_link != blank -%}
+        <a class="m2-top-button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+      {%- else -%}
+        <span class="m2-top-button m2-top-button--disabled">{{ section.settings.button_label | escape }}</span>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "M2 TOP ABOUT",
+  "tag": "div",
+  "class": "m2-section-wrapper",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "英字見出し", "default": "ABOUT" },
+    { "type": "text", "id": "heading", "label": "見出し", "default": "Me and More" },
+    { "type": "text", "id": "subheading", "label": "日本語見出し", "default": "自分らしい美しさを" },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "本文",
+      "default": "<p>美しさとは、誰かのために追い求めるものではなく、<br>自分自身を大切にする日々の積み重ねから生まれるもの。<br>頑張る日も、立ち止まる日も。<br>ありのままの自分を受け入れ、自分らしいリズムで過ごす時間が、未来の輝きを育んでいく。</p><p>もっと自由に。<br>もっと自然体に。<br>もっと、自分らしく美しく。<br>あなたが、あなたらしく輝き続けるために。</p>"
+    },
+    { "type": "image_picker", "id": "image", "label": "アンバサダー画像" },
+    { "type": "text", "id": "image_alt", "label": "画像の代替テキスト", "default": "m2ブランドアンバサダー" },
+    { "type": "text", "id": "ambassador_caption", "label": "肩書き", "default": "m2ブランドアンバサダー" },
+    { "type": "text", "id": "ambassador_name", "label": "氏名", "default": "ソン・イェジン" },
+    { "type": "text", "id": "button_label", "label": "ボタン名", "default": "もっとみる" },
+    { "type": "url", "id": "button_link", "label": "ボタンリンク" }
+  ],
+  "presets": [{ "name": "M2 TOP ABOUT" }]
+}
+{% endschema %}
