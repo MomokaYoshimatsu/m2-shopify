@@ -1,0 +1,46 @@
+<section class="m2-top-movie m2-top-width" aria-labelledby="M2TopMovieHeading-{{ section.id }}">
+  <div class="m2-top-heading m2-top-heading--split">
+    <p class="m2-top-label">{{ section.settings.eyebrow | escape }}</p>
+    <h2 id="M2TopMovieHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+  </div>
+
+  {%- assign video_url = section.settings.video_url -%}
+  <div class="m2-top-movie__media">
+    {%- if section.settings.poster != blank -%}
+      {{
+        section.settings.poster
+        | image_url: width: 2200
+        | image_tag:
+          widths: '600, 900, 1200, 1600, 2200',
+          sizes: '(min-width: 1200px) 1100px, calc(100vw - 40px)',
+          loading: 'lazy'
+      }}
+    {%- else -%}
+      <img src="{{ 'm2-top-brand-movie.jpg' | asset_url }}" alt="" width="1280" height="720" loading="lazy">
+    {%- endif -%}
+
+    {%- if video_url != blank -%}
+      <a class="m2-top-movie__play" href="{{ video_url }}" aria-label="{{ section.settings.play_label | escape }}">
+        <span aria-hidden="true"></span>
+      </a>
+    {%- else -%}
+      <span class="m2-top-movie__play m2-top-movie__play--disabled" aria-hidden="true"><span></span></span>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "M2 TOP BRAND MOVIE",
+  "tag": "div",
+  "class": "m2-section-wrapper",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "英字見出し", "default": "BRAND MOVIE" },
+    { "type": "text", "id": "heading", "label": "見出し", "default": "360度、自信に満ちた輝きへ。" },
+    { "type": "image_picker", "id": "poster", "label": "動画サムネイル" },
+    { "type": "video_url", "id": "video_url", "label": "YouTube / Vimeo URL", "accept": ["youtube", "vimeo"] },
+    { "type": "text", "id": "play_label", "label": "再生ボタンの説明", "default": "ブランドムービーを再生" }
+  ],
+  "presets": [{ "name": "M2 TOP BRAND MOVIE" }]
+}
+{% endschema %}
