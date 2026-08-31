@@ -1210,6 +1210,11 @@ body {
   line-height: 1.25;
 }
 
+.m2-top-trust__metric > div {
+  display: flex;
+  align-items: flex-end;
+}
+
 .m2-top-trust__metric span {
   font-size: 1.5rem;
   font-weight: 700;
