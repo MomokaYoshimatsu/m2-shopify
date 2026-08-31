@@ -36,8 +36,11 @@
 
   <div class="m2-top-hero__inner">
     {%- if section.settings.heading != blank -%}
+      {%- assign heading_lines = section.settings.heading | newline_to_br | split: '<br />' -%}
       <h2 id="M2TopHeroHeading-{{ section.id }}" class="m2-top-hero__heading">
-        {{ section.settings.heading | escape | newline_to_br }}
+        {%- for heading_line in heading_lines -%}
+          <span>{{ heading_line | strip | escape }}</span>
+        {%- endfor -%}
       </h2>
     {%- endif -%}
     {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
