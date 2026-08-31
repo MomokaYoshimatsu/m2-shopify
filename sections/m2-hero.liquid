@@ -1,59 +1,130 @@
-{%- liquid
-  assign desktop_image = section.settings.image
-  assign mobile_image = section.settings.mobile_image | default: desktop_image
--%}
+<m2-hero-slider
+  class="m2-top-hero"
+  data-autoplay="{{ section.settings.autoplay }}"
+  data-interval="{{ section.settings.change_slides_speed | times: 1000 }}"
+  aria-roledescription="カルーセル"
+  aria-label="メインビジュアル"
+>
+  <div class="m2-top-hero__slides" aria-live="polite">
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign desktop_image = block.settings.image | default: section.settings.image
+          assign mobile_image = block.settings.mobile_image | default: section.settings.mobile_image | default: desktop_image
+          assign slide_heading = block.settings.heading | default: section.settings.heading
+          assign button_label = block.settings.button_label | default: section.settings.button_label
+          assign button_link = block.settings.button_link | default: section.settings.button_link
+          assign image_loading = 'lazy'
+          assign image_fetchpriority = 'auto'
+          if forloop.first
+            assign image_loading = 'eager'
+            assign image_fetchpriority = 'high'
+          endif
+        -%}
+        <article
+          class="m2-top-hero__slide{% if forloop.first %} is-active{% endif %}"
+          data-m2-hero-slide
+          aria-roledescription="スライド"
+          aria-label="{{ forloop.index }} / {{ section.blocks.size }}"
+          aria-hidden="{% if forloop.first %}false{% else %}true{% endif %}"
+          {% unless forloop.first %}inert{% endunless %}
+          {{ block.shopify_attributes }}
+        >
+          <picture class="m2-top-hero__media" aria-hidden="true">
+            {%- if mobile_image != blank -%}
+              <source
+                media="(max-width: 1023px)"
+                srcset="{{ mobile_image | image_url: width: 480 }} 480w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1000 }} 1000w"
+                sizes="100vw"
+              >
+            {%- endif -%}
+            {%- if desktop_image != blank -%}
+              {{
+                desktop_image
+                | image_url: width: 2880
+                | image_tag:
+                  widths: '1024, 1280, 1440, 1920, 2400, 2880',
+                  sizes: '100vw',
+                  loading: image_loading,
+                  fetchpriority: image_fetchpriority
+              }}
+            {%- else -%}
+              <img
+                src="{{ 'm2-top-hero.jpg' | asset_url }}"
+                alt=""
+                width="2880"
+                height="1392"
+                loading="{{ image_loading }}"
+                fetchpriority="{{ image_fetchpriority }}"
+              >
+            {%- endif -%}
+          </picture>
 
-<section class="m2-top-hero" aria-labelledby="M2TopHeroHeading-{{ section.id }}">
-  <picture class="m2-top-hero__media" aria-hidden="true">
-    {%- if mobile_image != blank -%}
-      <source
-        media="(max-width: 1023px)"
-        srcset="{{ mobile_image | image_url: width: 480 }} 480w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1000 }} 1000w"
-        sizes="100vw"
-      >
-    {%- endif -%}
-    {%- if desktop_image != blank -%}
-      {{
-        desktop_image
-        | image_url: width: 2880
-        | image_tag:
-          widths: '1024, 1280, 1440, 1920, 2400, 2880',
-          sizes: '100vw',
-          loading: 'eager',
-          fetchpriority: 'high'
-      }}
+          <div class="m2-top-hero__inner">
+            {%- if slide_heading != blank -%}
+              {%- assign heading_lines = slide_heading | newline_to_br | split: '<br />' -%}
+              <h2 class="m2-top-hero__heading">
+                {%- for heading_line in heading_lines -%}
+                  <span>{{ heading_line | strip | escape }}</span>
+                {%- endfor -%}
+              </h2>
+            {%- endif -%}
+            {%- if button_label != blank and button_link != blank -%}
+              <a class="m2-top-button m2-top-button--light" href="{{ button_link }}">
+                {{ button_label | escape }}
+              </a>
+            {%- endif -%}
+          </div>
+        </article>
+      {%- endfor -%}
     {%- else -%}
-      <img
-        src="{{ 'm2-top-hero.jpg' | asset_url }}"
-        alt=""
-        width="2880"
-        height="1392"
-        loading="eager"
-        fetchpriority="high"
-      >
-    {%- endif -%}
-  </picture>
-
-  <div class="m2-top-hero__inner">
-    {%- if section.settings.heading != blank -%}
-      {%- assign heading_lines = section.settings.heading | newline_to_br | split: '<br />' -%}
-      <h2 id="M2TopHeroHeading-{{ section.id }}" class="m2-top-hero__heading">
-        {%- for heading_line in heading_lines -%}
-          <span>{{ heading_line | strip | escape }}</span>
-        {%- endfor -%}
-      </h2>
-    {%- endif -%}
-    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
-      <a class="m2-top-button m2-top-button--light" href="{{ section.settings.button_link }}">
-        {{ section.settings.button_label | escape }}
-      </a>
+      {%- liquid
+        assign desktop_image = section.settings.image
+        assign mobile_image = section.settings.mobile_image | default: desktop_image
+        assign heading_lines = section.settings.heading | newline_to_br | split: '<br />'
+      -%}
+      <article class="m2-top-hero__slide is-active" data-m2-hero-slide aria-hidden="false">
+        <picture class="m2-top-hero__media" aria-hidden="true">
+          {%- if mobile_image != blank -%}
+            <source
+              media="(max-width: 1023px)"
+              srcset="{{ mobile_image | image_url: width: 480 }} 480w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1000 }} 1000w"
+              sizes="100vw"
+            >
+          {%- endif -%}
+          {%- if desktop_image != blank -%}
+            {{ desktop_image | image_url: width: 2880 | image_tag: widths: '1024, 1280, 1440, 1920, 2400, 2880', sizes: '100vw', loading: 'eager', fetchpriority: 'high' }}
+          {%- else -%}
+            <img src="{{ 'm2-top-hero.jpg' | asset_url }}" alt="" width="2880" height="1392" loading="eager" fetchpriority="high">
+          {%- endif -%}
+        </picture>
+        <div class="m2-top-hero__inner">
+          {%- if section.settings.heading != blank -%}
+            <h2 class="m2-top-hero__heading">
+              {%- for heading_line in heading_lines -%}<span>{{ heading_line | strip | escape }}</span>{%- endfor -%}
+            </h2>
+          {%- endif -%}
+          {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+            <a class="m2-top-button m2-top-button--light" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+          {%- endif -%}
+        </div>
+      </article>
     {%- endif -%}
   </div>
 
-  {%- if section.settings.show_pagination -%}
-    <div class="m2-top-hero__pagination" aria-hidden="true"><i></i><i></i><i></i></div>
+  {%- if section.settings.show_pagination and section.blocks.size > 1 -%}
+    <div class="m2-top-hero__pagination" role="group" aria-label="スライドを選択">
+      {%- for block in section.blocks -%}
+        <button
+          type="button"
+          data-m2-hero-indicator="{{ forloop.index0 }}"
+          aria-label="スライド{{ forloop.index }}を表示"
+          aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+        ></button>
+      {%- endfor -%}
+    </div>
   {%- endif -%}
-</section>
+</m2-hero-slider>
 
 {% schema %}
 {
@@ -64,40 +135,75 @@
     {
       "type": "textarea",
       "id": "heading",
-      "label": "見出し",
+      "label": "共通の見出し",
       "default": "360度、\n自信に満ちた\n輝きへ。"
     },
     {
       "type": "image_picker",
       "id": "image",
-      "label": "PC画像",
-      "info": "未設定時はFigmaのキービジュアルを表示します。"
+      "label": "共通のPC画像",
+      "info": "各スライドで画像が未設定の場合に使用します。未設定時はFigmaのキービジュアルを表示します。"
     },
     {
       "type": "image_picker",
       "id": "mobile_image",
-      "label": "スマートフォン画像"
+      "label": "共通のスマートフォン画像"
     },
     {
       "type": "checkbox",
       "id": "show_pagination",
-      "label": "スライド位置の装飾を表示",
+      "label": "スライドインジケーターを表示",
       "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "自動再生する",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "change_slides_speed",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "秒",
+      "label": "スライド切り替え間隔",
+      "default": 5
     },
     {
       "type": "text",
       "id": "button_label",
-      "label": "ボタン名"
+      "label": "共通のボタン名"
     },
     {
       "type": "url",
       "id": "button_link",
-      "label": "ボタンリンク"
+      "label": "共通のボタンリンク"
     }
   ],
+  "blocks": [
+    {
+      "type": "slide",
+      "name": "スライド",
+      "settings": [
+        { "type": "image_picker", "id": "image", "label": "PC画像" },
+        { "type": "image_picker", "id": "mobile_image", "label": "スマートフォン画像" },
+        { "type": "textarea", "id": "heading", "label": "見出し", "default": "360度、\n自信に満ちた\n輝きへ。" },
+        { "type": "text", "id": "button_label", "label": "ボタン名" },
+        { "type": "url", "id": "button_link", "label": "ボタンリンク" }
+      ]
+    }
+  ],
+  "max_blocks": 5,
   "presets": [
     {
-      "name": "M2 TOP ヒーロー"
+      "name": "M2 TOP ヒーロー",
+      "blocks": [
+        { "type": "slide" },
+        { "type": "slide" },
+        { "type": "slide" }
+      ]
     }
   ]
 }

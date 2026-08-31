@@ -2,9 +2,38 @@
   "sections": {
     "m2_hero": {
       "type": "m2-hero",
+      "blocks": {
+        "slide_01": {
+          "type": "slide",
+          "settings": {
+            "heading": "360度、\n自信に満ちた\n輝きへ。",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "slide_02": {
+          "type": "slide",
+          "settings": {
+            "heading": "360度、\n自信に満ちた\n輝きへ。",
+            "button_label": "",
+            "button_link": ""
+          }
+        },
+        "slide_03": {
+          "type": "slide",
+          "settings": {
+            "heading": "360度、\n自信に満ちた\n輝きへ。",
+            "button_label": "",
+            "button_link": ""
+          }
+        }
+      },
+      "block_order": ["slide_01", "slide_02", "slide_03"],
       "settings": {
         "heading": "360度、\n自信に満ちた\n輝きへ。",
         "show_pagination": true,
+        "autoplay": true,
+        "change_slides_speed": 5,
         "button_label": "",
         "button_link": ""
       }

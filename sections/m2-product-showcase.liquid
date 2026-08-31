@@ -28,6 +28,15 @@
       <div class="m2-top-products__grid">
         {%- for product in selected_collection.products limit: section.settings.products_to_show -%}
           <article class="m2-top-product">
+            {%- if forloop.index <= 2 and section.settings.show_feature_badges -%}
+              <span class="m2-top-product__feature">
+                {%- if forloop.index == 1 -%}
+                  {{ section.settings.feature_badge_1 | escape | newline_to_br }}
+                {%- else -%}
+                  {{ section.settings.feature_badge_2 | escape | newline_to_br }}
+                {%- endif -%}
+              </span>
+            {%- endif -%}
             <div class="m2-top-product__media">
               {%- if product.featured_image != blank -%}
                 {{
@@ -40,15 +49,6 @@
                 }}
               {%- else -%}
                 {{ 'product-apparel-2' | placeholder_svg_tag: 'm2-top-product__placeholder' }}
-              {%- endif -%}
-              {%- if forloop.index <= 2 and section.settings.show_feature_badges -%}
-                <span class="m2-top-product__feature">
-                  {%- if forloop.index == 1 -%}
-                    {{ section.settings.feature_badge_1 | escape | newline_to_br }}
-                  {%- else -%}
-                    {{ section.settings.feature_badge_2 | escape | newline_to_br }}
-                  {%- endif -%}
-                </span>
               {%- endif -%}
             </div>
 
