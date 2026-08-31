@@ -1,4 +1,71 @@
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('m2-montserrat-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('m2-montserrat-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('m2-montserrat-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('m2-montserrat-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('m2-noto-sans-jp-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('m2-noto-sans-jp-500.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('m2-noto-sans-jp-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Noto Sans JP';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('m2-noto-sans-jp-700.woff2') format('woff2');
+}
+
 :root {
+  --m2-font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
+  --font-body-family: var(--m2-font-family);
+  --font-heading-family: var(--m2-font-family);
   --m2-ink: #262624;
   --m2-text: #4b4b48;
   --m2-muted: #858580;
@@ -18,6 +85,7 @@ html {
 
 body {
   color: var(--m2-text);
+  font-family: var(--m2-font-family);
 }
 
 .m2-section {
@@ -991,7 +1059,7 @@ body {
   width: 64%;
   margin: 0;
   color: #fff;
-  font-family: 'Noto Serif JP', serif;
+  font-family: var(--m2-font-family);
   font-size: clamp(2.8rem, 8.5vw, 3.4rem);
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -1030,29 +1098,60 @@ body {
   padding: 8rem 0 0;
 }
 
-.m2-top-about::after {
+.m2-top-about__label {
+  z-index: 3;
+  justify-self: center;
+  text-align: center;
+}
+
+.m2-top-about__label::after {
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.m2-top-about__drop {
   position: absolute;
-  z-index: 0;
-  right: -5rem;
-  bottom: -2rem;
+  z-index: 3;
+  display: block;
+  height: auto;
+  pointer-events: none;
+}
+
+.m2-top-about__drop--02 {
+  top: 8rem;
+  left: -8rem;
   width: 14rem;
-  aspect-ratio: 1;
-  background: url('m2-top-orb.png') center / contain no-repeat;
-  content: '';
-  filter: drop-shadow(1.5rem 1.5rem 1.5rem rgb(210 0 41 / 10%));
+}
+
+.m2-top-about__drop--03 {
+  top: 10rem;
+  left: 58%;
+  width: 4rem;
+}
+
+.m2-top-about__drop--04 {
+  right: -3rem;
+  bottom: 1rem;
+  width: 9rem;
 }
 
 .m2-top-about__media {
   position: relative;
+  z-index: 1;
   min-height: 46rem;
   overflow: hidden;
 }
 
 .m2-top-about__red {
   position: absolute;
+  display: block;
   inset: 7rem 0 0;
   border-radius: 0 6rem 0 0;
   background: linear-gradient(90deg, var(--m2-top-red-dark), var(--m2-top-red-light));
+}
+
+.m2-top-about__media > .m2-top-about__red {
+  display: block;
 }
 
 .m2-top-about__portrait {
@@ -1083,6 +1182,13 @@ body {
   letter-spacing: 0.08em;
 }
 
+.m2-top-about__ambassador img {
+  display: block;
+  width: 13.3rem;
+  height: auto;
+  margin-top: 0.8rem;
+}
+
 .m2-top-about__content {
   position: relative;
   z-index: 1;
@@ -1096,6 +1202,7 @@ body {
 
 .m2-top-about__titles h2 {
   margin: 0;
+  color: var(--m2-top-red);
   font-family: Montserrat, var(--font-body-family);
   font-size: 3.3rem;
   font-weight: 700;
@@ -1122,6 +1229,10 @@ body {
   margin-top: 3rem;
 }
 
+.m2-top-button--disabled {
+  cursor: default;
+}
+
 /* Brand movie */
 .m2-top-movie {
   padding-top: 8rem;
@@ -1139,11 +1250,25 @@ body {
   overflow: hidden;
 }
 
-.m2-top-movie__media > img {
+.m2-top-movie__media > img,
+.m2-top-movie__media > iframe,
+.m2-top-movie__media > video,
+.m2-top-movie__poster img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.m2-top-movie__poster {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
 }
 
 .m2-top-movie__play {
@@ -1160,8 +1285,8 @@ body {
   transition: transform 180ms ease;
 }
 
-.m2-top-movie__play:not(.m2-top-movie__play--disabled):hover,
-.m2-top-movie__play:not(.m2-top-movie__play--disabled):focus-visible {
+.m2-top-movie__poster:hover .m2-top-movie__play,
+.m2-top-movie__poster:focus-visible .m2-top-movie__play {
   transform: translate(-50%, -50%) scale(1.06);
 }
 
@@ -1690,9 +1815,30 @@ body {
     padding-top: 10rem;
   }
 
-  .m2-top-about::after {
-    right: 7%;
-    bottom: 0;
+  .m2-top-about__label {
+    position: absolute;
+    top: 11.7rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .m2-top-about__drop--02 {
+    top: 11.1rem;
+    left: -11.2%;
+    width: 17.6%;
+  }
+
+  .m2-top-about__drop--03 {
+    top: 10.9rem;
+    left: 35.2%;
+    width: 3.4%;
+  }
+
+  .m2-top-about__drop--04 {
+    top: 51.2rem;
+    right: 7.1%;
+    bottom: auto;
+    width: 9.5%;
   }
 
   .m2-top-about__media {
@@ -1705,11 +1851,16 @@ body {
   }
 
   .m2-top-about__portrait {
-    right: 4%;
-    width: min(88%, 52rem);
+    top: -1.4rem;
+    right: -1%;
+    bottom: auto;
+    width: 95%;
+    max-width: none;
   }
 
   .m2-top-about__ambassador {
+    top: 33%;
+    right: 8.5%;
     display: flex;
   }
 
@@ -1717,11 +1868,11 @@ body {
     width: auto;
     max-width: 53rem;
     margin: 0;
-    padding: 1.7rem 0 0 6.9rem;
+    padding: 0 0 0 6.9rem;
   }
 
   .m2-top-about__titles {
-    margin-top: 4.2rem;
+    margin-top: 11.4rem;
   }
 
   .m2-top-about__titles h2 {

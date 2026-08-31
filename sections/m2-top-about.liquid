@@ -1,4 +1,31 @@
 <section class="m2-top-about" id="about" aria-labelledby="M2TopAboutHeading-{{ section.id }}">
+  <p class="m2-top-label m2-top-about__label">{{ section.settings.eyebrow | escape }}</p>
+
+  <img
+    class="m2-top-about__drop m2-top-about__drop--02"
+    src="{{ 'm2-top-drop-02.png' | asset_url }}"
+    alt=""
+    width="600"
+    height="613"
+    loading="lazy"
+  >
+  <img
+    class="m2-top-about__drop m2-top-about__drop--03"
+    src="{{ 'm2-top-drop-03.png' | asset_url }}"
+    alt=""
+    width="150"
+    height="153"
+    loading="lazy"
+  >
+  <img
+    class="m2-top-about__drop m2-top-about__drop--04"
+    src="{{ 'm2-top-drop-04.png' | asset_url }}"
+    alt=""
+    width="350"
+    height="358"
+    loading="lazy"
+  >
+
   <div class="m2-top-about__media">
     <div class="m2-top-about__red" aria-hidden="true"></div>
     {%- if section.settings.image != blank -%}
@@ -16,8 +43,8 @@
         class="m2-top-about__portrait"
         src="{{ 'm2-top-about.png' | asset_url }}"
         alt="{{ section.settings.image_alt | escape }}"
-        width="1199"
-        height="1800"
+        width="1400"
+        height="2100"
         loading="lazy"
       >
     {%- endif -%}
@@ -25,19 +52,23 @@
       <div class="m2-top-about__ambassador">
         <small>{{ section.settings.ambassador_caption | escape }}</small>
         <strong>{{ section.settings.ambassador_name | escape }}</strong>
+        <img src="{{ 'm2-top-ambassador-signature.svg' | asset_url }}" alt="" width="133" height="66" loading="lazy">
       </div>
     {%- endif -%}
   </div>
 
   <div class="m2-top-about__content m2-top-width">
-    <p class="m2-top-label">{{ section.settings.eyebrow | escape }}</p>
     <div class="m2-top-about__titles">
       <h2 id="M2TopAboutHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
       <p>{{ section.settings.subheading | escape }}</p>
     </div>
     <div class="m2-top-copy m2-top-about__copy">{{ section.settings.text }}</div>
-    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
-      <a class="m2-top-button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+    {%- if section.settings.button_label != blank -%}
+      {%- if section.settings.button_link != blank -%}
+        <a class="m2-top-button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+      {%- else -%}
+        <span class="m2-top-button m2-top-button--disabled">{{ section.settings.button_label | escape }}</span>
+      {%- endif -%}
     {%- endif -%}
   </div>
 </section>
