@@ -62,6 +62,14 @@
   src: url('m2-noto-sans-jp-700.woff2') format('woff2');
 }
 
+@font-face {
+  font-family: 'Noto Serif JP';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('m2-noto-serif-jp-500.woff2') format('woff2');
+}
+
 :root {
   --m2-font-family: 'Montserrat', 'Noto Sans JP', sans-serif;
   --font-body-family: var(--m2-font-family);
@@ -968,6 +976,16 @@ body {
   text-align: center;
 }
 
+.m2-top-haze {
+  position: absolute;
+  z-index: 0;
+  display: block;
+  height: auto;
+  opacity: 0.4;
+  filter: blur(3.2rem);
+  pointer-events: none;
+}
+
 /* Rise header remains functional; the homepage receives the Figma treatment. */
 .template-index .shopify-section-group-header-group .header-wrapper {
   background: var(--m2-top-red);
@@ -1059,7 +1077,7 @@ body {
   width: 64%;
   margin: 0;
   color: #fff;
-  font-family: var(--m2-font-family);
+  font-family: 'Noto Serif JP', serif;
   font-size: clamp(2.8rem, 8.5vw, 3.4rem);
   font-weight: 500;
   letter-spacing: 0.05em;
@@ -1235,8 +1253,21 @@ body {
 
 /* Brand movie */
 .m2-top-movie {
+  position: relative;
   padding-top: 8rem;
   padding-bottom: 8rem;
+}
+
+.m2-top-movie > .m2-top-heading,
+.m2-top-movie > .m2-top-movie__media {
+  position: relative;
+  z-index: 1;
+}
+
+.m2-top-movie__drop {
+  top: 22rem;
+  right: -10rem;
+  width: 24rem;
 }
 
 .m2-top-heading--split h2 {
@@ -1412,8 +1443,20 @@ body {
 
 /* Products */
 .m2-top-products {
+  position: relative;
   padding-top: 8rem;
   padding-bottom: 8rem;
+}
+
+.m2-top-products > :not(.m2-top-products__drop) {
+  position: relative;
+  z-index: 1;
+}
+
+.m2-top-products__drop {
+  top: -8rem;
+  left: -12rem;
+  width: 22rem;
 }
 
 .m2-top-products__grid {
@@ -1554,8 +1597,20 @@ body {
 
 /* Science */
 .m2-top-science {
+  position: relative;
   padding: 8rem 0;
   background: linear-gradient(to bottom, var(--m2-top-red) 0 32rem, var(--m2-top-bg) 32rem 100%);
+}
+
+.m2-top-science > .m2-top-width {
+  position: relative;
+  z-index: 1;
+}
+
+.m2-top-science__drop {
+  top: 52%;
+  right: -8rem;
+  width: 22rem;
 }
 
 .m2-top-science__panel {
@@ -1583,6 +1638,7 @@ body {
   color: var(--m2-top-red);
   font-family: Montserrat, var(--font-body-family);
   font-size: 2rem;
+  font-weight: 700;
   letter-spacing: 0.07em;
   line-height: 1.6;
 }
@@ -1594,6 +1650,7 @@ body {
 .m2-top-science__cards h3 {
   margin: 0 0 2rem;
   font-size: 1.6rem;
+  font-weight: 700;
   letter-spacing: 0.07em;
   line-height: 1.5;
 }
@@ -1612,6 +1669,11 @@ body {
 
 .m2-top-science__cards .m2-top-copy {
   margin-top: 2rem;
+}
+
+.m2-top-science .m2-top-copy {
+  font-weight: 500;
+  line-height: 1.8;
 }
 
 /* News */
@@ -1672,7 +1734,8 @@ body {
   line-height: 1.8;
 }
 
-.m2-top-news__item h3 a {
+.m2-top-news__item h3 a,
+.m2-top-news__item h3 span {
   color: var(--m2-top-ink);
   text-decoration: none;
 }
@@ -1892,6 +1955,12 @@ body {
     padding-bottom: 10rem;
   }
 
+  .m2-top-movie__drop {
+    top: 29.4rem;
+    right: -27.4rem;
+    width: 48.3rem;
+  }
+
   .m2-top-heading--split {
     flex-direction: row;
     align-items: flex-start;
@@ -1929,6 +1998,12 @@ body {
     padding-bottom: 10rem;
   }
 
+  .m2-top-products__drop {
+    top: -14.3rem;
+    left: -29.7rem;
+    width: 39.8rem;
+  }
+
   .m2-top-products__grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-auto-flow: initial;
@@ -1947,6 +2022,12 @@ body {
   .m2-top-science {
     padding: 10rem 0;
     background: linear-gradient(to bottom, var(--m2-top-red) 0 43.2rem, var(--m2-top-bg) 43.2rem 100%);
+  }
+
+  .m2-top-science__drop {
+    top: 62.4rem;
+    right: 2.7%;
+    width: 39.8rem;
   }
 
   .m2-top-science__panel {

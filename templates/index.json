@@ -113,6 +113,36 @@
     },
     "m2_news": {
       "type": "m2-news",
+      "blocks": {
+        "fallback_01": {
+          "type": "fallback_article",
+          "settings": {
+            "date": "2026.09.01",
+            "tag": "INFO",
+            "title": "韓国発・プレミアム美容サプリメントブランド「m2（美度）」日本公式Shopifyストアがオープン！",
+            "link": ""
+          }
+        },
+        "fallback_02": {
+          "type": "fallback_article",
+          "settings": {
+            "date": "2026.09.01",
+            "tag": "PRODUCT",
+            "title": "【注目の新成分】最先端インナーケアに着目した「m2 プレミアムPDRNコラーゲンドリンク」が新登場！",
+            "link": ""
+          }
+        },
+        "fallback_03": {
+          "type": "fallback_article",
+          "settings": {
+            "date": "2026.09.01",
+            "tag": "EVENT",
+            "title": "【イベント情報】Qoo10公式ショップ出店＆秋のBIGセール参加のお知らせ",
+            "link": ""
+          }
+        }
+      },
+      "block_order": ["fallback_01", "fallback_02", "fallback_03"],
       "settings": {
         "eyebrow": "NEWS",
         "heading": "お知らせ",

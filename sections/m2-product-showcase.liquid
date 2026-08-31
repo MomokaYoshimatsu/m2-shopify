@@ -10,6 +10,15 @@
 
 {%- if should_render -%}
   <section class="m2-top-products m2-top-width" id="products" aria-labelledby="M2TopProductsHeading-{{ section.id }}">
+    <img
+      class="m2-top-haze m2-top-products__drop"
+      src="{{ 'm2-top-drop-05.png' | asset_url }}"
+      alt=""
+      width="800"
+      height="818"
+      loading="lazy"
+    >
+
     <div class="m2-top-heading m2-top-heading--center">
       <p class="m2-top-label">{{ section.settings.eyebrow | escape }}</p>
       <h2 id="M2TopProductsHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>

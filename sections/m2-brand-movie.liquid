@@ -12,6 +12,15 @@
 -%}
 
 <section class="m2-top-movie m2-top-width" aria-labelledby="M2TopMovieHeading-{{ section.id }}">
+  <img
+    class="m2-top-haze m2-top-movie__drop"
+    src="{{ 'm2-top-drop-01.png' | asset_url }}"
+    alt=""
+    width="1000"
+    height="1022"
+    loading="lazy"
+  >
+
   <div class="m2-top-heading m2-top-heading--split">
     <p class="m2-top-label">{{ section.settings.eyebrow | escape }}</p>
     <h2 id="M2TopMovieHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
