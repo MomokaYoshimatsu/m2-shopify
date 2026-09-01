@@ -122,7 +122,10 @@
                     {%- if is_m2_product and page_content.badge.value != blank -%}
                       <span class="m2-product-main__badge">{{ page_content.badge.value | escape }}</span>
                     {%- endif -%}
-                    <h1>{{ product.title | escape }}</h1>
+                    <h1>
+                      {%- if is_m2_product -%}<span class="m2-product-main__brand">m2</span>{%- endif -%}
+                      {{- product.title | escape -}}
+                    </h1>
                     <a href="{{ product.url }}" class="product__title">
                       <h2 class="h1">
                         {{ product.title | escape }}
@@ -133,13 +136,16 @@
                   {%- if is_m2_product and page_content.package_summary.value != blank -%}
                     <p class="m2-product-main__package">{{ page_content.package_summary.value | escape }}</p>
                   {%- endif -%}
-                  <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                    {%- render 'price',
-                      product: product,
-                      use_variant: true,
-                      show_badges: true,
-                      price_class: 'price--large'
-                    -%}
+                  <div class="{% if is_m2_product %}m2-product-main__price-row{% endif %}">
+                    <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
+                      {%- render 'price',
+                        product: product,
+                        use_variant: true,
+                        show_badges: true,
+                        price_class: 'price--large'
+                      -%}
+                    </div>
+                    {%- if is_m2_product -%}<span class="m2-product-main__tax">(税込)</span>{%- endif -%}
                   </div>
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="volume-pricing-note" id="Volume-Note-{{ section.id }}">
@@ -255,6 +261,52 @@
                     </details>
                   </div>
                 {%- when 'quantity_selector' -%}
+                  {%- if is_m2_product -%}
+                    {%- assign selling_plan_allocations = product.selected_or_first_available_variant.selling_plan_allocations -%}
+                    <fieldset class="m2-product-main__purchase-method">
+                      <legend>購入方式</legend>
+                      <div class="m2-product-main__purchase-options">
+                        <label class="m2-product-main__purchase-option">
+                          <input
+                            type="radio"
+                            name="selling_plan"
+                            value=""
+                            form="{{ product_form_id }}"
+                            checked
+                          >
+                          <span class="m2-product-main__purchase-name">単品購入</span>
+                          <span class="m2-product-main__purchase-price">
+                            {{ product.selected_or_first_available_variant.price | money }}
+                            <small>(税込)</small>
+                          </span>
+                        </label>
+                        {%- for selling_plan_allocation in selling_plan_allocations -%}
+                          {%- assign selling_plan = selling_plan_allocation.selling_plan -%}
+                          {%- assign price_adjustment = selling_plan.price_adjustments.first -%}
+                          <label class="m2-product-main__purchase-option">
+                            <input
+                              type="radio"
+                              name="selling_plan"
+                              value="{{ selling_plan.id }}"
+                              form="{{ product_form_id }}"
+                            >
+                            <span class="m2-product-main__purchase-name">
+                              {{ selling_plan.name | escape }}
+                              {%- if price_adjustment.value_type == 'percentage' -%}
+                                <strong>{{ price_adjustment.value }}%OFF</strong>
+                              {%- endif -%}
+                            </span>
+                            <span class="m2-product-main__purchase-price">
+                              <s>{{ product.selected_or_first_available_variant.price | money }}</s>
+                              <span aria-hidden="true">→</span>
+                              <em>{{ selling_plan_allocation.price | money }}</em>
+                              <small>(税込)</small>
+                            </span>
+                          </label>
+                        {%- endfor -%}
+                      </div>
+                    </fieldset>
+                  {%- endif -%}
                   <div
                     id="Quantity-Form-{{ section.id }}"
                     class="product-form__input product-form__quantity{% if settings.inputs_shadow_vertical_offset != 0 and settings.inputs_shadow_vertical_offset < 0 %} product-form__quantity-top{% endif %}"
@@ -278,7 +330,9 @@
                       for="Quantity-{{ section.id }}"
                       aria-labelledby="quantity-label-{{ section.id }}"
                     >
-                      <span aria-hidden="true">{{ 'products.product.quantity.label' | t }}</span>
+                      <span aria-hidden="true">
+                        {%- if is_m2_product -%}数量{%- else -%}{{ 'products.product.quantity.label' | t }}{%- endif -%}
+                      </span>
                       <span class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %}" aria-hidden="true">
                         {%- render 'loading-spinner' -%}
                         <span
@@ -523,15 +577,13 @@
                     product: product,
                     product_form_id: product_form_id,
                     section_id: section.id,
-                    show_pickup_availability: true
+                    show_pickup_availability: true,
+                    is_m2_product: is_m2_product
                   -%}
-                  {%- if is_m2_product and page_content.purchase_notes.value != blank -%}
+                  {%- if is_m2_product -%}
                     <ul class="m2-product-main__notes" role="list">
-                      {%- for purchase_note in page_content.purchase_notes.value -%}
-                        {%- if purchase_note != blank -%}
-                          <li>{{ purchase_note | escape }}</li>
-                        {%- endif -%}
-                      {%- endfor -%}
+                      <li>5,000 円(税込)以上送料無料</li>
+                      <li>日本国内から発送</li>
                     </ul>
                   {%- endif -%}
                 {%- when 'rating' -%}

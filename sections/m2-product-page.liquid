@@ -29,11 +29,19 @@
 
           <div class="m2-pdp-overview__grid">
             <div class="m2-pdp-overview__content">
-              {%- if page_content.overview_badge.value != blank or page_content.overview_lead.value != blank -%}
+              {%- if page_content.overview_badge.value != blank
+                or page_content.overview_kicker.value != blank
+                or page_content.overview_lead.value != blank
+              -%}
                 <div class="m2-pdp-overview__lead">
-                  {%- if page_content.overview_badge.value != blank -%}
-                    <span>{{ page_content.overview_badge.value | escape }}</span>
-                  {%- endif -%}
+                  <div class="m2-pdp-overview__lead-row">
+                    {%- if page_content.overview_badge.value != blank -%}
+                      <span>{{ page_content.overview_badge.value | escape }}</span>
+                    {%- endif -%}
+                    {%- if page_content.overview_kicker.value != blank -%}
+                      <strong>{{ page_content.overview_kicker.value | escape }}</strong>
+                    {%- endif -%}
+                  </div>
                   {%- if page_content.overview_lead.value != blank -%}
                     <h3>{{ page_content.overview_lead.value | escape }}</h3>
                   {%- endif -%}
@@ -54,9 +62,7 @@
 
               {%- if page_content.recommended_items.value != blank -%}
                 <div class="m2-pdp-recommended">
-                  {%- if page_content.recommended_heading.value != blank -%}
-                    <h3>{{ page_content.recommended_heading.value | escape }}</h3>
-                  {%- endif -%}
+                  <h3>こんな方におすすめ</h3>
                   <ul role="list">
                     {%- for recommended_item in page_content.recommended_items.value -%}
                       {%- if recommended_item != blank -%}<li>{{ recommended_item | escape }}</li>{%- endif -%}
@@ -88,12 +94,8 @@
     {%- if features != blank -%}
       <section class="m2-pdp-formula" aria-labelledby="M2ProductFormula-{{ section.id }}">
         <header class="m2-pdp-heading">
-          {%- if page_content.features_eyebrow.value != blank -%}
-            <p class="m2-pdp-heading__eyebrow">{{ page_content.features_eyebrow.value | escape }}</p>
-          {%- endif -%}
-          {%- if page_content.features_heading.value != blank -%}
-            <h2 id="M2ProductFormula-{{ section.id }}">{{ page_content.features_heading.value | escape }}</h2>
-          {%- endif -%}
+          <p class="m2-pdp-heading__eyebrow">FORMULA</p>
+          <h2 id="M2ProductFormula-{{ section.id }}">{{ features.size }}つの美容アプローチ</h2>
         </header>
 
         <div class="m2-pdp-feature-grid">
@@ -106,9 +108,7 @@
               <article class="m2-pdp-feature{% if forloop.first %} m2-pdp-feature--featured{% endif %}">
                 <div class="m2-pdp-feature__content">
                   <div class="m2-pdp-feature__title">
-                    {%- if feature_item.number.value != blank -%}
-                      <span>{{ feature_item.number.value | escape }}</span>
-                    {%- endif -%}
+                    <span>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
                     {%- if feature_item.heading.value != blank -%}
                       <h3>{{ feature_item.heading.value | escape }}</h3>
                     {%- endif -%}
@@ -139,12 +139,8 @@
           <div class="m2-pdp-width">
             <div class="m2-pdp-support">
               <header class="m2-pdp-heading m2-pdp-heading--inverse">
-                {%- if page_content.support_eyebrow.value != blank -%}
-                  <p class="m2-pdp-heading__eyebrow">{{ page_content.support_eyebrow.value | escape }}</p>
-                {%- endif -%}
-                {%- if page_content.support_heading.value != blank -%}
-                  <h2>{{ page_content.support_heading.value | escape }}</h2>
-                {%- endif -%}
+                <p class="m2-pdp-heading__eyebrow">WHY THIS FORMULA</p>
+                <h2>なぜ、この成分設計なのか。</h2>
               </header>
               <div class="m2-pdp-support__grid">
                 {%- for support_item in support_items -%}
@@ -153,9 +149,7 @@
                     assign support_alt = support_item.image_alt.value | default: support_image.alt
                   -%}
                   <article class="m2-pdp-support-card">
-                    {%- if support_item.number.value != blank -%}
-                      <span class="m2-pdp-support-card__number">{{ support_item.number.value | escape }}</span>
-                    {%- endif -%}
+                    <span class="m2-pdp-support-card__number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
                     {%- if support_item.heading.value != blank -%}
                       <h3>{{ support_item.heading.value | escape }}</h3>
                     {%- endif -%}
@@ -188,12 +182,8 @@
         {%- if free_formula_items != blank -%}
           <div class="m2-pdp-width m2-pdp-free-formula">
             <header class="m2-pdp-heading">
-              {%- if page_content.free_formula_eyebrow.value != blank -%}
-                <p class="m2-pdp-heading__eyebrow">{{ page_content.free_formula_eyebrow.value | escape }}</p>
-              {%- endif -%}
-              {%- if page_content.free_formula_heading.value != blank -%}
-                <h2>{{ page_content.free_formula_heading.value | escape | newline_to_br }}</h2>
-              {%- endif -%}
+              <p class="m2-pdp-heading__eyebrow">CLEAN &amp; PURE FORMULA</p>
+              <h2>毎日飲むものだから、余計なものは入れない。<br>{{ free_formula_items.size }}つのフリー処方</h2>
             </header>
             <ul role="list">
               {%- for free_formula_item in free_formula_items -%}
@@ -209,12 +199,8 @@
       <section class="m2-pdp-how-to" aria-labelledby="M2ProductHowTo-{{ section.id }}">
         <div class="m2-pdp-width">
           <header class="m2-pdp-heading">
-            {%- if page_content.how_to_eyebrow.value != blank -%}
-              <p class="m2-pdp-heading__eyebrow">{{ page_content.how_to_eyebrow.value | escape }}</p>
-            {%- endif -%}
-            {%- if page_content.how_to_heading.value != blank -%}
-              <h2 id="M2ProductHowTo-{{ section.id }}">{{ page_content.how_to_heading.value | escape }}</h2>
-            {%- endif -%}
+            <p class="m2-pdp-heading__eyebrow">HOW TO USE</p>
+            <h2 id="M2ProductHowTo-{{ section.id }}">お召し上がりシーン</h2>
           </header>
           <div class="m2-pdp-how-to__grid">
             {%- for how_to_item in how_to_items -%}
@@ -250,30 +236,33 @@
       <section class="m2-pdp-specs" aria-labelledby="M2ProductSpecs-{{ section.id }}">
         <div class="m2-pdp-width">
           <header class="m2-pdp-heading">
-            {%- if page_content.specs_eyebrow.value != blank -%}
-              <p class="m2-pdp-heading__eyebrow">{{ page_content.specs_eyebrow.value | escape }}</p>
-            {%- endif -%}
-            {%- if page_content.specs_heading.value != blank -%}
-              <h2 id="M2ProductSpecs-{{ section.id }}">{{ page_content.specs_heading.value | escape }}</h2>
-            {%- endif -%}
+            <p class="m2-pdp-heading__eyebrow">INGREDIENTS</p>
+            <h2 id="M2ProductSpecs-{{ section.id }}">全成分・商品仕様</h2>
           </header>
           {%- if specs != blank -%}
             <dl class="m2-pdp-spec-list">
               {%- for spec_item in specs -%}
-                {%- if spec_item.label.value != blank and spec_item.value.value != blank -%}
+                {%- if spec_item.value.value != blank -%}
                   <div class="m2-pdp-spec-row{% if spec_item.emphasis.value %} m2-pdp-spec-row--emphasis{% endif %}">
-                    <dt>{{ spec_item.label.value | escape }}</dt>
+                    <dt>
+                      {%- case forloop.index -%}
+                        {%- when 1 -%}全成分表示
+                        {%- when 2 -%}内容量
+                        {%- when 3 -%}原産国
+                        {%- when 4 -%}賞味期限
+                        {%- when 5 -%}保存方法
+                        {%- when 6 -%}アレルギー物質
+                      {%- endcase -%}
+                    </dt>
                     <dd>{{ spec_item.value | metafield_tag }}</dd>
                   </div>
                 {%- endif -%}
               {%- endfor -%}
             </dl>
           {%- endif -%}
-          {%- if page_content.notice_heading.value != blank or page_content.notice_body.value != blank -%}
+          {%- if page_content.notice_body.value != blank -%}
             <div class="m2-pdp-notice">
-              {%- if page_content.notice_heading.value != blank -%}
-                <h3>{{ page_content.notice_heading.value | escape }}</h3>
-              {%- endif -%}
+              <h3>ご注意事項</h3>
               {%- if page_content.notice_body.value != blank -%}
                 <div class="m2-pdp-richtext">{{ page_content.notice_body | metafield_tag }}</div>
               {%- endif -%}
@@ -287,17 +276,13 @@
       <section class="m2-pdp-faq" aria-labelledby="M2ProductFaq-{{ section.id }}">
         <div class="m2-pdp-width">
           <header class="m2-pdp-heading">
-            {%- if page_content.faq_eyebrow.value != blank -%}
-              <p class="m2-pdp-heading__eyebrow">{{ page_content.faq_eyebrow.value | escape }}</p>
-            {%- endif -%}
-            {%- if page_content.faq_heading.value != blank -%}
-              <h2 id="M2ProductFaq-{{ section.id }}">{{ page_content.faq_heading.value | escape }}</h2>
-            {%- endif -%}
+            <p class="m2-pdp-heading__eyebrow">FAQ</p>
+            <h2 id="M2ProductFaq-{{ section.id }}">商品についてのよくあるご質問</h2>
           </header>
           <div class="m2-pdp-faq__list">
             {%- for faq_item in faqs -%}
               {%- if faq_item.question.value != blank -%}
-                <details class="m2-pdp-faq-item">
+                <details class="m2-pdp-faq-item"{% if forloop.index == 2 %} open{% endif %}>
                   <summary>
                     <span class="m2-pdp-faq-item__q" aria-hidden="true">Q</span>
                     <span>{{ faq_item.question.value | escape }}</span>
@@ -319,12 +304,8 @@
       <section class="m2-pdp-related" aria-labelledby="M2ProductRelated-{{ section.id }}">
         <div class="m2-pdp-width">
           <header class="m2-pdp-heading">
-            {%- if page_content.related_eyebrow.value != blank -%}
-              <p class="m2-pdp-heading__eyebrow">{{ page_content.related_eyebrow.value | escape }}</p>
-            {%- endif -%}
-            {%- if page_content.related_heading.value != blank -%}
-              <h2 id="M2ProductRelated-{{ section.id }}">{{ page_content.related_heading.value | escape }}</h2>
-            {%- endif -%}
+            <p class="m2-pdp-heading__eyebrow">RECOMMEND</p>
+            <h2 id="M2ProductRelated-{{ section.id }}">こちらもおすすめ</h2>
           </header>
           <div class="m2-pdp-related__grid">
             {%- for related_product in related_products -%}
@@ -355,7 +336,7 @@
                   {%- if related_page_content.badge.value != blank -%}
                     <span class="m2-pdp-related-card__badge">{{ related_page_content.badge.value | escape }}</span>
                   {%- endif -%}
-                  <h3><a href="{{ related_product.url }}">{{ related_product.title | escape }}</a></h3>
+                  <h3><a href="{{ related_product.url }}">m2 {{ related_product.title | escape }}</a></h3>
                   {%- if related_page_content.card_description.value != blank -%}
                     <p>{{ related_page_content.card_description.value | escape }}</p>
                   {%- elsif related_product.description != blank -%}
@@ -363,7 +344,10 @@
                   {%- endif -%}
                   <div class="m2-pdp-related-card__meta">
                     <span>{{ related_page_content.package_summary.value | escape }}</span>
-                    {% render 'price', product: related_product, price_class: '', show_compare_at_price: true %}
+                    <span class="m2-pdp-related-card__price">
+                      {% render 'price', product: related_product, price_class: '', show_compare_at_price: true %}
+                      <small>(税込)</small>
+                    </span>
                   </div>
                 </div>
               </article>
