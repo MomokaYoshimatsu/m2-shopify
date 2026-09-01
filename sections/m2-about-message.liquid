@@ -1,0 +1,54 @@
+{%- if section.settings.show_section -%}
+  <section class="m2-about-message" aria-labelledby="M2AboutMessageHeading-{{ section.id }}">
+    <div class="m2-about-section-heading">
+      {%- if section.settings.eyebrow != blank -%}<p>{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 id="M2AboutMessageHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+    </div>
+
+    <div class="m2-about-message__stage">
+      <picture class="m2-about-message__picture">
+        {%- if section.settings.mobile_image != blank -%}
+          <source
+            media="(max-width: 1023px)"
+            srcset="{{ section.settings.mobile_image | image_url: width: 480 }} 480w, {{ section.settings.mobile_image | image_url: width: 750 }} 750w, {{ section.settings.mobile_image | image_url: width: 1000 }} 1000w"
+            sizes="100vw"
+          >
+        {%- endif -%}
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 1600 | image_tag: widths: '480, 750, 1000, 1200, 1600', sizes: '(min-width: 1024px) 715px, 100vw', loading: 'lazy', alt: section.settings.image_alt }}
+        {%- else -%}
+          <img src="{{ 'm2-about-message.png' | asset_url }}" alt="{{ section.settings.image_alt | escape }}" width="715" height="504" loading="lazy">
+        {%- endif -%}
+      </picture>
+
+      <article class="m2-about-message__letter">
+        {%- if section.settings.signature != blank -%}
+          {{ section.settings.signature | image_url: width: 500 | image_tag: widths: '220, 330, 440, 500', sizes: '22rem', loading: 'lazy', alt: '' }}
+        {%- elsif section.settings.show_default_signature -%}
+          <img src="{{ 'm2-about-founder-signature.png' | asset_url }}" alt="" width="219" height="61" loading="lazy">
+        {%- endif -%}
+        {%- if section.settings.text != blank -%}<div class="m2-about-copy rte">{{ section.settings.text }}</div>{%- endif -%}
+      </article>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "M2 ABOUT メッセージ",
+  "tag": "div",
+  "class": "m2-about-section-wrapper",
+  "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "セクションを表示", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "英字ラベル", "default": "MESSAGE" },
+    { "type": "text", "id": "heading", "label": "見出し", "default": "創業者からのメッセージ" },
+    { "type": "image_picker", "id": "image", "label": "PC画像" },
+    { "type": "image_picker", "id": "mobile_image", "label": "スマートフォン画像" },
+    { "type": "text", "id": "image_alt", "label": "画像の代替テキスト", "default": "手紙を書く手元" },
+    { "type": "image_picker", "id": "signature", "label": "署名画像" },
+    { "type": "checkbox", "id": "show_default_signature", "label": "Figmaの署名画像を表示", "default": true },
+    { "type": "richtext", "id": "text", "label": "本文" }
+  ],
+  "presets": [{ "name": "M2 ABOUT メッセージ" }]
+}
+{% endschema %}

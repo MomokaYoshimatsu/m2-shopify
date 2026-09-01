@@ -1,0 +1,575 @@
+.template-page--m2-about {
+  --m2-about-red: #d5002a;
+  --m2-about-red-dark: #bb0428;
+  --m2-about-red-light: #ed0432;
+  --m2-about-ink: #2b2b2b;
+  --m2-about-bg: #f7f7f6;
+  --m2-about-width: 110rem;
+  --m2-about-gutter: 2rem;
+  background: var(--m2-about-bg);
+  color: var(--m2-about-ink);
+}
+
+.template-page--m2-about .content-for-layout {
+  overflow: clip;
+}
+
+.m2-about-vision,
+.m2-about-message,
+.m2-about-science,
+.m2-about-recommend {
+  box-sizing: border-box;
+  font-family: 'Noto Sans JP', var(--font-body-family);
+}
+
+.m2-about-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  width: min(100%, calc(123.8rem + (var(--m2-about-gutter) * 2)));
+  margin-inline: auto;
+  padding: 4rem var(--m2-about-gutter);
+  color: #2b2b2b;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+.m2-about-breadcrumb a {
+  color: #5a5a58;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.m2-about-breadcrumb a:hover,
+.m2-about-breadcrumb a:focus-visible,
+.m2-about-text-link:hover,
+.m2-about-text-link:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.3rem;
+}
+
+.m2-about-vision {
+  padding-bottom: 8rem;
+  background: var(--m2-about-bg);
+}
+
+.m2-about-vision__layout {
+  display: grid;
+  gap: 4rem;
+}
+
+.m2-about-vision__visual {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  aspect-ratio: 671 / 576;
+}
+
+.m2-about-vision__red {
+  position: absolute;
+  inset: 17.5% 0 0;
+  border-radius: 0 6rem 0 0;
+  background: linear-gradient(90deg, var(--m2-about-red-dark), var(--m2-about-red-light));
+}
+
+.m2-about-vision__picture,
+.m2-about-vision__picture img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.m2-about-vision__picture img {
+  top: -13.3%;
+  left: 0.3%;
+  width: 102.4%;
+  max-width: none;
+  height: auto;
+}
+
+.m2-about-vision__ambassador {
+  position: absolute;
+  z-index: 1;
+  top: 31%;
+  right: 7%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 14rem;
+  color: #fff;
+  text-align: center;
+}
+
+.m2-about-vision__ambassador small {
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.m2-about-vision__ambassador strong {
+  font-size: 1.4rem;
+  letter-spacing: 0.08em;
+  line-height: 1.8;
+}
+
+.m2-about-vision__ambassador img {
+  display: block;
+  width: 10rem;
+  height: auto;
+  margin-top: 0.4rem;
+}
+
+.m2-about-vision__content {
+  min-width: 0;
+  padding-inline: var(--m2-about-gutter);
+}
+
+.m2-about-vision__layout--text-only .m2-about-vision__content {
+  width: min(100%, 72rem);
+  margin-inline: auto;
+}
+
+.m2-about-vision__heading {
+  color: var(--m2-about-red);
+}
+
+.m2-about-vision__heading h1 {
+  margin: 0;
+  color: inherit;
+  font-family: Montserrat, var(--font-heading-family);
+  font-size: clamp(3.2rem, 10vw, 4.4rem);
+  font-weight: 700;
+  letter-spacing: 0.045em;
+  line-height: 1.25;
+}
+
+.m2-about-vision__heading p {
+  margin: 0.3rem 0 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+}
+
+.m2-about-copy {
+  color: var(--m2-about-ink);
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  line-height: 2;
+}
+
+.m2-about-copy > :first-child {
+  margin-top: 0;
+}
+
+.m2-about-copy > :last-child {
+  margin-bottom: 0;
+}
+
+.m2-about-copy strong {
+  color: var(--m2-about-red);
+  font-weight: 700;
+}
+
+.m2-about-vision__content > .m2-about-copy {
+  margin-top: 3rem;
+}
+
+.m2-about-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 4.8rem;
+  margin-top: 3rem;
+  padding: 1.2rem 3rem;
+  border: 0.1rem solid var(--m2-about-red);
+  color: var(--m2-about-red);
+  font-family: Montserrat, var(--font-body-family);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+}
+
+.m2-about-link:hover,
+.m2-about-link:focus-visible {
+  background: var(--m2-about-red);
+  color: #fff;
+}
+
+.m2-about-section-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.7rem;
+  color: var(--m2-about-red);
+  text-align: center;
+}
+
+.m2-about-section-heading p {
+  position: relative;
+  margin: 0;
+  padding-bottom: 0.9rem;
+  font-family: Montserrat, var(--font-body-family);
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.6;
+}
+
+.m2-about-section-heading p::after {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 4.1rem;
+  border-bottom: 0.1rem solid currentColor;
+  content: '';
+  transform: translateX(-50%);
+}
+
+.m2-about-section-heading h2,
+.m2-about-section-heading h3 {
+  margin: 0;
+  color: inherit;
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+}
+
+.m2-about-section-heading--light {
+  color: #fff;
+}
+
+.m2-about-message {
+  padding: 8rem var(--m2-about-gutter);
+  background: #fff;
+}
+
+.m2-about-message__stage {
+  width: min(100%, var(--m2-about-width));
+  margin: 6rem auto 0;
+}
+
+.m2-about-message__picture,
+.m2-about-message__picture img {
+  display: block;
+  width: 100%;
+}
+
+.m2-about-message__picture img {
+  aspect-ratio: 715 / 504;
+  border-radius: 1rem;
+  object-fit: cover;
+}
+
+.m2-about-message__letter {
+  position: relative;
+  z-index: 1;
+  margin: -4rem 1.5rem 0;
+  padding: 3.2rem 2rem;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 1.4rem 1.4rem 1rem rgb(0 0 0 / 10%);
+}
+
+.m2-about-message__letter > img {
+  display: block;
+  width: min(100%, 21.9rem);
+  height: auto;
+  margin-bottom: 2.4rem;
+}
+
+.m2-about-science__intro {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 22rem;
+  padding: 6rem var(--m2-about-gutter);
+  background: linear-gradient(90deg, var(--m2-about-red-dark), var(--m2-about-red-light));
+  color: #fff;
+  text-align: center;
+}
+
+.m2-about-science__intro h2 {
+  margin: 0;
+  color: inherit;
+  font-family: 'Noto Serif JP', var(--font-heading-family);
+  font-size: clamp(2.6rem, 7vw, 3.6rem);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
+
+.m2-about-science__part {
+  padding: 8rem var(--m2-about-gutter);
+}
+
+.m2-about-science__part--collagen {
+  background: #fff;
+}
+
+.m2-about-science__part--pdrn {
+  background: var(--m2-about-bg);
+}
+
+.m2-about-science__grid {
+  display: grid;
+  gap: 4rem;
+  width: min(100%, var(--m2-about-width));
+  margin: 6rem auto 0;
+}
+
+.m2-about-science__media,
+.m2-about-science__media img {
+  display: block;
+  width: 100%;
+}
+
+.m2-about-science__media img {
+  height: auto;
+  border-radius: 1rem;
+}
+
+.m2-about-science__content {
+  min-width: 0;
+}
+
+.m2-about-science__badge {
+  margin: 0 0 2rem;
+  padding: 1.2rem 2rem;
+  border-radius: 6rem;
+  background: linear-gradient(90deg, var(--m2-about-red-dark), var(--m2-about-red-light));
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.m2-about-science__content h4 {
+  margin: 0 0 2rem;
+  color: var(--m2-about-ink);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.7;
+}
+
+.m2-about-text-link {
+  display: inline-block;
+  margin-top: 2rem;
+  color: var(--m2-about-red);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.m2-about-recommend {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8rem var(--m2-about-gutter);
+  background: linear-gradient(90deg, var(--m2-about-red-dark), var(--m2-about-red-light));
+}
+
+.m2-about-recommend__grid {
+  display: grid;
+  grid-auto-columns: min(86vw, 35rem);
+  grid-auto-flow: column;
+  gap: 1.6rem;
+  width: min(100%, var(--m2-about-width));
+  margin-top: 6rem;
+  padding: 1.2rem 0 2rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+}
+
+.m2-about-recommend__item {
+  min-width: 0;
+  scroll-snap-align: start;
+}
+
+.m2-about-recommend__item:empty {
+  display: none;
+}
+
+.m2-about-recommend__placeholder {
+  display: grid;
+  min-height: 20rem;
+  padding: 2rem;
+  border: 0.1rem dashed #fff;
+  color: #fff;
+  place-items: center;
+  text-align: center;
+}
+
+.m2-about-recommend .m2-top-product {
+  height: 100%;
+  min-height: 57rem;
+}
+
+.m2-about-recommend .m2-top-product__feature {
+  display: none;
+}
+
+.m2-about-recommend__coming-soon .m2-top-product__media {
+  position: relative;
+}
+
+.m2-about-recommend__coming-soon .m2-top-product__media img {
+  opacity: 0.22;
+}
+
+.m2-about-recommend__coming-soon .m2-top-product__media > span {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  display: grid;
+  color: var(--m2-about-red);
+  font-family: Montserrat, var(--font-body-family);
+  font-size: 2.4rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  place-items: center;
+  text-align: center;
+}
+
+.m2-about-link--light {
+  border-color: #fff;
+  color: #fff;
+}
+
+.m2-about-link--light:hover,
+.m2-about-link--light:focus-visible {
+  background: #fff;
+  color: var(--m2-about-red);
+}
+
+@media screen and (min-width: 1024px) {
+  .template-page--m2-about {
+    --m2-about-gutter: 4.8rem;
+  }
+
+  .m2-about-breadcrumb {
+    padding-top: 6rem;
+    padding-bottom: 4rem;
+  }
+
+  .m2-about-vision {
+    padding-bottom: 10rem;
+  }
+
+  .m2-about-vision__layout {
+    grid-template-columns: minmax(0, 46.6%) minmax(0, 1fr);
+    align-items: center;
+    gap: 6.9rem;
+  }
+
+  .m2-about-vision__layout--text-only {
+    grid-template-columns: 1fr;
+  }
+
+  .m2-about-vision__red {
+    border-radius: 0 10rem 0 0;
+  }
+
+  .m2-about-vision__ambassador {
+    right: 8.5%;
+    max-width: 14rem;
+  }
+
+  .m2-about-vision__ambassador small {
+    font-size: 1.2rem;
+  }
+
+  .m2-about-vision__ambassador strong {
+    font-size: 1.6rem;
+  }
+
+  .m2-about-vision__ambassador img {
+    width: 13.3rem;
+  }
+
+  .m2-about-vision__content {
+    width: min(100%, 53rem);
+    padding-inline: 0;
+  }
+
+  .m2-about-message {
+    padding: 10rem var(--m2-about-gutter);
+  }
+
+  .m2-about-message__stage {
+    position: relative;
+    min-height: 97.6rem;
+  }
+
+  .m2-about-message__picture {
+    width: 65%;
+  }
+
+  .m2-about-message__letter {
+    position: absolute;
+    top: 18.3rem;
+    right: 0;
+    width: 80.9%;
+    margin: 0;
+    padding: 6rem 7rem;
+  }
+
+  .m2-about-science__intro {
+    min-height: 26rem;
+    padding: 8rem var(--m2-about-gutter);
+  }
+
+  .m2-about-science__part--collagen {
+    padding-block: 8rem;
+  }
+
+  .m2-about-science__part--pdrn {
+    padding-block: 9rem;
+  }
+
+  .m2-about-science__grid {
+    align-items: start;
+  }
+
+  .m2-about-science__grid--collagen {
+    grid-template-columns: minmax(0, 61.7rem) minmax(0, 44.8rem);
+    gap: 3.5rem;
+  }
+
+  .m2-about-science__grid--pdrn {
+    grid-template-columns: minmax(0, 47.1rem) minmax(0, 56.9rem);
+    gap: 6rem;
+  }
+
+  .m2-about-science__content h4 {
+    margin-bottom: 3.2rem;
+  }
+
+  .m2-about-recommend {
+    padding: 10rem var(--m2-about-gutter);
+  }
+
+  .m2-about-recommend__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-auto-flow: initial;
+    gap: 2.5rem;
+    padding: 1.2rem 0;
+    overflow: visible;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .template-page--m2-about {
+    --m2-about-gutter: 6rem;
+  }
+}

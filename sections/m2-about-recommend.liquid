@@ -1,0 +1,93 @@
+{%- if section.settings.show_section -%}
+  <section class="m2-about-recommend" aria-labelledby="M2AboutRecommendHeading-{{ section.id }}">
+    <div class="m2-about-section-heading m2-about-section-heading--light">
+      {%- if section.settings.eyebrow != blank -%}<p>{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 id="M2AboutRecommendHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="m2-about-recommend__grid">
+        {%- for block in section.blocks -%}
+          {%- assign fallback_product = collections.all.products[forloop.index0] -%}
+          {%- assign card_product = block.settings.product | default: fallback_product -%}
+          <div class="m2-about-recommend__item" {{ block.shopify_attributes }}>
+            {%- if card_product != blank -%}
+              {% render 'm2-product-card',
+                card_product: card_product,
+                show_description: section.settings.show_description,
+                show_feature_badge: false,
+                unavailable_label: section.settings.unavailable_label,
+                image_sizes: '(min-width: 1024px) 350px, 86vw'
+              %}
+            {%- elsif block.settings.placeholder_title != blank -%}
+              <article class="m2-top-product m2-about-recommend__coming-soon">
+                <div class="m2-top-product__media">
+                  {%- if block.settings.placeholder_image != blank -%}
+                    {{ block.settings.placeholder_image | image_url: width: 1200 | image_tag: widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 1024px) 350px, 86vw', loading: 'lazy', alt: block.settings.placeholder_image_alt }}
+                  {%- else -%}
+                    <img src="{{ 'm2-about-coming-soon.png' | asset_url }}" alt="{{ block.settings.placeholder_image_alt | escape }}" width="1000" height="1000" loading="lazy">
+                  {%- endif -%}
+                  <span>{{ block.settings.placeholder_status | escape | newline_to_br }}</span>
+                </div>
+                <div class="m2-top-product__body">
+                  {%- if block.settings.show_new_badge -%}<span class="m2-top-product__badge">NEW</span>{%- endif -%}
+                  <h3>
+                    {%- if block.settings.placeholder_link != blank -%}<a href="{{ block.settings.placeholder_link }}">{{ block.settings.placeholder_title | escape }}</a>{%- else -%}{{ block.settings.placeholder_title | escape }}{%- endif -%}
+                  </h3>
+                  {%- if section.settings.show_description and block.settings.placeholder_description != blank -%}<p class="m2-top-product__description">{{ block.settings.placeholder_description | escape }}</p>{%- endif -%}
+                  <div class="m2-top-product__meta">
+                    <span>{{ block.settings.placeholder_package | escape }}</span>
+                    <strong class="m2-top-product__unavailable">{{ block.settings.placeholder_status | escape }}</strong>
+                  </div>
+                </div>
+              </article>
+            {%- elsif request.design_mode -%}
+              <div class="m2-about-recommend__placeholder">このブロックに商品を選択してください。</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      <a class="m2-about-link m2-about-link--light" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+    {%- endif -%}
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "M2 ABOUT おすすめ商品",
+  "tag": "div",
+  "class": "m2-about-section-wrapper",
+  "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "セクションを表示", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "英字ラベル", "default": "RECOMMEND" },
+    { "type": "text", "id": "heading", "label": "見出し", "default": "おすすめ商品" },
+    { "type": "checkbox", "id": "show_description", "label": "商品説明を表示", "default": true },
+    { "type": "text", "id": "unavailable_label", "label": "販売前・売り切れ表示", "default": "coming soon" },
+    { "type": "text", "id": "button_label", "label": "ボタン名" },
+    { "type": "url", "id": "button_link", "label": "ボタンリンク" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "商品",
+      "settings": [
+        { "type": "product", "id": "product", "label": "商品" },
+        { "type": "header", "content": "商品未選択時の公開前カード" },
+        { "type": "image_picker", "id": "placeholder_image", "label": "画像" },
+        { "type": "text", "id": "placeholder_image_alt", "label": "画像の代替テキスト" },
+        { "type": "text", "id": "placeholder_title", "label": "商品名" },
+        { "type": "textarea", "id": "placeholder_description", "label": "説明" },
+        { "type": "text", "id": "placeholder_package", "label": "内容量" },
+        { "type": "textarea", "id": "placeholder_status", "label": "販売前表示", "default": "coming soon" },
+        { "type": "checkbox", "id": "show_new_badge", "label": "NEWを表示", "default": true },
+        { "type": "url", "id": "placeholder_link", "label": "リンク先" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{ "name": "M2 ABOUT おすすめ商品", "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }] }]
+}
+{% endschema %}

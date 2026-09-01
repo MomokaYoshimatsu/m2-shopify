@@ -1,0 +1,100 @@
+{%- if section.settings.show_section -%}
+  <section class="m2-about-science" aria-labelledby="M2AboutScienceHeading-{{ section.id }}">
+    <header class="m2-about-science__intro">
+      {%- if section.settings.intro_heading != blank -%}
+        <h2 id="M2AboutScienceHeading-{{ section.id }}">{{ section.settings.intro_heading | escape | newline_to_br }}</h2>
+      {%- endif -%}
+    </header>
+
+    {%- if section.settings.show_collagen -%}
+      <div class="m2-about-science__part m2-about-science__part--collagen">
+        <div class="m2-about-section-heading">
+          {%- if section.settings.collagen_eyebrow != blank -%}<p>{{ section.settings.collagen_eyebrow | escape }}</p>{%- endif -%}
+          {%- if section.settings.collagen_heading != blank -%}<h3>{{ section.settings.collagen_heading | escape }}</h3>{%- endif -%}
+        </div>
+        <div class="m2-about-science__grid m2-about-science__grid--collagen">
+          <picture class="m2-about-science__media">
+            {%- if section.settings.collagen_mobile_image != blank -%}
+              <source media="(max-width: 1023px)" srcset="{{ section.settings.collagen_mobile_image | image_url: width: 480 }} 480w, {{ section.settings.collagen_mobile_image | image_url: width: 750 }} 750w, {{ section.settings.collagen_mobile_image | image_url: width: 1000 }} 1000w" sizes="100vw">
+            {%- endif -%}
+            {%- if section.settings.collagen_image != blank -%}
+              {{ section.settings.collagen_image | image_url: width: 1400 | image_tag: widths: '480, 750, 1000, 1200, 1400', sizes: '(min-width: 1024px) 617px, 100vw', loading: 'lazy', alt: section.settings.collagen_image_alt }}
+            {%- else -%}
+              <img src="{{ 'm2-about-collagen-diagram.png' | asset_url }}" alt="{{ section.settings.collagen_image_alt | escape }}" width="617" height="370" loading="lazy">
+            {%- endif -%}
+          </picture>
+          <div class="m2-about-science__content">
+            {%- if section.settings.collagen_badge != blank -%}<p class="m2-about-science__badge">{{ section.settings.collagen_badge | escape }}</p>{%- endif -%}
+            {%- if section.settings.collagen_title != blank -%}<h4>{{ section.settings.collagen_title | escape | newline_to_br }}</h4>{%- endif -%}
+            {%- if section.settings.collagen_text != blank -%}<div class="m2-about-copy rte">{{ section.settings.collagen_text }}</div>{%- endif -%}
+            {%- if section.settings.collagen_link_label != blank and section.settings.collagen_link != blank -%}<a class="m2-about-text-link" href="{{ section.settings.collagen_link }}">{{ section.settings.collagen_link_label | escape }}</a>{%- endif -%}
+          </div>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_pdrn -%}
+      <div class="m2-about-science__part m2-about-science__part--pdrn">
+        <div class="m2-about-section-heading">
+          {%- if section.settings.pdrn_eyebrow != blank -%}<p>{{ section.settings.pdrn_eyebrow | escape }}</p>{%- endif -%}
+          {%- if section.settings.pdrn_heading != blank -%}<h3>{{ section.settings.pdrn_heading | escape }}</h3>{%- endif -%}
+        </div>
+        <div class="m2-about-science__grid m2-about-science__grid--pdrn">
+          <div class="m2-about-science__content">
+            {%- if section.settings.pdrn_badge != blank -%}<p class="m2-about-science__badge">{{ section.settings.pdrn_badge | escape }}</p>{%- endif -%}
+            {%- if section.settings.pdrn_title != blank -%}<h4>{{ section.settings.pdrn_title | escape | newline_to_br }}</h4>{%- endif -%}
+            {%- if section.settings.pdrn_text != blank -%}<div class="m2-about-copy rte">{{ section.settings.pdrn_text }}</div>{%- endif -%}
+            {%- if section.settings.pdrn_link_label != blank and section.settings.pdrn_link != blank -%}<a class="m2-about-text-link" href="{{ section.settings.pdrn_link }}">{{ section.settings.pdrn_link_label | escape }}</a>{%- endif -%}
+          </div>
+          <picture class="m2-about-science__media">
+            {%- if section.settings.pdrn_mobile_image != blank -%}
+              <source media="(max-width: 1023px)" srcset="{{ section.settings.pdrn_mobile_image | image_url: width: 480 }} 480w, {{ section.settings.pdrn_mobile_image | image_url: width: 750 }} 750w, {{ section.settings.pdrn_mobile_image | image_url: width: 1000 }} 1000w" sizes="100vw">
+            {%- endif -%}
+            {%- if section.settings.pdrn_image != blank -%}
+              {{ section.settings.pdrn_image | image_url: width: 1400 | image_tag: widths: '480, 750, 1000, 1200, 1400', sizes: '(min-width: 1024px) 569px, 100vw', loading: 'lazy', alt: section.settings.pdrn_image_alt }}
+            {%- else -%}
+              <img src="{{ 'm2-about-pdrn.png' | asset_url }}" alt="{{ section.settings.pdrn_image_alt | escape }}" width="569" height="365" loading="lazy">
+            {%- endif -%}
+          </picture>
+        </div>
+      </div>
+    {%- endif -%}
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "M2 ABOUT 成分解説",
+  "tag": "div",
+  "class": "m2-about-section-wrapper",
+  "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "セクションを表示", "default": true },
+    { "type": "textarea", "id": "intro_heading", "label": "導入見出し", "default": "m2がこだわり抜いた\n「コラーゲン」と「PDRN」を知る。" },
+    { "type": "header", "content": "コラーゲン" },
+    { "type": "checkbox", "id": "show_collagen", "label": "コラーゲン解説を表示", "default": true },
+    { "type": "text", "id": "collagen_eyebrow", "label": "英字ラベル", "default": "WHAT IS m2’s Collagen" },
+    { "type": "text", "id": "collagen_heading", "label": "見出し", "default": "m2のコラーゲンは何が違う？" },
+    { "type": "image_picker", "id": "collagen_image", "label": "PC画像" },
+    { "type": "image_picker", "id": "collagen_mobile_image", "label": "スマートフォン画像" },
+    { "type": "text", "id": "collagen_image_alt", "label": "画像の代替テキスト", "default": "コラーゲンの分子サイズ比較イメージ" },
+    { "type": "text", "id": "collagen_badge", "label": "帯ラベル" },
+    { "type": "textarea", "id": "collagen_title", "label": "本文見出し" },
+    { "type": "richtext", "id": "collagen_text", "label": "本文" },
+    { "type": "text", "id": "collagen_link_label", "label": "リンク名" },
+    { "type": "url", "id": "collagen_link", "label": "リンク先" },
+    { "type": "header", "content": "PDRN" },
+    { "type": "checkbox", "id": "show_pdrn", "label": "PDRN解説を表示", "default": true },
+    { "type": "text", "id": "pdrn_eyebrow", "label": "英字ラベル", "default": "WHAT IS m2’s PDRN" },
+    { "type": "text", "id": "pdrn_heading", "label": "見出し", "default": "m2のPDRNは何が違う？" },
+    { "type": "image_picker", "id": "pdrn_image", "label": "PC画像" },
+    { "type": "image_picker", "id": "pdrn_mobile_image", "label": "スマートフォン画像" },
+    { "type": "text", "id": "pdrn_image_alt", "label": "画像の代替テキスト", "default": "PDRNを表現した透明な球体のイメージ" },
+    { "type": "text", "id": "pdrn_badge", "label": "帯ラベル" },
+    { "type": "textarea", "id": "pdrn_title", "label": "本文見出し" },
+    { "type": "richtext", "id": "pdrn_text", "label": "本文" },
+    { "type": "text", "id": "pdrn_link_label", "label": "リンク名" },
+    { "type": "url", "id": "pdrn_link", "label": "リンク先" }
+  ],
+  "presets": [{ "name": "M2 ABOUT 成分解説" }]
+}
+{% endschema %}
