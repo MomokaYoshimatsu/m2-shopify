@@ -293,7 +293,9 @@
                   <summary>
                     <span class="m2-pdp-faq-item__q" aria-hidden="true">Q</span>
                     <span>{{ faq_item.question.value | escape }}</span>
-                    <span class="m2-pdp-faq-item__icon" aria-hidden="true"></span>
+                    <span class="m2-pdp-faq-item__icon" aria-hidden="true">
+                      {{- 'icon-caret.svg' | inline_asset_content -}}
+                    </span>
                   </summary>
                   {%- if faq_item.answer.value != blank -%}
                     <div class="m2-pdp-faq-item__answer">{{ faq_item.answer | metafield_tag }}</div>
