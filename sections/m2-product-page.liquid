@@ -1,0 +1,364 @@
+{%- liquid
+  assign overview = product.metafields.custom.m2_overview.value
+  assign features = product.metafields.custom.m2_features.value
+  assign support_items = product.metafields.custom.m2_support_items.value
+  assign free_formula_items = product.metafields.custom.m2_free_formula_items.value
+  assign how_to_items = product.metafields.custom.m2_how_to_items.value
+  assign specs = product.metafields.custom.m2_specs.value
+  assign notice_body = product.metafields.custom.m2_notice_body
+  assign faqs = product.metafields.custom.m2_faqs.value
+  assign related_products = product.metafields.custom.m2_related_products.value
+  assign has_page_content = false
+
+  if overview != blank or features != blank or support_items != blank or free_formula_items != blank or how_to_items != blank or specs != blank or notice_body.value != blank or faqs != blank or related_products != blank
+    assign has_page_content = true
+  endif
+-%}
+
+{%- if has_page_content -%}
+  <script src="{{ 'm2-product.js' | asset_url }}" defer="defer"></script>
+  <div class="m2-pdp" data-m2-product-content>
+    {%- if overview.eyebrow.value != blank
+      or overview.heading.value != blank
+      or overview.body.value != blank
+      or overview.recommended_items.value != blank
+    -%}
+      <section class="m2-pdp-overview" aria-labelledby="M2ProductOverview-{{ section.id }}">
+        <div class="m2-pdp-width">
+          <header class="m2-pdp-heading m2-pdp-heading--overview">
+            {%- if overview.eyebrow.value != blank -%}
+              <p class="m2-pdp-heading__eyebrow">{{ overview.eyebrow.value | escape }}</p>
+            {%- endif -%}
+            {%- if overview.heading.value != blank -%}
+              <h2 id="M2ProductOverview-{{ section.id }}">{{ overview.heading.value | escape }}</h2>
+            {%- endif -%}
+          </header>
+
+          <div class="m2-pdp-overview__grid">
+            <div class="m2-pdp-overview__content">
+              {%- if overview.badge.value != blank
+                or overview.kicker.value != blank
+                or overview.lead.value != blank
+              -%}
+                <div class="m2-pdp-overview__lead">
+                  <div class="m2-pdp-overview__lead-row">
+                    {%- if overview.badge.value != blank -%}
+                      <span>{{ overview.badge.value | escape }}</span>
+                    {%- endif -%}
+                    {%- if overview.kicker.value != blank -%}
+                      <strong>{{ overview.kicker.value | escape }}</strong>
+                    {%- endif -%}
+                  </div>
+                  {%- if overview.lead.value != blank -%}
+                    <h3>{{ overview.lead.value | escape }}</h3>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+
+              {%- if overview.tags.value != blank -%}
+                <ul class="m2-pdp-tags" role="list">
+                  {%- for tag_text in overview.tags.value -%}
+                    {%- if tag_text != blank -%}<li>{{ tag_text | escape }}</li>{%- endif -%}
+                  {%- endfor -%}
+                </ul>
+              {%- endif -%}
+
+              {%- if overview.body.value != blank -%}
+                <div class="m2-pdp-richtext">{{ overview.body | metafield_tag }}</div>
+              {%- endif -%}
+
+              {%- if overview.recommended_items.value != blank -%}
+                <div class="m2-pdp-recommended">
+                  <h3>こんな方におすすめ</h3>
+                  <ul role="list">
+                    {%- for recommended_item in overview.recommended_items.value -%}
+                      {%- if recommended_item != blank -%}<li>{{ recommended_item | escape }}</li>{%- endif -%}
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+            </div>
+
+            {%- if product.featured_image != blank -%}
+              {%- assign overview_image_alt = product.featured_image.alt | default: product.title -%}
+              <div class="m2-pdp-overview__media">
+                {{
+                  product.featured_image
+                  | image_url: width: 900
+                  | image_tag:
+                    widths: '320, 480, 640, 760, 900',
+                    sizes: '(min-width: 1024px) 28rem, 70vw',
+                    loading: 'lazy',
+                    alt: overview_image_alt
+                }}
+              </div>
+            {%- endif -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- if features != blank -%}
+      <section class="m2-pdp-formula" aria-labelledby="M2ProductFormula-{{ section.id }}">
+        <header class="m2-pdp-heading">
+          <p class="m2-pdp-heading__eyebrow">FORMULA</p>
+          <h2 id="M2ProductFormula-{{ section.id }}">{{ features.size }}つの美容アプローチ</h2>
+        </header>
+
+        <div class="m2-pdp-feature-grid">
+          {%- for feature_item in features -%}
+            {%- liquid
+              assign feature_image = feature_item.image.value
+              assign feature_alt = feature_item.image_alt.value | default: feature_image.alt
+            -%}
+            {%- if feature_item.heading.value != blank or feature_item.body.value != blank or feature_image != blank -%}
+              <article class="m2-pdp-feature{% if forloop.first %} m2-pdp-feature--featured{% endif %}">
+                <div class="m2-pdp-feature__content">
+                  <div class="m2-pdp-feature__title">
+                    <span>{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                    {%- if feature_item.heading.value != blank -%}
+                      <h3>{{ feature_item.heading.value | escape }}</h3>
+                    {%- endif -%}
+                  </div>
+                  {%- if feature_item.body.value != blank -%}
+                    <div class="m2-pdp-richtext">{{ feature_item.body | metafield_tag }}</div>
+                  {%- endif -%}
+                </div>
+                {%- if feature_image != blank -%}
+                  <div class="m2-pdp-feature__media">
+                    {{
+                      feature_image
+                      | image_url: width: 1200
+                      | image_tag:
+                        widths: '360, 540, 720, 900, 1200',
+                        sizes: '(min-width: 1024px) 52rem, 100vw',
+                        loading: 'lazy',
+                        alt: feature_alt
+                    }}
+                  </div>
+                {%- endif -%}
+              </article>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+
+        {%- if support_items != blank -%}
+          <div class="m2-pdp-width">
+            <div class="m2-pdp-support">
+              <header class="m2-pdp-heading m2-pdp-heading--inverse">
+                <p class="m2-pdp-heading__eyebrow">WHY THIS FORMULA</p>
+                <h2>なぜ、この成分設計なのか。</h2>
+              </header>
+              <div class="m2-pdp-support__grid">
+                {%- for support_item in support_items -%}
+                  {%- liquid
+                    assign support_image = support_item.image.value
+                    assign support_alt = support_item.image_alt.value | default: support_image.alt
+                  -%}
+                  <article class="m2-pdp-support-card">
+                    <span class="m2-pdp-support-card__number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
+                    {%- if support_item.heading.value != blank -%}
+                      <h3>{{ support_item.heading.value | escape | replace: '&lt;br&gt;', '<br>' | replace: '&lt;br/&gt;', '<br>' | replace: '&lt;br /&gt;', '<br>' }}</h3>
+                    {%- endif -%}
+                    {%- if support_image != blank -%}
+                      <div class="m2-pdp-support-card__media">
+                        {{
+                          support_image
+                          | image_url: width: 900
+                          | image_tag:
+                            widths: '360, 540, 720, 900',
+                            sizes: '(min-width: 1024px) 40rem, 100vw',
+                            loading: 'lazy',
+                            alt: support_alt
+                        }}
+                      </div>
+                    {%- endif -%}
+                    {%- if support_item.lead.value != blank -%}
+                      <p class="m2-pdp-support-card__lead">{{ support_item.lead.value | escape }}</p>
+                    {%- endif -%}
+                    {%- if support_item.body.value != blank -%}
+                      <div class="m2-pdp-richtext">{{ support_item.body | metafield_tag }}</div>
+                    {%- endif -%}
+                  </article>
+                {%- endfor -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if free_formula_items != blank -%}
+          <div class="m2-pdp-width m2-pdp-free-formula">
+            <header class="m2-pdp-heading">
+              <p class="m2-pdp-heading__eyebrow">CLEAN &amp; PURE FORMULA</p>
+              <h2>毎日飲むものだから、余計なものは入れない。<br>{{ free_formula_items.size }}つのフリー処方</h2>
+            </header>
+            <ul role="list">
+              {%- for free_formula_item in free_formula_items -%}
+                {%- if free_formula_item != blank -%}<li>{{ free_formula_item | escape | newline_to_br | replace: '&lt;br&gt;', '<br>' | replace: '&lt;br/&gt;', '<br>' | replace: '&lt;br /&gt;', '<br>' }}</li>{%- endif -%}
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      </section>
+    {%- endif -%}
+
+    {%- if how_to_items != blank -%}
+      <section class="m2-pdp-how-to" aria-labelledby="M2ProductHowTo-{{ section.id }}">
+        <div class="m2-pdp-width">
+          <header class="m2-pdp-heading">
+            <p class="m2-pdp-heading__eyebrow">HOW TO USE</p>
+            <h2 id="M2ProductHowTo-{{ section.id }}">お召し上がりシーン</h2>
+          </header>
+          <div class="m2-pdp-how-to__grid">
+            {%- for how_to_item in how_to_items -%}
+              {%- liquid
+                assign how_to_image = how_to_item.image.value
+                assign how_to_alt = how_to_item.image_alt.value | default: how_to_image.alt
+              -%}
+              <article class="m2-pdp-how-to-card">
+                {%- if how_to_image != blank -%}
+                  <div class="m2-pdp-how-to-card__media">
+                    {{
+                      how_to_image
+                      | image_url: width: 800
+                      | image_tag:
+                        widths: '320, 480, 640, 800',
+                        sizes: '(min-width: 1024px) 33rem, 82vw',
+                        loading: 'lazy',
+                        alt: how_to_alt
+                    }}
+                  </div>
+                {%- endif -%}
+                {%- if how_to_item.body.value != blank -%}
+                  <div class="m2-pdp-richtext">{{ how_to_item.body | metafield_tag }}</div>
+                {%- endif -%}
+              </article>
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- if specs != blank or notice_body.value != blank -%}
+      <section class="m2-pdp-specs" aria-labelledby="M2ProductSpecs-{{ section.id }}">
+        <div class="m2-pdp-width">
+          <header class="m2-pdp-heading">
+            <p class="m2-pdp-heading__eyebrow">INGREDIENTS</p>
+            <h2 id="M2ProductSpecs-{{ section.id }}">全成分・商品仕様</h2>
+          </header>
+          {%- if specs != blank -%}
+            <dl class="m2-pdp-spec-list">
+              {%- for spec_item in specs -%}
+                {%- if spec_item.value.value != blank -%}
+                  <div class="m2-pdp-spec-row{% if spec_item.emphasis.value %} m2-pdp-spec-row--emphasis{% endif %}">
+                    <dt>
+                      {%- case forloop.index -%}
+                        {%- when 1 -%}全成分表示
+                        {%- when 2 -%}内容量
+                        {%- when 3 -%}原産国
+                        {%- when 4 -%}賞味期限
+                        {%- when 5 -%}保存方法
+                        {%- when 6 -%}アレルギー物質
+                      {%- endcase -%}
+                    </dt>
+                    <dd>{{ spec_item.value | metafield_tag }}</dd>
+                  </div>
+                {%- endif -%}
+              {%- endfor -%}
+            </dl>
+          {%- endif -%}
+          {%- if notice_body.value != blank -%}
+            <div class="m2-pdp-notice">
+              <h3>ご注意事項</h3>
+              {%- if notice_body.value != blank -%}
+                <div class="m2-pdp-richtext">{{ notice_body | metafield_tag }}</div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- if faqs != blank -%}
+      <section class="m2-pdp-faq" aria-labelledby="M2ProductFaq-{{ section.id }}">
+        <div class="m2-pdp-width">
+          <header class="m2-pdp-heading">
+            <p class="m2-pdp-heading__eyebrow">FAQ</p>
+            <h2 id="M2ProductFaq-{{ section.id }}">商品についてのよくあるご質問</h2>
+          </header>
+          <div class="m2-pdp-faq__list">
+            {%- for faq_item in faqs -%}
+              {%- if faq_item.question.value != blank -%}
+                <details class="m2-pdp-faq-item">
+                  <summary>
+                    <span class="m2-pdp-faq-item__q" aria-hidden="true">Q</span>
+                    <span>{{ faq_item.question.value | escape }}</span>
+                    <span class="m2-pdp-faq-item__icon" aria-hidden="true">
+                      {{- 'icon-caret.svg' | inline_asset_content -}}
+                    </span>
+                  </summary>
+                  {%- if faq_item.answer.value != blank -%}
+                    <div class="m2-pdp-faq-item__answer">{{ faq_item.answer | metafield_tag }}</div>
+                  {%- endif -%}
+                </details>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+
+    {%- if related_products != blank -%}
+      {{ 'component-price.css' | asset_url | stylesheet_tag }}
+      <section class="m2-pdp-related" aria-labelledby="M2ProductRelated-{{ section.id }}">
+        <div class="m2-pdp-width">
+          <header class="m2-pdp-heading">
+            <p class="m2-pdp-heading__eyebrow">RECOMMEND</p>
+            <h2 id="M2ProductRelated-{{ section.id }}">こちらもおすすめ</h2>
+          </header>
+          <div class="m2-pdp-related__grid">
+            {%- for related_product in related_products -%}
+              {%- liquid
+                assign related_card_badge = related_product.metafields.custom.m2_card_badge.value
+                assign related_card_description = related_product.metafields.custom.m2_card_description.value
+                assign related_package_summary = related_product.metafields.custom.m2_package_summary.value
+              -%}
+              {% render 'm2-product-card',
+                card_product: related_product,
+                feature_badge: related_card_badge,
+                description_text: related_card_description,
+                package_summary: related_package_summary,
+                show_description: true,
+                show_feature_badge: true,
+                unavailable_label: 'coming soon',
+                image_sizes: '(min-width: 1024px) 350px, 84vw'
+              %}
+            {%- endfor -%}
+          </div>
+        </div>
+      </section>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "M2 商品ページコンテンツ",
+  "tag": "div",
+  "class": "m2-product-page-section",
+  "enabled_on": {
+    "templates": ["product"]
+  },
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "商品ごとのM2専用メタフィールドと、各セクションのMetaobjectを表示します。未設定のセクションは表示しません。"
+    }
+  ],
+  "presets": [
+    {
+      "name": "M2 商品ページコンテンツ"
+    }
+  ]
+}
+{% endschema %}

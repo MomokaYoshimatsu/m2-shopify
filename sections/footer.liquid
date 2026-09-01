@@ -28,13 +28,17 @@
 {%- endstyle -%}
 
 <footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  {%- if request.page_type == 'index' -%}
+  {%- assign use_m2_footer = true -%}
+  {%- if use_m2_footer -%}
     {%- liquid
-      assign m2_about_link = section.settings.m2_about_link | default: '#about'
-      assign m2_clinical_link = section.settings.m2_clinical_link | default: '#science'
-      assign m2_product_1_link = section.settings.m2_product_1_link | default: '#products'
-      assign m2_product_2_link = section.settings.m2_product_2_link | default: '#products'
-      assign m2_product_3_link = section.settings.m2_product_3_link | default: '#products'
+      assign m2_about_default = routes.root_url | append: '#about'
+      assign m2_clinical_default = routes.root_url | append: '#science'
+      assign m2_products_default = routes.root_url | append: '#products'
+      assign m2_about_link = section.settings.m2_about_link | default: m2_about_default
+      assign m2_clinical_link = section.settings.m2_clinical_link | default: m2_clinical_default
+      assign m2_product_1_link = section.settings.m2_product_1_link | default: m2_products_default
+      assign m2_product_2_link = section.settings.m2_product_2_link | default: m2_products_default
+      assign m2_product_3_link = section.settings.m2_product_3_link | default: m2_products_default
       assign m2_faq_link = section.settings.m2_faq_link | default: '/pages/faq'
       assign m2_contact_link = section.settings.m2_contact_link | default: '/pages/contact'
       assign m2_shop_list_link = section.settings.m2_shop_list_link | default: '/pages/shop-list'
