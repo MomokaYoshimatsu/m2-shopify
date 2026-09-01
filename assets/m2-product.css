@@ -601,6 +601,11 @@
   text-align: left;
 }
 
+.m2-pdp-support-card .m2-pdp-richtext strong {
+  color: var(--m2-pdp-red);
+  font-weight: 700;
+}
+
 .m2-pdp-free-formula {
   padding-top: 8rem;
 }

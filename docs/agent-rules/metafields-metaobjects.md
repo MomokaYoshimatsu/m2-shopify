@@ -59,7 +59,17 @@ Metafield / Metaobjectの新設前に、次を確認します。
 
 ## M2 Product Page Content Contract
 
-ステータス: テーマ実装済み・Shopify管理画面の定義とエントリーは未作成（ユーザー承認待ち）。
+ステータス: テーマ実装済み。検証ストアにMetaobject定義6種、商品Metafield定義、子エントリー19件、ルートエントリー1件を作成済み。画像設定・商品紐付け・テンプレート割り当ては未完了。
+
+2026-09-01 Admin API反映状況:
+
+- 対象ストア: `m2-test-zyzvnzan.myshopify.com`
+- `m2_product_page` と子Metaobject定義5種を作成し、Storefront accessを `PUBLIC_READ` に設定済み。
+- 商品Metafield定義 `custom.product_page_content` を作成し、参照先を `m2_product_page` に固定済み。
+- Figma記載テキストを子エントリー19件とルートエントリー1件へ登録済み。
+- APIクライアントに `write_files` がないため画像8点は未アップロード。画像フィールドは未設定。
+- 不完全な状態で商品ページへ表示しないため、対象商品のMetafield紐付けと `product.m2` 割り当ては未実施。
+- 検証ストアには対象商品以外の商品がないため、`related_products` は未設定。
 
 商品側Metafield:
 
