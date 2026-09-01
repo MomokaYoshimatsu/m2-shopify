@@ -5,11 +5,24 @@
   {% render 'header-drawer' %}
 {% endcomment %}
 
+<noscript>
+  <style>
+    header-drawer details[open] > .menu-drawer {
+      visibility: visible;
+      transform: translateX(0);
+    }
+  </style>
+</noscript>
+
 <header-drawer data-breakpoint="{% if section.settings.menu_type_desktop == 'drawer' %}desktop{% else %}tablet{% endif %}">
   <details id="Details-menu-drawer-container" class="menu-drawer-container">
     <summary
       class="header__icon header__icon--menu header__icon--summary link focus-inset"
       aria-label="{{ 'sections.header.menu' | t }}"
+      aria-controls="menu-drawer"
+      aria-expanded="false"
+      data-open-label="{{ 'sections.header.menu' | t }}"
+      data-close-label="{{ 'accessibility.close' | t }}"
     >
       <span>
         {{- 'icon-hamburger.svg' | inline_asset_content -}}
