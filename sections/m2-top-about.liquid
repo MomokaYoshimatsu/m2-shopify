@@ -17,37 +17,43 @@
     height="153"
     loading="lazy"
   >
-  <img
-    class="m2-top-about__drop m2-top-about__drop--04"
-    src="{{ 'm2-top-drop-04.png' | asset_url }}"
-    alt=""
-    width="350"
-    height="358"
-    loading="lazy"
-  >
+  <picture>
+    <source media="(max-width: 1023px)" srcset="{{ 'm2-top-drop-04-sp.png' | asset_url }}">
+    <img
+      class="m2-top-about__drop m2-top-about__drop--04"
+      src="{{ 'm2-top-drop-04.png' | asset_url }}"
+      alt=""
+      width="350"
+      height="358"
+      loading="lazy"
+    >
+  </picture>
 
   <div class="m2-top-about__media">
     <div class="m2-top-about__red" aria-hidden="true"></div>
-    {%- if section.settings.image != blank -%}
-      {{
-        section.settings.image
-        | image_url: width: 1800
-        | image_tag:
-          widths: '480, 750, 1000, 1400, 1800',
-          sizes: '(min-width: 1024px) 47vw, 100vw',
-          loading: 'lazy',
-          class: 'm2-top-about__portrait'
-      }}
-    {%- else -%}
-      <img
-        class="m2-top-about__portrait"
-        src="{{ 'm2-top-about.png' | asset_url }}"
-        alt="{{ section.settings.image_alt | escape }}"
-        width="1400"
-        height="2100"
-        loading="lazy"
-      >
-    {%- endif -%}
+    <picture>
+      <source media="(max-width: 1023px)" srcset="{{ 'm2-top-about-group-613.png' | asset_url }}">
+      {%- if section.settings.image != blank -%}
+        {{
+          section.settings.image
+          | image_url: width: 1800
+          | image_tag:
+            widths: '480, 750, 1000, 1400, 1800',
+            sizes: '(min-width: 1024px) 47vw, 100vw',
+            loading: 'lazy',
+            class: 'm2-top-about__portrait'
+        }}
+      {%- else -%}
+        <img
+          class="m2-top-about__portrait"
+          src="{{ 'm2-top-about.png' | asset_url }}"
+          alt="{{ section.settings.image_alt | escape }}"
+          width="1400"
+          height="2100"
+          loading="lazy"
+        >
+      {%- endif -%}
+    </picture>
     {%- if section.settings.ambassador_name != blank -%}
       <div class="m2-top-about__ambassador">
         <small>{{ section.settings.ambassador_caption | escape }}</small>

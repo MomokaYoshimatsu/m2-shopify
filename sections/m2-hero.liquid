@@ -37,6 +37,8 @@
                 srcset="{{ mobile_image | image_url: width: 480 }} 480w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1000 }} 1000w"
                 sizes="100vw"
               >
+            {%- else -%}
+              <source media="(max-width: 1023px)" srcset="{{ 'm2-top-hero-sp.jpg' | asset_url }}">
             {%- endif -%}
             {%- if desktop_image != blank -%}
               {{
@@ -91,6 +93,8 @@
               srcset="{{ mobile_image | image_url: width: 480 }} 480w, {{ mobile_image | image_url: width: 750 }} 750w, {{ mobile_image | image_url: width: 1000 }} 1000w"
               sizes="100vw"
             >
+          {%- else -%}
+            <source media="(max-width: 1023px)" srcset="{{ 'm2-top-hero-sp.jpg' | asset_url }}">
           {%- endif -%}
           {%- if desktop_image != blank -%}
             {{ desktop_image | image_url: width: 2880 | image_tag: widths: '1024, 1280, 1440, 1920, 2400, 2880', sizes: '100vw', loading: 'eager', fetchpriority: 'high' }}
