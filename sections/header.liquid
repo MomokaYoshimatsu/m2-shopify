@@ -113,20 +113,9 @@
 {% liquid
   assign header_tag = 'div'
   assign header_sticky_type = section.settings.sticky_header_type
-  assign use_m2_header_branding = false
-
-  if request.page_type == 'index'
-    assign use_m2_header_branding = true
-  elsif request.page_type == 'product' and template.suffix == 'm2'
-    assign use_m2_header_branding = true
-  endif
-
-  if request.page_type == 'index'
-    assign header_tag = 'sticky-header'
-    assign header_sticky_type = 'always'
-  elsif section.settings.sticky_header_type != 'none'
-    assign header_tag = 'sticky-header'
-  endif
+  assign use_m2_header_branding = true
+  assign header_tag = 'sticky-header'
+  assign header_sticky_type = 'always'
 %}
 
 <{{ header_tag }}
@@ -161,6 +150,8 @@
     {%- if section.settings.logo_position != 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
         <h1 class="header__heading">
+      {%- else -%}
+        <div class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
         {%- if use_m2_header_branding -%}
@@ -197,6 +188,8 @@
       </a>
       {%- if request.page_type == 'index' -%}
         </h1>
+      {%- else -%}
+        </div>
       {%- endif -%}
     {%- endif -%}
 
@@ -213,6 +206,8 @@
     {%- if section.settings.logo_position == 'middle-center' -%}
       {%- if request.page_type == 'index' -%}
         <h1 class="header__heading">
+      {%- else -%}
+        <div class="header__heading">
       {%- endif -%}
       <a href="{{ routes.root_url }}" class="header__heading-link link link--text focus-inset">
         {%- if use_m2_header_branding -%}
@@ -249,6 +244,8 @@
       </a>
       {%- if request.page_type == 'index' -%}
         </h1>
+      {%- else -%}
+        </div>
       {%- endif -%}
     {%- endif -%}
 

@@ -1,70 +1,77 @@
 {%- liquid
-  assign page_content = product.metafields.custom.product_page_content.value
-  assign features = page_content.features.value
-  assign support_items = page_content.support_items.value
-  assign free_formula_items = page_content.free_formula_items.value
-  assign how_to_items = page_content.how_to_items.value
-  assign specs = page_content.specs.value
-  assign faqs = page_content.faqs.value
-  assign related_products = page_content.related_products.value
+  assign overview = product.metafields.custom.m2_overview.value
+  assign features = product.metafields.custom.m2_features.value
+  assign support_items = product.metafields.custom.m2_support_items.value
+  assign free_formula_items = product.metafields.custom.m2_free_formula_items.value
+  assign how_to_items = product.metafields.custom.m2_how_to_items.value
+  assign specs = product.metafields.custom.m2_specs.value
+  assign notice_body = product.metafields.custom.m2_notice_body
+  assign faqs = product.metafields.custom.m2_faqs.value
+  assign related_products = product.metafields.custom.m2_related_products.value
+  assign has_page_content = false
+
+  if overview != blank or features != blank or support_items != blank or free_formula_items != blank or how_to_items != blank or specs != blank or notice_body.value != blank or faqs != blank or related_products != blank
+    assign has_page_content = true
+  endif
 -%}
 
-{%- if page_content != blank -%}
+{%- if has_page_content -%}
+  <script src="{{ 'm2-product.js' | asset_url }}" defer="defer"></script>
   <div class="m2-pdp" data-m2-product-content>
-    {%- if page_content.overview_eyebrow.value != blank
-      or page_content.overview_heading.value != blank
-      or page_content.overview_body.value != blank
-      or page_content.recommended_items.value != blank
+    {%- if overview.eyebrow.value != blank
+      or overview.heading.value != blank
+      or overview.body.value != blank
+      or overview.recommended_items.value != blank
     -%}
       <section class="m2-pdp-overview" aria-labelledby="M2ProductOverview-{{ section.id }}">
         <div class="m2-pdp-width">
           <header class="m2-pdp-heading m2-pdp-heading--overview">
-            {%- if page_content.overview_eyebrow.value != blank -%}
-              <p class="m2-pdp-heading__eyebrow">{{ page_content.overview_eyebrow.value | escape }}</p>
+            {%- if overview.eyebrow.value != blank -%}
+              <p class="m2-pdp-heading__eyebrow">{{ overview.eyebrow.value | escape }}</p>
             {%- endif -%}
-            {%- if page_content.overview_heading.value != blank -%}
-              <h2 id="M2ProductOverview-{{ section.id }}">{{ page_content.overview_heading.value | escape }}</h2>
+            {%- if overview.heading.value != blank -%}
+              <h2 id="M2ProductOverview-{{ section.id }}">{{ overview.heading.value | escape }}</h2>
             {%- endif -%}
           </header>
 
           <div class="m2-pdp-overview__grid">
             <div class="m2-pdp-overview__content">
-              {%- if page_content.overview_badge.value != blank
-                or page_content.overview_kicker.value != blank
-                or page_content.overview_lead.value != blank
+              {%- if overview.badge.value != blank
+                or overview.kicker.value != blank
+                or overview.lead.value != blank
               -%}
                 <div class="m2-pdp-overview__lead">
                   <div class="m2-pdp-overview__lead-row">
-                    {%- if page_content.overview_badge.value != blank -%}
-                      <span>{{ page_content.overview_badge.value | escape }}</span>
+                    {%- if overview.badge.value != blank -%}
+                      <span>{{ overview.badge.value | escape }}</span>
                     {%- endif -%}
-                    {%- if page_content.overview_kicker.value != blank -%}
-                      <strong>{{ page_content.overview_kicker.value | escape }}</strong>
+                    {%- if overview.kicker.value != blank -%}
+                      <strong>{{ overview.kicker.value | escape }}</strong>
                     {%- endif -%}
                   </div>
-                  {%- if page_content.overview_lead.value != blank -%}
-                    <h3>{{ page_content.overview_lead.value | escape }}</h3>
+                  {%- if overview.lead.value != blank -%}
+                    <h3>{{ overview.lead.value | escape }}</h3>
                   {%- endif -%}
                 </div>
               {%- endif -%}
 
-              {%- if page_content.tags.value != blank -%}
+              {%- if overview.tags.value != blank -%}
                 <ul class="m2-pdp-tags" role="list">
-                  {%- for tag_text in page_content.tags.value -%}
+                  {%- for tag_text in overview.tags.value -%}
                     {%- if tag_text != blank -%}<li>{{ tag_text | escape }}</li>{%- endif -%}
                   {%- endfor -%}
                 </ul>
               {%- endif -%}
 
-              {%- if page_content.overview_body.value != blank -%}
-                <div class="m2-pdp-richtext">{{ page_content.overview_body | metafield_tag }}</div>
+              {%- if overview.body.value != blank -%}
+                <div class="m2-pdp-richtext">{{ overview.body | metafield_tag }}</div>
               {%- endif -%}
 
-              {%- if page_content.recommended_items.value != blank -%}
+              {%- if overview.recommended_items.value != blank -%}
                 <div class="m2-pdp-recommended">
                   <h3>こんな方におすすめ</h3>
                   <ul role="list">
-                    {%- for recommended_item in page_content.recommended_items.value -%}
+                    {%- for recommended_item in overview.recommended_items.value -%}
                       {%- if recommended_item != blank -%}<li>{{ recommended_item | escape }}</li>{%- endif -%}
                     {%- endfor -%}
                   </ul>
@@ -232,7 +239,7 @@
       </section>
     {%- endif -%}
 
-    {%- if specs != blank or page_content.notice_body.value != blank -%}
+    {%- if specs != blank or notice_body.value != blank -%}
       <section class="m2-pdp-specs" aria-labelledby="M2ProductSpecs-{{ section.id }}">
         <div class="m2-pdp-width">
           <header class="m2-pdp-heading">
@@ -260,11 +267,11 @@
               {%- endfor -%}
             </dl>
           {%- endif -%}
-          {%- if page_content.notice_body.value != blank -%}
+          {%- if notice_body.value != blank -%}
             <div class="m2-pdp-notice">
               <h3>ご注意事項</h3>
-              {%- if page_content.notice_body.value != blank -%}
-                <div class="m2-pdp-richtext">{{ page_content.notice_body | metafield_tag }}</div>
+              {%- if notice_body.value != blank -%}
+                <div class="m2-pdp-richtext">{{ notice_body | metafield_tag }}</div>
               {%- endif -%}
             </div>
           {%- endif -%}
@@ -310,47 +317,20 @@
           <div class="m2-pdp-related__grid">
             {%- for related_product in related_products -%}
               {%- liquid
-                assign related_page_content = related_product.metafields.custom.product_page_content.value
-                assign related_image_alt = related_product.featured_image.alt | default: related_product.title
+                assign related_card_badge = related_product.metafields.custom.m2_card_badge.value
+                assign related_card_description = related_product.metafields.custom.m2_card_description.value
+                assign related_package_summary = related_product.metafields.custom.m2_package_summary.value
               -%}
-              <article class="m2-pdp-related-card">
-                {%- if related_page_content.card_badge.value != blank -%}
-                  <span class="m2-pdp-related-card__feature">{{ related_page_content.card_badge.value | escape | newline_to_br }}</span>
-                {%- endif -%}
-                <a class="m2-pdp-related-card__media" href="{{ related_product.url }}" tabindex="-1" aria-hidden="true">
-                  {%- if related_product.featured_image != blank -%}
-                    {{
-                      related_product.featured_image
-                      | image_url: width: 900
-                      | image_tag:
-                        widths: '360, 540, 720, 900',
-                        sizes: '(min-width: 1024px) 35rem, 84vw',
-                        loading: 'lazy',
-                        alt: related_image_alt
-                    }}
-                  {%- else -%}
-                    {{ 'product-apparel-2' | placeholder_svg_tag: 'm2-pdp-related-card__placeholder' }}
-                  {%- endif -%}
-                </a>
-                <div class="m2-pdp-related-card__body">
-                  {%- if related_page_content.badge.value != blank -%}
-                    <span class="m2-pdp-related-card__badge">{{ related_page_content.badge.value | escape }}</span>
-                  {%- endif -%}
-                  <h3><a href="{{ related_product.url }}">m2 {{ related_product.title | escape }}</a></h3>
-                  {%- if related_page_content.card_description.value != blank -%}
-                    <p>{{ related_page_content.card_description.value | escape }}</p>
-                  {%- elsif related_product.description != blank -%}
-                    <p>{{ related_product.description | strip_html | truncate: 110 }}</p>
-                  {%- endif -%}
-                  <div class="m2-pdp-related-card__meta">
-                    <span>{{ related_page_content.package_summary.value | escape }}</span>
-                    <span class="m2-pdp-related-card__price">
-                      {% render 'price', product: related_product, price_class: '', show_compare_at_price: true %}
-                      <small>(税込)</small>
-                    </span>
-                  </div>
-                </div>
-              </article>
+              {% render 'm2-product-card',
+                card_product: related_product,
+                feature_badge: related_card_badge,
+                description_text: related_card_description,
+                package_summary: related_package_summary,
+                show_description: true,
+                show_feature_badge: true,
+                unavailable_label: 'coming soon',
+                image_sizes: '(min-width: 1024px) 350px, 84vw'
+              %}
             {%- endfor -%}
           </div>
         </div>
@@ -370,7 +350,7 @@
   "settings": [
     {
       "type": "paragraph",
-      "content": "商品メタフィールド custom.product_page_content に紐づくMetaobjectを表示します。未設定の場合は何も表示しません。"
+      "content": "商品ごとのM2専用メタフィールドと、各セクションのMetaobjectを表示します。未設定のセクションは表示しません。"
     }
   ],
   "presets": [

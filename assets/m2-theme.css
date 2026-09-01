@@ -856,7 +856,7 @@ body {
   overflow: clip;
 }
 
-.template-index .section-header {
+.m2-site-shell .section-header {
   position: sticky;
   z-index: 20;
   top: 0;
@@ -992,46 +992,46 @@ body {
   pointer-events: none;
 }
 
-/* Rise header remains functional; the homepage receives the Figma treatment. */
-.template-index .shopify-section-group-header-group .header-wrapper {
+/* Riseの機能を維持しながら、全ページでM2共通ヘッダーを適用する。 */
+.m2-site-shell .shopify-section-group-header-group .header-wrapper {
   background: var(--m2-top-red);
   border: 0;
   box-shadow: 0 0.4rem 0.35rem rgb(0 0 0 / 10%);
 }
 
-.template-index .shopify-section-group-header-group .header {
+.m2-site-shell .shopify-section-group-header-group .header {
   max-width: none;
   padding: 1.4rem 2rem;
 }
 
-.template-index .shopify-section-group-header-group .header__heading-link,
-.template-index .shopify-section-group-header-group .header__menu-item,
-.template-index .shopify-section-group-header-group .header__icon,
-.template-index .shopify-section-group-header-group .header__active-menu-item,
-.template-index .shopify-section-group-header-group .localization-form__select,
-.template-index .shopify-section-group-header-group .disclosure__button {
+.m2-site-shell .shopify-section-group-header-group .header__heading-link,
+.m2-site-shell .shopify-section-group-header-group .header__menu-item,
+.m2-site-shell .shopify-section-group-header-group .header__icon,
+.m2-site-shell .shopify-section-group-header-group .header__active-menu-item,
+.m2-site-shell .shopify-section-group-header-group .localization-form__select,
+.m2-site-shell .shopify-section-group-header-group .disclosure__button {
   color: #fff;
 }
 
-.template-index .shopify-section-group-header-group .header__heading-logo {
+.m2-site-shell .shopify-section-group-header-group .header__heading-logo {
   filter: brightness(0) invert(1);
 }
 
-.template-index .shopify-section-group-header-group .header__heading-link .h2 {
+.m2-site-shell .shopify-section-group-header-group .header__heading-link .h2 {
   color: #fff;
 }
 
-.template-index .m2-header-logo {
+.m2-site-shell .m2-header-logo {
   display: block;
   width: 4.3rem;
   height: auto;
 }
 
-.template-index .m2-header-actions {
+.m2-site-shell .m2-header-actions {
   display: none;
 }
 
-.template-index .shopify-section-group-header-group .header__menu-item {
+.m2-site-shell .shopify-section-group-header-group .header__menu-item {
   font-family: Montserrat, var(--font-body-family);
   font-size: 1.1rem;
   font-weight: 600;
@@ -1039,30 +1039,30 @@ body {
   transition: opacity 180ms ease;
 }
 
-.template-index .shopify-section-group-header-group .header__menu-item:hover,
-.template-index .shopify-section-group-header-group .header__menu-item:focus-visible {
+.m2-site-shell .shopify-section-group-header-group .header__menu-item:hover,
+.m2-site-shell .shopify-section-group-header-group .header__menu-item:focus-visible {
   opacity: 0.6;
 }
 
-.template-index .shopify-section-group-header-group .header__menu-item:hover span,
-.template-index .shopify-section-group-header-group .header__active-menu-item,
-.template-index .shopify-section-group-header-group .header__menu-item:hover .header__active-menu-item {
+.m2-site-shell .shopify-section-group-header-group .header__menu-item:hover span,
+.m2-site-shell .shopify-section-group-header-group .header__active-menu-item,
+.m2-site-shell .shopify-section-group-header-group .header__menu-item:hover .header__active-menu-item {
   text-decoration: none;
 }
 
-.template-index .shopify-section-group-header-group .header__icon .icon,
-.template-index .shopify-section-group-header-group .header__icon svg {
+.m2-site-shell .shopify-section-group-header-group .header__icon .icon,
+.m2-site-shell .shopify-section-group-header-group .header__icon svg {
   color: #fff;
 }
 
-.template-index .cart-count-bubble {
+.m2-site-shell .cart-count-bubble {
   background: #fff;
   color: var(--m2-top-red);
 }
 
 /* SP header and Shopify's standard menu drawer */
 @media screen and (max-width: 1023px) {
-  .template-index .shopify-section-group-header-group .header {
+  .m2-site-shell .shopify-section-group-header-group .header {
     position: relative;
     isolation: isolate;
     display: grid;
@@ -1072,7 +1072,7 @@ body {
     padding: 0 2rem;
   }
 
-  .template-index .shopify-section-group-header-group .header::before {
+  .m2-site-shell .shopify-section-group-header-group .header::before {
     position: absolute;
     z-index: 4;
     inset: 0;
@@ -1081,20 +1081,20 @@ body {
     pointer-events: none;
   }
 
-  .template-index .shopify-section-group-header-group header-drawer {
+  .m2-site-shell .shopify-section-group-header-group header-drawer {
     display: block;
     grid-area: left-icons;
     justify-self: start;
     margin-left: -1.2rem;
   }
 
-  .template-index .shopify-section-group-header-group .header__inline-menu,
-  .template-index .shopify-section-group-header-group .header__search,
-  .template-index .shopify-section-group-header-group .desktop-localization-wrapper {
+  .m2-site-shell .shopify-section-group-header-group .header__inline-menu,
+  .m2-site-shell .shopify-section-group-header-group .header__search,
+  .m2-site-shell .shopify-section-group-header-group .desktop-localization-wrapper {
     display: none;
   }
 
-  .template-index .shopify-section-group-header-group .header__heading {
+  .m2-site-shell .shopify-section-group-header-group .header__heading {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1106,7 +1106,7 @@ body {
     transform: translate(-50%, -50%);
   }
 
-  .template-index .shopify-section-group-header-group .header__heading-link {
+  .m2-site-shell .shopify-section-group-header-group .header__heading-link {
     position: static;
     display: block;
     width: 100%;
@@ -1116,13 +1116,13 @@ body {
     transform: none;
   }
 
-  .template-index .m2-header-logo {
+  .m2-site-shell .m2-header-logo {
     width: 100%;
     max-width: none;
     height: 100%;
   }
 
-  .template-index .shopify-section-group-header-group .header__icons {
+  .m2-site-shell .shopify-section-group-header-group .header__icons {
     position: relative;
     z-index: 5;
     display: block;
@@ -1131,7 +1131,7 @@ body {
     padding: 0;
   }
 
-  .template-index .m2-header-actions {
+  .m2-site-shell .m2-header-actions {
     position: absolute;
     z-index: 0;
     top: 50%;
@@ -1144,8 +1144,8 @@ body {
     transform: translateY(-50%);
   }
 
-  .template-index .shopify-section-group-header-group .header__icon--cart,
-  .template-index .shopify-section-group-header-group .header__icon--account {
+  .m2-site-shell .shopify-section-group-header-group .header__icon--cart,
+  .m2-site-shell .shopify-section-group-header-group .header__icon--account {
     position: absolute;
     z-index: 1;
     top: 0;
@@ -1155,40 +1155,40 @@ body {
     margin: 0;
   }
 
-  .template-index .shopify-section-group-header-group .header__icon--cart {
+  .m2-site-shell .shopify-section-group-header-group .header__icon--cart {
     right: 3.7rem;
   }
 
-  .template-index .shopify-section-group-header-group .header__icon--account {
+  .m2-site-shell .shopify-section-group-header-group .header__icon--account {
     right: -1.1rem;
   }
 
-  .template-index .shopify-section-group-header-group .header__icon--cart .svg-wrapper,
-  .template-index .shopify-section-group-header-group .header__icon--account .svg-wrapper {
+  .m2-site-shell .shopify-section-group-header-group .header__icon--cart .svg-wrapper,
+  .m2-site-shell .shopify-section-group-header-group .header__icon--account .svg-wrapper {
     opacity: 0;
   }
 
-  .template-index .shopify-section-group-header-group .header__icon--menu {
+  .m2-site-shell .shopify-section-group-header-group .header__icon--menu {
     width: 4.4rem;
     height: 4.4rem;
   }
 
-  .template-index .shopify-section-group-header-group .header__icon--menu > span {
+  .m2-site-shell .shopify-section-group-header-group .header__icon--menu > span {
     position: relative;
     z-index: 5;
   }
 
-  .template-index .shopify-section-group-header-group .header__icon--menu .icon-hamburger {
+  .m2-site-shell .shopify-section-group-header-group .header__icon--menu .icon-hamburger {
     width: 2rem;
     height: 1.6rem;
   }
 
-  .template-index .shopify-section-group-header-group .header__icon--menu .icon-close {
+  .m2-site-shell .shopify-section-group-header-group .header__icon--menu .icon-close {
     width: 1.5rem;
     height: 1.5rem;
   }
 
-  .template-index header-drawer .header__icon--menu[aria-expanded='true']::before {
+  .m2-site-shell header-drawer .header__icon--menu[aria-expanded='true']::before {
     position: fixed;
     z-index: 2;
     inset: var(--header-bottom-position, 4.4rem) 0 0;
@@ -1199,7 +1199,7 @@ body {
     content: '';
   }
 
-  .template-index header-drawer .menu-drawer {
+  .m2-site-shell header-drawer .menu-drawer {
     position: fixed;
     z-index: 3;
     top: var(--header-bottom-position, 4.4rem);
@@ -1217,30 +1217,30 @@ body {
     transform: translateY(-100%);
   }
 
-  .js .template-index header-drawer details[open] > .menu-drawer {
+  .js .m2-site-shell header-drawer details[open] > .menu-drawer {
     transition: transform 250ms ease, visibility 250ms ease;
   }
 
-  .js .template-index header-drawer details[open].menu-opening > .menu-drawer {
+  .js .m2-site-shell header-drawer details[open].menu-opening > .menu-drawer {
     visibility: visible;
     transform: translateY(0);
   }
 
-  .template-index header-drawer .menu-drawer__navigation-container {
+  .m2-site-shell header-drawer .menu-drawer__navigation-container {
     display: block;
     overflow: visible;
   }
 
-  .template-index header-drawer .menu-drawer__navigation {
+  .m2-site-shell header-drawer .menu-drawer__navigation {
     padding: 4rem 4rem 5rem;
   }
 
-  .template-index header-drawer .menu-drawer__menu > li {
+  .m2-site-shell header-drawer .menu-drawer__menu > li {
     margin: 0;
     border-bottom: 0.1rem solid rgb(255 255 255 / 90%);
   }
 
-  .template-index header-drawer .menu-drawer__menu-item {
+  .m2-site-shell header-drawer .menu-drawer__menu-item {
     min-height: 6.4rem;
     padding: 1.8rem 0;
     color: #fff;
@@ -1252,43 +1252,43 @@ body {
     text-transform: uppercase;
   }
 
-  .template-index header-drawer summary.menu-drawer__menu-item {
+  .m2-site-shell header-drawer summary.menu-drawer__menu-item {
     padding-right: 4.4rem;
   }
 
-  .template-index header-drawer .menu-drawer__menu-item--active,
-  .template-index header-drawer .menu-drawer__menu-item:focus,
-  .template-index header-drawer .menu-drawer__menu-item:hover,
-  .template-index header-drawer .menu-drawer__close-button:focus,
-  .template-index header-drawer .menu-drawer__close-button:hover {
+  .m2-site-shell header-drawer .menu-drawer__menu-item--active,
+  .m2-site-shell header-drawer .menu-drawer__menu-item:focus,
+  .m2-site-shell header-drawer .menu-drawer__menu-item:hover,
+  .m2-site-shell header-drawer .menu-drawer__close-button:focus,
+  .m2-site-shell header-drawer .menu-drawer__close-button:hover {
     background: transparent;
     color: #fff;
     text-decoration: none;
   }
 
-  .template-index header-drawer .menu-drawer__menu-item > .svg-wrapper {
+  .m2-site-shell header-drawer .menu-drawer__menu-item > .svg-wrapper {
     right: 0;
     color: #fff;
   }
 
-  .template-index header-drawer .menu-drawer__submenu {
+  .m2-site-shell header-drawer .menu-drawer__submenu {
     background: linear-gradient(90deg, var(--m2-top-red-dark), var(--m2-top-red-light));
   }
 
-  .template-index header-drawer .menu-drawer__close-button {
+  .m2-site-shell header-drawer .menu-drawer__close-button {
     min-height: 4.4rem;
     margin: 0;
     padding: 1.2rem 0;
     color: #fff;
   }
 
-  .template-index header-drawer .menu-drawer__utility-links {
+  .m2-site-shell header-drawer .menu-drawer__utility-links {
     display: none;
   }
 }
 
 @media screen and (min-width: 990px) and (max-width: 1023px) {
-  body.template-index.overflow-hidden-tablet {
+  body.m2-site-shell.overflow-hidden-tablet {
     overflow: hidden;
   }
 }
@@ -2199,8 +2199,8 @@ body {
   }
 }
 
-/* The homepage footer follows the Figma information architecture. */
-.template-index .shopify-section-group-footer-group .footer {
+/* 全ページでFigma準拠のM2共通フッターを適用する。 */
+.m2-site-shell .shopify-section-group-footer-group .footer {
   min-height: 0;
   padding: 0;
   background: #2b2b2b;
@@ -2323,42 +2323,42 @@ body {
 @media screen and (min-width: 1024px) {
   :root { --m2-top-gutter: 4.8rem; }
 
-  .template-index .shopify-section-group-header-group .header {
+  .m2-site-shell .shopify-section-group-header-group .header {
     display: flex;
     align-items: center;
     min-height: 7.2rem;
     padding: 2rem 3rem;
   }
 
-  .template-index .shopify-section-group-header-group .header__heading,
-  .template-index .shopify-section-group-header-group .header__heading-link {
+  .m2-site-shell .shopify-section-group-header-group .header__heading,
+  .m2-site-shell .shopify-section-group-header-group .header__heading-link {
     flex: 0 0 auto;
     margin: 0;
     padding: 0;
   }
 
-  .template-index .m2-header-logo {
+  .m2-site-shell .m2-header-logo {
     width: 5.3rem;
     height: 3.219rem;
   }
 
-  .template-index .shopify-section-group-header-group .header__inline-menu {
+  .m2-site-shell .shopify-section-group-header-group .header__inline-menu {
     margin: 0 0 0 auto;
   }
 
-  .template-index .shopify-section-group-header-group .list-menu--inline {
+  .m2-site-shell .shopify-section-group-header-group .list-menu--inline {
     flex-wrap: nowrap;
     gap: 4.1rem;
   }
 
-  .template-index .shopify-section-group-header-group .header__menu-item {
+  .m2-site-shell .shopify-section-group-header-group .header__menu-item {
     padding: 0;
     font-size: 1.4rem;
     letter-spacing: 0.142857em;
     white-space: nowrap;
   }
 
-  .template-index .shopify-section-group-header-group .header__icons {
+  .m2-site-shell .shopify-section-group-header-group .header__icons {
     position: relative;
     flex: 0 0 8.221rem;
     width: 8.221rem;
@@ -2367,12 +2367,12 @@ body {
     padding: 0;
   }
 
-  .template-index .shopify-section-group-header-group .desktop-localization-wrapper,
-  .template-index .shopify-section-group-header-group .header__search {
+  .m2-site-shell .shopify-section-group-header-group .desktop-localization-wrapper,
+  .m2-site-shell .shopify-section-group-header-group .header__search {
     display: none;
   }
 
-  .template-index .m2-header-actions {
+  .m2-site-shell .m2-header-actions {
     position: absolute;
     z-index: 0;
     inset: 0;
@@ -2382,26 +2382,26 @@ body {
     pointer-events: none;
   }
 
-  .template-index .shopify-section-group-header-group .header__icon--cart,
-  .template-index .shopify-section-group-header-group .header__icon--account {
+  .m2-site-shell .shopify-section-group-header-group .header__icon--cart,
+  .m2-site-shell .shopify-section-group-header-group .header__icon--account {
     position: absolute;
     z-index: 1;
     top: 0;
     height: 2.25rem;
   }
 
-  .template-index .shopify-section-group-header-group .header__icon--cart {
+  .m2-site-shell .shopify-section-group-header-group .header__icon--cart {
     left: 0;
     width: 2.35rem;
   }
 
-  .template-index .shopify-section-group-header-group .header__icon--account {
+  .m2-site-shell .shopify-section-group-header-group .header__icon--account {
     right: 0;
     width: 2.25rem;
   }
 
-  .template-index .shopify-section-group-header-group .header__icon--cart .svg-wrapper,
-  .template-index .shopify-section-group-header-group .header__icon--account .svg-wrapper {
+  .m2-site-shell .shopify-section-group-header-group .header__icon--cart .svg-wrapper,
+  .m2-site-shell .shopify-section-group-header-group .header__icon--account .svg-wrapper {
     opacity: 0;
   }
 
@@ -2789,8 +2789,8 @@ body {
     animation: none;
   }
 
-  .js .template-index header-drawer details[open] > .menu-drawer,
-  .js .template-index header-drawer details[open] > .menu-drawer .menu-drawer__submenu {
+  .js .m2-site-shell header-drawer details[open] > .menu-drawer,
+  .js .m2-site-shell header-drawer details[open] > .menu-drawer .menu-drawer__submenu {
     transition-duration: 0.01ms;
   }
 

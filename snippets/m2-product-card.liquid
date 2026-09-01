@@ -1,0 +1,62 @@
+{%- liquid
+  assign card_image_alt = card_product.featured_image.alt | default: card_product.title
+  assign card_show_new = card_product.metafields.custom.m2_show_new_badge.value
+  assign card_feature_badge = card_product.metafields.custom.m2_card_badge.value
+  if feature_badge != blank
+    assign card_feature_badge = feature_badge
+  endif
+  if show_feature_badge == false
+    assign card_feature_badge = blank
+  endif
+  assign card_description = description_text | default: card_product.metafields.custom.m2_card_description.value | default: card_product.description
+  assign card_package_summary = package_summary | default: card_product.metafields.custom.m2_package_summary.value
+  assign card_unavailable_label = unavailable_label | default: 'coming soon'
+-%}
+
+<article class="m2-top-product">
+  {%- if card_feature_badge != blank -%}
+    <span class="m2-top-product__feature">{{ card_feature_badge | escape | newline_to_br }}</span>
+  {%- endif -%}
+
+  <div class="m2-top-product__media">
+    {%- if card_product.featured_image != blank -%}
+      {{
+        card_product.featured_image
+        | image_url: width: 1200
+        | image_tag:
+          widths: '360, 540, 720, 960, 1200',
+          sizes: image_sizes,
+          loading: 'lazy',
+          alt: card_image_alt
+      }}
+    {%- else -%}
+      {{ 'product-apparel-2' | placeholder_svg_tag: 'm2-top-product__placeholder' }}
+    {%- endif -%}
+  </div>
+
+  <div class="m2-top-product__body">
+    {%- if card_show_new -%}
+      <span class="m2-top-product__badge">NEW</span>
+    {%- endif -%}
+    <h3><a href="{{ card_product.url }}">{{ card_product.title | escape }}</a></h3>
+    {%- if show_description and card_description != blank -%}
+      <p class="m2-top-product__description">{{ card_description | strip_html | truncate: 110 }}</p>
+    {%- endif -%}
+    <div class="m2-top-product__meta">
+      <span>
+        {%- if card_package_summary != blank -%}
+          {{ card_package_summary | escape }}
+        {%- unless card_product.has_only_default_variant -%}<br>{%- endunless -%}
+        {%- endif -%}
+        {%- unless card_product.has_only_default_variant -%}
+          {{ card_product.selected_or_first_available_variant.title | escape }}
+        {%- endunless -%}
+      </span>
+      {%- if card_product.available -%}
+        {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+      {%- else -%}
+        <strong class="m2-top-product__unavailable">{{ card_unavailable_label | escape }}</strong>
+      {%- endif -%}
+    </div>
+  </div>
+</article>

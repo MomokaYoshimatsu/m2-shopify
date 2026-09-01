@@ -3,7 +3,8 @@
   if template.name == 'product' and template.suffix == 'm2'
     assign is_m2_product = true
   endif
-  assign page_content = product.metafields.custom.product_page_content.value
+  assign show_new_badge = product.metafields.custom.m2_show_new_badge.value
+  assign package_summary = product.metafields.custom.m2_package_summary.value
 -%}
 
 <product-info
@@ -119,8 +120,8 @@
                   </p>
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
-                    {%- if is_m2_product and page_content.badge.value != blank -%}
-                      <span class="m2-product-main__badge">{{ page_content.badge.value | escape }}</span>
+                    {%- if is_m2_product and show_new_badge -%}
+                      <span class="m2-product-main__badge">NEW</span>
                     {%- endif -%}
                     <h1>
                       {%- if is_m2_product -%}<span class="m2-product-main__brand">m2</span>{%- endif -%}
@@ -133,8 +134,8 @@
                     </a>
                   </div>
                 {%- when 'price' -%}
-                  {%- if is_m2_product and page_content.package_summary.value != blank -%}
-                    <p class="m2-product-main__package">{{ page_content.package_summary.value | escape }}</p>
+                  {%- if is_m2_product and package_summary != blank -%}
+                    <p class="m2-product-main__package">{{ package_summary | escape }}</p>
                   {%- endif -%}
                   <div class="{% if is_m2_product %}m2-product-main__price-row{% endif %}">
                     <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>

@@ -280,9 +280,7 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'm2-theme.css' | asset_url | stylesheet_tag }}
-    {%- if request.page_type == 'index' -%}
-      <script src="{{ 'm2-theme.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
+    <script src="{{ 'm2-theme.js' | asset_url }}" defer="defer"></script>
     <link rel="stylesheet" href="{{ 'component-cart-items.css' | asset_url }}" media="print" onload="this.media='all'">
 
     {%- if settings.cart_type == 'drawer' -%}
@@ -325,7 +323,7 @@
     </script>
   </head>
 
-  <body class="gradient template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}--{{ template.suffix }}{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body class="gradient m2-site-shell template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}--{{ template.suffix }}{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>

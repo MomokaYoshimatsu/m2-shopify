@@ -1,7 +1,7 @@
 # Metafields And Metaobjects Rules
 
-M2固有のMetafield / Metaobjectは、現時点のリポジトリでは実装を確認できていません。
-別プロジェクトの定義を流用せず、M2の要件とShopify管理画面の現状を確認してから設計・追加します。
+M2固有のMetafield / Metaobjectは、商品ページ用として本ファイル後半の契約を実装済みです。
+追加・変更時は別プロジェクトの定義を流用せず、M2の要件とShopify管理画面の現状を確認してから設計します。
 
 ## Current Verified References
 
@@ -59,7 +59,47 @@ Metafield / Metaobjectの新設前に、次を確認します。
 
 ## M2 Product Page Content Contract
 
-ステータス: テーマ実装・検証ストアへのコンテンツ登録・対象商品へのテンプレート割り当てまで完了。
+ステータス: 個別Metafield / Metaobject構造への移行、コンテンツ登録、対象商品へのテンプレート割り当てまで完了。
+
+2026-09-01 個別管理への移行:
+
+- 旧 `custom.product_page_content` とルートMetaobject `m2_product_page` は、2商品の値を個別フィールドへコピーして全件照合後に削除した。
+- 商品ラベルの自由入力欄を廃止し、`custom.m2_show_new_badge` で固定文言 `NEW` の表示有無だけを管理する。
+- 商品概要だけを `m2_product_overview` にまとめ、それ以外の各セクションは商品Metafieldから個別に参照する。
+
+商品側Metafield:
+
+| namespace / key | 型 | 用途 | 未入力時 |
+|---|---|---|---|
+| `custom.m2_show_new_badge` | `boolean` | 固定 `NEW` タグの表示切り替え | 非表示 |
+| `custom.m2_package_summary` | `single_line_text_field` | 内容数などの補足 | 非表示 |
+| `custom.m2_card_badge` | `multi_line_text_field` | 商品カードの円形訴求 | 非表示 |
+| `custom.m2_card_description` | `multi_line_text_field` | 商品カードの説明 | 商品説明へフォールバック |
+| `custom.m2_overview` | `metaobject_reference` → `m2_product_overview` | 商品概要 | 商品概要セクションを非表示 |
+| `custom.m2_features` | `list.metaobject_reference` → `m2_product_feature` | 成分・特徴カード | 特徴セクションを非表示 |
+| `custom.m2_support_items` | `list.metaobject_reference` → `m2_product_support_item` | WHY THIS FORMULAカード | 補足訴求を非表示 |
+| `custom.m2_free_formula_items` | `list.single_line_text_field` | フリー処方項目 | 一覧を非表示 |
+| `custom.m2_how_to_items` | `list.metaobject_reference` → `m2_product_how_to` | 使用シーン | セクションを非表示 |
+| `custom.m2_specs` | `list.metaobject_reference` → `m2_product_spec` | 仕様表 | 仕様表を非表示 |
+| `custom.m2_notice_body` | `rich_text_field` | 注意事項本文 | 注意事項を非表示 |
+| `custom.m2_faqs` | `list.metaobject_reference` → `m2_product_faq` | FAQ | FAQセクションを非表示 |
+| `custom.m2_related_products` | `list.product_reference` | 関連商品 | 関連商品セクションを非表示 |
+
+### `m2_product_overview`（M2 商品概要）
+
+| field key | データ型 | 必須 | 用途 |
+|---|---|---|---|
+| `name` | `single_line_text_field` | 必須 | 管理画面の表示名。画面には出力しない |
+| `eyebrow` | `single_line_text_field` | 任意 | 商品紹介の英字見出し |
+| `heading` | `single_line_text_field` | 任意 | 商品紹介の和文見出し |
+| `badge` | `single_line_text_field` | 任意 | 商品紹介の訴求ラベル |
+| `kicker` | `single_line_text_field` | 任意 | 商品固有の導入コピー |
+| `lead` | `single_line_text_field` | 任意 | 商品紹介のメインコピー |
+| `tags` | `list.single_line_text_field` | 任意 | タイプ・フレーバー等のタグ |
+| `body` | `rich_text_field` | 任意 | 商品紹介本文 |
+| `recommended_items` | `list.single_line_text_field` | 任意 | 「こんな方におすすめ」の項目 |
+
+### 廃止済みの旧集約構造（移行履歴）
 
 2026-09-01 固定UI整理・Admin API反映:
 
@@ -69,7 +109,7 @@ Metafield / Metaobjectの新設前に、次を確認します。
 - 商品固有コピー用の `overview_kicker` を追加し、対象商品へ「話題のPDRN成分を試したい方へ」を登録した。
 - Figmaのチューブ元画像を対象商品の2枚目の商品メディアとして追加した。
 
-2026-09-01 Admin API反映状況:
+2026-09-01 旧集約構造のAdmin API反映履歴（現在は廃止）:
 
 - 対象ストア: `m2-test-zyzvnzan.myshopify.com`
 - `m2_product_page` と子Metaobject定義5種を作成し、Storefront accessを `PUBLIC_READ` に設定済み。
@@ -79,13 +119,13 @@ Metafield / Metaobjectの新設前に、次を確認します。
 - 対象商品に `custom.product_page_content` を紐付け、商品テンプレート `product.m2` を割り当て済み。
 - 追加商品用の最小ルートエントリーを作成して商品へ紐付け、対象商品の `related_products` に設定済み。追加商品の商品ページテンプレートは標準のまま。
 
-商品側Metafield:
+旧商品側Metafield:
 
 | namespace / key | 型 | 値 | 用途 | Liquid | 未入力時 |
 |---|---|---|---|---|---|
 | `custom.product_page_content` | `metaobject_reference` | 単一・任意 | 商品とルートMetaobjectを紐付ける | `product.metafields.custom.product_page_content.value` | M2固有コンテンツを非表示。Rise標準の商品メインと購入フォームは表示 |
 
-### `m2_product_page`（M2 商品ページ）
+### 旧 `m2_product_page`（M2 商品ページ）
 
 | field key | データ型 | 値 | 必須 | 用途 / Liquid | 未入力時 |
 |---|---|---|---|---|---|

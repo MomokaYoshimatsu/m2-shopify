@@ -93,7 +93,7 @@ if (!customElements.get('m2-hero-slider')) {
 }
 
 function initM2HeaderDrawer() {
-  const drawer = document.querySelector('.template-index header-drawer');
+  const drawer = document.querySelector('.m2-site-shell header-drawer');
   const details = drawer?.querySelector('#Details-menu-drawer-container');
   const summary = details?.querySelector(':scope > summary');
   const menu = details?.querySelector(':scope > #menu-drawer');

@@ -27,53 +27,25 @@
     {%- if selected_collection != blank and selected_collection.products_count > 0 -%}
       <div class="m2-top-products__grid">
         {%- for product in selected_collection.products limit: section.settings.products_to_show -%}
-          <article class="m2-top-product">
-            {%- if forloop.index <= 2 and section.settings.show_feature_badges -%}
-              <span class="m2-top-product__feature">
-                {%- if forloop.index == 1 -%}
-                  {{ section.settings.feature_badge_1 | escape | newline_to_br }}
-                {%- else -%}
-                  {{ section.settings.feature_badge_2 | escape | newline_to_br }}
-                {%- endif -%}
-              </span>
-            {%- endif -%}
-            <div class="m2-top-product__media">
-              {%- if product.featured_image != blank -%}
-                {{
-                  product.featured_image
-                  | image_url: width: 1200
-                  | image_tag:
-                    widths: '360, 540, 720, 960, 1200',
-                    sizes: '(min-width: 1024px) 350px, 82vw',
-                    loading: 'lazy'
-                }}
-              {%- else -%}
-                {{ 'product-apparel-2' | placeholder_svg_tag: 'm2-top-product__placeholder' }}
-              {%- endif -%}
-            </div>
-
-            <div class="m2-top-product__body">
-              {%- if section.settings.badge_text != blank -%}
-                <span class="m2-top-product__badge">{{ section.settings.badge_text | escape }}</span>
-              {%- endif -%}
-              <h3><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
-              {%- if section.settings.show_description and product.description != blank -%}
-                <p class="m2-top-product__description">{{ product.description | strip_html | truncate: 90 }}</p>
-              {%- endif -%}
-              <div class="m2-top-product__meta">
-                <span>
-                  {%- unless product.has_only_default_variant -%}
-                    {{ product.selected_or_first_available_variant.title | escape }}
-                  {%- endunless -%}
-                </span>
-                {%- if product.available -%}
-                  {% render 'price', product: product, price_class: '', show_compare_at_price: true %}
-                {%- else -%}
-                  <strong class="m2-top-product__unavailable">{{ section.settings.unavailable_label | escape }}</strong>
-                {%- endif -%}
-              </div>
-            </div>
-          </article>
+          {%- liquid
+            assign top_feature_badge = blank
+            if section.settings.show_feature_badges
+              if forloop.index == 1
+                assign top_feature_badge = section.settings.feature_badge_1
+              elsif forloop.index == 2
+                assign top_feature_badge = section.settings.feature_badge_2
+              endif
+            endif
+          -%}
+          {% render 'm2-product-card',
+            card_product: product,
+            feature_badge: top_feature_badge,
+            description_text: product.description,
+            show_description: section.settings.show_description,
+            show_feature_badge: section.settings.show_feature_badges,
+            unavailable_label: section.settings.unavailable_label,
+            image_sizes: '(min-width: 1024px) 350px, 82vw'
+          %}
         {%- endfor -%}
       </div>
 
@@ -99,7 +71,6 @@
     { "type": "collection", "id": "collection", "label": "コレクション" },
     { "type": "range", "id": "products_to_show", "min": 2, "max": 6, "step": 1, "label": "表示商品数", "default": 3 },
     { "type": "checkbox", "id": "show_description", "label": "商品説明を表示", "default": true },
-    { "type": "text", "id": "badge_text", "label": "商品ラベル", "default": "NEW" },
     { "type": "checkbox", "id": "show_feature_badges", "label": "特徴バッジを表示", "default": true },
     { "type": "textarea", "id": "feature_badge_1", "label": "1商品目の特徴", "default": "高濃度\nコラーゲン\n6000mg" },
     { "type": "textarea", "id": "feature_badge_2", "label": "2商品目の特徴", "default": "コラーゲン\n＋\nPDRN" },
