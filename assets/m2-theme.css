@@ -1447,6 +1447,14 @@ body {
   pointer-events: none;
 }
 
+.m2-top-about__drop-picture {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
 .m2-top-about__drop--02 {
   top: 8rem;
   left: -8rem;
@@ -2532,8 +2540,8 @@ body {
     position: relative;
     z-index: 1;
     display: block;
-    width: auto;
-    max-width: 53rem;
+    width: min(100%, 59.9rem);
+    max-width: none;
     margin: 0;
     padding: 0 0 0 6.9rem;
   }
@@ -2546,20 +2554,28 @@ body {
 
   .m2-top-about__titles h2 {
     font-size: 4.4rem;
+    letter-spacing: 0.2rem;
   }
 
   .m2-top-about__titles p {
     font-size: 1.8rem;
+    line-height: 3rem;
   }
 
   .m2-top-about__copy {
     grid-row: auto;
     margin-top: 3.9rem;
     padding-inline: 0;
+    font-size: 1.4rem;
+  }
+
+  .m2-top-about__copy p + p {
+    margin-top: 2.8rem;
   }
 
   .m2-top-about__content .m2-top-button {
     grid-row: auto;
+    margin-top: 3.9rem;
   }
 
   .m2-top-movie {
