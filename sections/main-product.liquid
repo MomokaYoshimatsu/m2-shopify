@@ -1,6 +1,14 @@
+{%- liquid
+  assign is_m2_product = false
+  if template.name == 'product' and template.suffix == 'm2'
+    assign is_m2_product = true
+  endif
+  assign page_content = product.metafields.custom.product_page_content.value
+-%}
+
 <product-info
   id="MainProduct-{{ section.id }}"
-  class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
+  class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}{% if is_m2_product %} m2-product-main{% endif %}"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
   data-update-url="true"
@@ -15,6 +23,9 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {%- if is_m2_product -%}
+    {{ 'm2-product.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
 
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
@@ -75,6 +86,15 @@
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
   <product-component view-event-payload="{{ product | standard_event_data: 'view', context: 'page' | escape }}">
     <div class="page-width">
+      {%- if is_m2_product -%}
+        <nav class="m2-product-breadcrumb" aria-label="パンくずリスト">
+          <a href="{{ routes.root_url }}">TOP</a>
+          <span aria-hidden="true">›</span>
+          <a href="{{ routes.all_products_collection_url }}">商品一覧</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">{{ product.title | escape }}</span>
+        </nav>
+      {%- endif -%}
       <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
         <div class="grid__item product__media-wrapper">
           {% render 'product-media-gallery', variant_images: variant_images %}
@@ -99,6 +119,9 @@
                   </p>
                 {%- when 'title' -%}
                   <div class="product__title" {{ block.shopify_attributes }}>
+                    {%- if is_m2_product and page_content.badge.value != blank -%}
+                      <span class="m2-product-main__badge">{{ page_content.badge.value | escape }}</span>
+                    {%- endif -%}
                     <h1>{{ product.title | escape }}</h1>
                     <a href="{{ product.url }}" class="product__title">
                       <h2 class="h1">
@@ -107,6 +130,9 @@
                     </a>
                   </div>
                 {%- when 'price' -%}
+                  {%- if is_m2_product and page_content.package_summary.value != blank -%}
+                    <p class="m2-product-main__package">{{ page_content.package_summary.value | escape }}</p>
+                  {%- endif -%}
                   <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
                     {%- render 'price',
                       product: product,
@@ -499,6 +525,15 @@
                     section_id: section.id,
                     show_pickup_availability: true
                   -%}
+                  {%- if is_m2_product and page_content.purchase_notes.value != blank -%}
+                    <ul class="m2-product-main__notes" role="list">
+                      {%- for purchase_note in page_content.purchase_notes.value -%}
+                        {%- if purchase_note != blank -%}
+                          <li>{{ purchase_note | escape }}</li>
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
                 {%- when 'rating' -%}
                   {%- if product.metafields.reviews.rating.value != blank -%}
                     <div class="rating-wrapper">

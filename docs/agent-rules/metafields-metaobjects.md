@@ -56,3 +56,86 @@ Metafield / Metaobjectの新設前に、次を確認します。
 - 商品やバリエーションに紐づく場合は、複数商品・複数バリエーションで誤参照がないことを確認する。
 - 新しい定義を導入したら、このファイルにnamespace / key / 型 / 用途 / Metaobject field構成 / 運用上の注意を追記する。
 - 管理画面で追加作業が残る場合は、設定場所、入力内容、注意点、確認方法をユーザーへ渡す。
+
+## M2 Product Page Content Contract
+
+ステータス: テーマ実装済み・Shopify管理画面の定義とエントリーは未作成（ユーザー承認待ち）。
+
+商品側Metafield:
+
+| namespace / key | 型 | 値 | 用途 | Liquid | 未入力時 |
+|---|---|---|---|---|---|
+| `custom.product_page_content` | `metaobject_reference` | 単一・任意 | 商品とルートMetaobjectを紐付ける | `product.metafields.custom.product_page_content.value` | M2固有コンテンツを非表示。Rise標準の商品メインと購入フォームは表示 |
+
+### `m2_product_page`（M2 商品ページ）
+
+| field key | データ型 | 値 | 必須 | 用途 / Liquid | 未入力時 |
+|---|---|---|---|---|---|
+| `name` | `single_line_text_field` | 単一 | 必須 | 管理画面のエントリー表示名（画面には出力しない） | 定義上必須 |
+| `badge` | `single_line_text_field` | 単一 | 任意 | 商品メインのラベル / `page_content.badge.value` | 非表示 |
+| `card_badge` | `multi_line_text_field` | 単一 | 任意 | 関連商品カードの円形訴求 / `related_page_content.card_badge.value` | 非表示 |
+| `package_summary` | `single_line_text_field` | 単一 | 任意 | 内容数などの補足 / `page_content.package_summary.value` | 非表示 |
+| `purchase_notes` | `list.single_line_text_field` | リスト | 任意 | 購入欄下の補足 / `page_content.purchase_notes.value` | リスト非表示 |
+| `overview_eyebrow` | `single_line_text_field` | 単一 | 任意 | 商品紹介の英字見出し | 見出し行を非表示 |
+| `overview_heading` | `single_line_text_field` | 単一 | 任意 | 商品紹介の和文見出し | 見出し行を非表示 |
+| `overview_badge` | `single_line_text_field` | 単一 | 任意 | 商品紹介の強調ラベル | 非表示 |
+| `overview_lead` | `single_line_text_field` | 単一 | 任意 | 商品紹介のリード見出し | 非表示 |
+| `tags` | `list.single_line_text_field` | リスト | 任意 | タイプ・フレーバー等のタグ | リスト非表示 |
+| `overview_body` | `rich_text_field` | 単一 | 任意 | 商品紹介本文 / `page_content.overview_body | metafield_tag` | 非表示 |
+| `recommended_heading` | `single_line_text_field` | 単一 | 任意 | おすすめ対象の見出し | 見出しのみ非表示 |
+| `recommended_items` | `list.single_line_text_field` | リスト | 任意 | おすすめ対象 | ボックス非表示 |
+| `features_eyebrow` | `single_line_text_field` | 単一 | 任意 | 特徴セクション英字見出し | 見出し行を非表示 |
+| `features_heading` | `single_line_text_field` | 単一 | 任意 | 特徴セクション和文見出し | 見出し行を非表示 |
+| `features` | `list.metaobject_reference` → `m2_product_feature` | リスト | 任意 | 成分・特徴カード / `page_content.features.value` | 特徴セクション非表示 |
+| `support_eyebrow` | `single_line_text_field` | 単一 | 任意 | 補足訴求の英字見出し | 見出し行を非表示 |
+| `support_heading` | `single_line_text_field` | 単一 | 任意 | 補足訴求の和文見出し | 見出し行を非表示 |
+| `support_items` | `list.metaobject_reference` → `m2_product_support_item` | リスト | 任意 | WHY THIS FORMULAカード / `page_content.support_items.value` | 補足訴求を非表示 |
+| `free_formula_eyebrow` | `single_line_text_field` | 単一 | 任意 | フリー処方英字見出し | 見出し行を非表示 |
+| `free_formula_heading` | `multi_line_text_field` | 単一 | 任意 | フリー処方和文見出し | 見出し行を非表示 |
+| `free_formula_items` | `list.single_line_text_field` | リスト | 任意 | フリー処方項目 | セクション非表示 |
+| `how_to_eyebrow` | `single_line_text_field` | 単一 | 任意 | 使用方法英字見出し | 見出し行を非表示 |
+| `how_to_heading` | `single_line_text_field` | 単一 | 任意 | 使用方法和文見出し | 見出し行を非表示 |
+| `how_to_items` | `list.metaobject_reference` → `m2_product_how_to` | リスト | 任意 | 使用シーン / `page_content.how_to_items.value` | セクション非表示 |
+| `specs_eyebrow` | `single_line_text_field` | 単一 | 任意 | 仕様英字見出し | 見出し行を非表示 |
+| `specs_heading` | `single_line_text_field` | 単一 | 任意 | 仕様和文見出し | 見出し行を非表示 |
+| `specs` | `list.metaobject_reference` → `m2_product_spec` | リスト | 任意 | 仕様表 / `page_content.specs.value` | 仕様表を非表示 |
+| `notice_heading` | `single_line_text_field` | 単一 | 任意 | 注意事項見出し | 見出しのみ非表示 |
+| `notice_body` | `rich_text_field` | 単一 | 任意 | 注意事項本文 | 注意事項を非表示 |
+| `faq_eyebrow` | `single_line_text_field` | 単一 | 任意 | FAQ英字見出し | 見出し行を非表示 |
+| `faq_heading` | `single_line_text_field` | 単一 | 任意 | FAQ和文見出し | 見出し行を非表示 |
+| `faqs` | `list.metaobject_reference` → `m2_product_faq` | リスト | 任意 | FAQ / `page_content.faqs.value` | FAQセクション非表示 |
+| `related_eyebrow` | `single_line_text_field` | 単一 | 任意 | 関連商品英字見出し | 見出し行を非表示 |
+| `related_heading` | `single_line_text_field` | 単一 | 任意 | 関連商品和文見出し | 見出し行を非表示 |
+| `related_products` | `list.product_reference` | リスト | 任意 | 関連商品 / `page_content.related_products.value` | 関連商品セクション非表示 |
+
+### 子Metaobject
+
+| type / 表示名 | field key | データ型 | 値 | 必須 | 用途 / 未入力時 |
+|---|---|---|---|---|---|
+| `m2_product_feature` / 商品特徴 | `number` | `single_line_text_field` | 単一 | 任意 | 連番。未入力なら非表示 |
+|  | `heading` | `single_line_text_field` | 単一 | 任意 | 特徴見出し。未入力なら見出し非表示 |
+|  | `body` | `rich_text_field` | 単一 | 任意 | 本文。未入力なら本文非表示 |
+|  | `image` | `file_reference`（画像） | 単一 | 任意 | 訴求画像。未入力なら画像枠非表示 |
+|  | `image_alt` | `single_line_text_field` | 単一 | 任意 | 代替テキスト。未入力なら画像ファイルのaltを使用 |
+| `m2_product_support_item` / 商品補足訴求 | `number` | `single_line_text_field` | 単一 | 任意 | 連番。未入力なら非表示 |
+|  | `heading` | `single_line_text_field` | 単一 | 任意 | カード見出し。未入力なら非表示 |
+|  | `image` | `file_reference`（画像） | 単一 | 任意 | カード画像。未入力なら画像枠非表示 |
+|  | `image_alt` | `single_line_text_field` | 単一 | 任意 | 代替テキスト。未入力なら画像ファイルのaltを使用 |
+|  | `lead` | `single_line_text_field` | 単一 | 任意 | 本文前の強調文。未入力なら非表示 |
+|  | `body` | `rich_text_field` | 単一 | 任意 | 本文。未入力なら非表示 |
+| `m2_product_how_to` / 使用方法 | `name` | `single_line_text_field` | 単一 | 必須 | 管理画面のエントリー表示名（画面には出力しない） |
+|  | `image` | `file_reference`（画像） | 単一 | 任意 | 使用シーン画像。未入力なら画像枠非表示 |
+|  | `image_alt` | `single_line_text_field` | 単一 | 任意 | 代替テキスト。未入力なら画像ファイルのaltを使用 |
+|  | `body` | `rich_text_field` | 単一 | 任意 | 説明。未入力なら本文非表示 |
+| `m2_product_spec` / 商品仕様 | `label` | `single_line_text_field` | 単一 | 必須 | 仕様項目名。label/valueのどちらかが空なら行を非表示 |
+|  | `value` | `rich_text_field` | 単一 | 必須 | 仕様値。label/valueのどちらかが空なら行を非表示 |
+|  | `emphasis` | `boolean` | 単一 | 任意 | アレルギー等を赤字強調。未入力は通常色 |
+| `m2_product_faq` / 商品FAQ | `question` | `single_line_text_field` | 単一 | 必須 | 質問。未入力なら項目非表示 |
+|  | `answer` | `rich_text_field` | 単一 | 任意 | 回答。未入力でも質問は閉じた状態で表示 |
+
+運用上の注意:
+
+- 商品名、価格、比較価格、バリエーション、在庫、商品メディア、販売可否、購入フォームは商品オブジェクトを正とし、Metaobjectへ複製しない。
+- 商品メディアはRise標準ギャラリーで表示し、紹介セクションの製品画像も `product.featured_image` を使用する。
+- 参照リストの順序が画面の表示順になる。
+- Metaobject定義、エントリー、商品Metafieldの作成・更新は管理画面変更にあたるため、ユーザー承認後に行う。
