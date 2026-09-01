@@ -12,35 +12,17 @@
           {%- assign card_product = block.settings.product | default: fallback_product -%}
           <div class="m2-about-recommend__item" {{ block.shopify_attributes }}>
             {%- if card_product != blank -%}
+              {%- assign registered_description = card_product.metafields.custom.m2_card_description.value | default: card_product.description -%}
+              {%- assign registered_package = card_product.metafields.custom.m2_package_summary.value -%}
               {% render 'm2-product-card',
                 card_product: card_product,
+                description_text: registered_description,
+                package_summary: registered_package,
                 show_description: section.settings.show_description,
                 show_feature_badge: false,
                 unavailable_label: section.settings.unavailable_label,
                 image_sizes: '(min-width: 1024px) 350px, 86vw'
               %}
-            {%- elsif block.settings.placeholder_title != blank -%}
-              <article class="m2-top-product m2-about-recommend__coming-soon">
-                <div class="m2-top-product__media">
-                  {%- if block.settings.placeholder_image != blank -%}
-                    {{ block.settings.placeholder_image | image_url: width: 1200 | image_tag: widths: '360, 540, 720, 960, 1200', sizes: '(min-width: 1024px) 350px, 86vw', loading: 'lazy', alt: block.settings.placeholder_image_alt }}
-                  {%- else -%}
-                    <img src="{{ 'm2-about-coming-soon.png' | asset_url }}" alt="{{ block.settings.placeholder_image_alt | escape }}" width="1000" height="1000" loading="lazy">
-                  {%- endif -%}
-                  <span>{{ block.settings.placeholder_status | escape | newline_to_br }}</span>
-                </div>
-                <div class="m2-top-product__body">
-                  {%- if block.settings.show_new_badge -%}<span class="m2-top-product__badge">NEW</span>{%- endif -%}
-                  <h3>
-                    {%- if block.settings.placeholder_link != blank -%}<a href="{{ block.settings.placeholder_link }}">{{ block.settings.placeholder_title | escape }}</a>{%- else -%}{{ block.settings.placeholder_title | escape }}{%- endif -%}
-                  </h3>
-                  {%- if section.settings.show_description and block.settings.placeholder_description != blank -%}<p class="m2-top-product__description">{{ block.settings.placeholder_description | escape }}</p>{%- endif -%}
-                  <div class="m2-top-product__meta">
-                    <span>{{ block.settings.placeholder_package | escape }}</span>
-                    <strong class="m2-top-product__unavailable">{{ block.settings.placeholder_status | escape }}</strong>
-                  </div>
-                </div>
-              </article>
             {%- elsif request.design_mode -%}
               <div class="m2-about-recommend__placeholder">このブロックに商品を選択してください。</div>
             {%- endif -%}
@@ -74,16 +56,7 @@
       "type": "product",
       "name": "商品",
       "settings": [
-        { "type": "product", "id": "product", "label": "商品" },
-        { "type": "header", "content": "商品未選択時の公開前カード" },
-        { "type": "image_picker", "id": "placeholder_image", "label": "画像" },
-        { "type": "text", "id": "placeholder_image_alt", "label": "画像の代替テキスト" },
-        { "type": "text", "id": "placeholder_title", "label": "商品名" },
-        { "type": "textarea", "id": "placeholder_description", "label": "説明" },
-        { "type": "text", "id": "placeholder_package", "label": "内容量" },
-        { "type": "textarea", "id": "placeholder_status", "label": "販売前表示", "default": "coming soon" },
-        { "type": "checkbox", "id": "show_new_badge", "label": "NEWを表示", "default": true },
-        { "type": "url", "id": "placeholder_link", "label": "リンク先" }
+        { "type": "product", "id": "product", "label": "商品" }
       ]
     }
   ],

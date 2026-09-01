@@ -84,7 +84,7 @@
 }
 
 .m2-about-vision__picture img {
-  top: -13.3%;
+  top: -8%;
   left: 0.3%;
   width: 102.4%;
   max-width: none;
@@ -416,29 +416,6 @@
 
 .m2-about-recommend .m2-top-product__feature {
   display: none;
-}
-
-.m2-about-recommend__coming-soon .m2-top-product__media {
-  position: relative;
-}
-
-.m2-about-recommend__coming-soon .m2-top-product__media img {
-  opacity: 0.22;
-}
-
-.m2-about-recommend__coming-soon .m2-top-product__media > span {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  display: grid;
-  color: var(--m2-about-red);
-  font-family: Montserrat, var(--font-body-family);
-  font-size: 2.4rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  line-height: 1.2;
-  place-items: center;
-  text-align: center;
 }
 
 .m2-about-link--light {

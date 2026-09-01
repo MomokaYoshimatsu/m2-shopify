@@ -57,17 +57,7 @@
       "blocks": {
         "product_1": { "type": "product", "settings": {} },
         "product_2": { "type": "product", "settings": {} },
-        "product_3": {
-          "type": "product",
-          "settings": {
-            "placeholder_image_alt": "販売開始前の商品イメージ",
-            "placeholder_title": "m2 プレミアムコラーゲンゼリー2000＋PDRN",
-            "placeholder_description": "超微細コラーゲン2,000mgとPDRNが自ら生み出す力を呼び覚ます、飲むリペア美容。ゼリータイプ",
-            "placeholder_package": "1箱7本入り",
-            "placeholder_status": "coming\nsoon",
-            "show_new_badge": true
-          }
-        }
+        "product_3": { "type": "product", "settings": {} }
       },
       "block_order": ["product_1", "product_2", "product_3"],
       "settings": {
