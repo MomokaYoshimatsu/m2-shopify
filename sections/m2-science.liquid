@@ -24,7 +24,7 @@
           {%- if section.settings.intro_image != blank -%}
             {{ section.settings.intro_image | image_url: width: 1200 | image_tag: widths: '480, 750, 1000, 1200', sizes: '(min-width: 1024px) 371px, 100vw', loading: 'lazy' }}
           {%- else -%}
-            <img src="{{ 'm2-top-science-main.jpg' | asset_url }}" alt="" width="512" height="288" loading="lazy">
+            <img src="{{ 'm2-top-science-main.jpg' | asset_url }}" alt="" width="371" height="250" loading="lazy">
           {%- endif -%}
         </div>
       </div>
@@ -36,7 +36,7 @@
             {%- if section.settings.card_1_image != blank -%}
               {{ section.settings.card_1_image | image_url: width: 1000 | image_tag: widths: '400, 600, 800, 1000', sizes: '(min-width: 1024px) 400px, 100vw', loading: 'lazy' }}
             {%- else -%}
-              <img src="{{ 'm2-top-science-collagen.jpg' | asset_url }}" alt="" width="512" height="285" loading="lazy">
+              <img src="{{ 'm2-top-science-collagen.jpg' | asset_url }}" alt="" width="400" height="159" loading="lazy">
             {%- endif -%}
           </div>
           <div class="m2-top-copy">{{ section.settings.card_1_text }}</div>
@@ -47,15 +47,19 @@
             {%- if section.settings.card_2_image != blank -%}
               {{ section.settings.card_2_image | image_url: width: 1000 | image_tag: widths: '400, 600, 800, 1000', sizes: '(min-width: 1024px) 400px, 100vw', loading: 'lazy' }}
             {%- else -%}
-              <img src="{{ 'm2-top-science-pdrn.jpg' | asset_url }}" alt="" width="512" height="287" loading="lazy">
+              <img src="{{ 'm2-top-science-pdrn.jpg' | asset_url }}" alt="" width="400" height="159" loading="lazy">
             {%- endif -%}
           </div>
           <div class="m2-top-copy">{{ section.settings.card_2_text }}</div>
         </article>
       </div>
 
-      {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
-        <a class="m2-top-button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+      {%- if section.settings.button_label != blank -%}
+        {%- if section.settings.button_link != blank -%}
+          <a class="m2-top-button" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+        {%- else -%}
+          <span class="m2-top-button m2-top-button--disabled">{{ section.settings.button_label | escape }}</span>
+        {%- endif -%}
       {%- endif -%}
     </div>
   </div>
