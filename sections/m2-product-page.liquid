@@ -158,7 +158,7 @@
                   <article class="m2-pdp-support-card">
                     <span class="m2-pdp-support-card__number">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span>
                     {%- if support_item.heading.value != blank -%}
-                      <h3>{{ support_item.heading.value | escape }}</h3>
+                      <h3>{{ support_item.heading.value | escape | replace: '&lt;br&gt;', '<br>' | replace: '&lt;br/&gt;', '<br>' | replace: '&lt;br /&gt;', '<br>' }}</h3>
                     {%- endif -%}
                     {%- if support_image != blank -%}
                       <div class="m2-pdp-support-card__media">
@@ -194,7 +194,7 @@
             </header>
             <ul role="list">
               {%- for free_formula_item in free_formula_items -%}
-                {%- if free_formula_item != blank -%}<li>{{ free_formula_item | escape | newline_to_br }}</li>{%- endif -%}
+                {%- if free_formula_item != blank -%}<li>{{ free_formula_item | escape | newline_to_br | replace: '&lt;br&gt;', '<br>' | replace: '&lt;br/&gt;', '<br>' | replace: '&lt;br /&gt;', '<br>' }}</li>{%- endif -%}
               {%- endfor -%}
             </ul>
           </div>
@@ -289,7 +289,7 @@
           <div class="m2-pdp-faq__list">
             {%- for faq_item in faqs -%}
               {%- if faq_item.question.value != blank -%}
-                <details class="m2-pdp-faq-item"{% if forloop.index == 2 %} open{% endif %}>
+                <details class="m2-pdp-faq-item">
                   <summary>
                     <span class="m2-pdp-faq-item__q" aria-hidden="true">Q</span>
                     <span>{{ faq_item.question.value | escape }}</span>
