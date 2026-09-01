@@ -1064,11 +1064,21 @@ body {
 @media screen and (max-width: 1023px) {
   .template-index .shopify-section-group-header-group .header {
     position: relative;
+    isolation: isolate;
     display: grid;
     grid-template-areas: 'left-icons heading icons';
     grid-template-columns: 8.2rem minmax(0, 1fr) 8.2rem;
     min-height: 4.4rem;
     padding: 0 2rem;
+  }
+
+  .template-index .shopify-section-group-header-group .header::before {
+    position: absolute;
+    z-index: 4;
+    inset: 0;
+    background: var(--m2-top-red);
+    content: '';
+    pointer-events: none;
   }
 
   .template-index .shopify-section-group-header-group header-drawer {
@@ -1090,6 +1100,7 @@ body {
     left: 50%;
     width: 2.7rem;
     height: 1.64rem;
+    z-index: 5;
     margin: 0;
     padding: 0;
     transform: translate(-50%, -50%);
@@ -1113,6 +1124,7 @@ body {
 
   .template-index .shopify-section-group-header-group .header__icons {
     position: relative;
+    z-index: 5;
     display: block;
     width: 8.2rem;
     height: 4.4rem;
@@ -1159,6 +1171,11 @@ body {
   .template-index .shopify-section-group-header-group .header__icon--menu {
     width: 4.4rem;
     height: 4.4rem;
+  }
+
+  .template-index .shopify-section-group-header-group .header__icon--menu > span {
+    position: relative;
+    z-index: 5;
   }
 
   .template-index .shopify-section-group-header-group .header__icon--menu .icon-hamburger {
@@ -1566,7 +1583,8 @@ body {
     bottom: auto;
     width: 10rem;
     height: 10.2rem;
-    object-fit: cover;
+    filter: drop-shadow(3rem 3rem 3rem rgb(210 0 41 / 10%));
+    object-fit: contain;
   }
 
   .m2-top-about__media {
