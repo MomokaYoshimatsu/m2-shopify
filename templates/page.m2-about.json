@@ -1,98 +1,74 @@
 {
   "sections": {
-    "hero": {
-      "type": "m2-hero",
+    "vision": {
+      "type": "m2-about-vision",
       "settings": {
-        "eyebrow": "ABOUT M2",
-        "heading": "BE YOU, BE CONFIDENT",
-        "text": "<p>自分らしくあることが、自信につながる。<br/>M2は、毎日の美容習慣に寄り添います。</p>",
-        "alignment": "center",
-        "height": "compact",
-        "button_label": "",
-        "button_link": ""
+        "show_section": true,
+        "show_breadcrumb": true,
+        "breadcrumb_parent": "TOP",
+        "breadcrumb_current": "ABOUT",
+        "heading": "Vision & Mission",
+        "subheading": "美しさは「思いやり」から始まる",
+        "text": "<p>m2 Collagenでは、美しさは「思いやり」から始まると考えています。<br/>それは、自分自身への思いやり、他者への思いやり、そして私たちがともに暮らす地球への思いやりです。</p><p>私たちの使命は、シンプルです。<br/>毎日の健康と自信を支え、心も身体も健やかに過ごせる製品を届けること。<br/>自分自身や周りの人、そして地球への思いやりを大切に、<br/>内側からも外側からも、心地よく自分らしく過ごせる毎日をサポートします。<br/>人にも、地球にもやさしいブランドであり続けること。<br/>それが、m2 Collagenの想いです。</p>",
+        "show_ambassador_visual": true,
+        "image_alt": "赤い衣装を着たm2ブランドアンバサダー",
+        "ambassador_caption": "",
+        "ambassador_name": "",
+        "show_default_signature": false,
+        "button_label": ""
       }
     },
-    "concept": {
-      "type": "m2-editorial",
+    "message": {
+      "type": "m2-about-message",
       "settings": {
-        "eyebrow": "CONCEPT",
-        "heading": "自分自身を大切にする時間を。",
-        "text": "<p>誰かのためだけではなく、自分のために選ぶこと。頑張る日も、立ち止まる日も、自分らしいリズムを大切にすること。M2は、その積み重ねに寄り添うブランドでありたいと考えています。</p>",
-        "layout": "media-first",
-        "background": "paper",
-        "button_label": "",
-        "button_link": ""
+        "show_section": true,
+        "eyebrow": "MESSAGE",
+        "heading": "創業者からのメッセージ",
+        "image_alt": "手紙を書く手元",
+        "show_default_signature": true,
+        "text": "<p>成功とは「どれだけ早く結果を出せるか」ではなく、たとえ困難に直面しても、諦めずに前へ進み続けられるかということです。</p><p>「自分たちが良いと思うものをつくるだけでは、十分ではない。本当に人々が必要としているものを届けなければならない。」この気づきが、<strong>m2 Collagen</strong>の原点となりました。</p><p>科学へのこだわり、何度でも挑戦し続ける姿勢、そして「美しさは、内側から始まる」という信念。<br/>その想いをもとに、私たちはブランドを立ち上げました。<br/>そして今では、女性だけでなく男性にも、毎日をより健やかに、自信を持って、前向きに過ごしていただける製品を、28か国以上の方々にお届けできるまでになりました。</p><p>それでも、私たちが大切にしている想いは変わりません。自分自身を大切にすることは、人生をより豊かにすること。もっと愛に満ちた毎日を。もっと健やかで、自信に満ちた毎日を。<br/>そして、もっと自分らしく輝ける毎日を。<br/>それが、<strong>「m2」＝「Me and More」</strong>に込めた私たちの想いです。<br/>「m2」は、単なるブランド名ではありません。自分自身を大切にすること。<br/>そして、昨日の自分を超えて、これからも成長し続けること。<br/>そんな想いを、私たちはこの名前に込めています。</p><p>感謝を込めて<br/>Arron Yang</p>"
       }
     },
-    "values": {
-      "type": "m2-card-grid",
+    "science": {
+      "type": "m2-about-science",
+      "settings": {
+        "show_section": true,
+        "intro_heading": "m2がこだわり抜いた\n「コラーゲン」と「PDRN」を知る。",
+        "show_collagen": true,
+        "collagen_eyebrow": "WHAT IS m2’s Collagen",
+        "collagen_heading": "m2のコラーゲンは何が違う？",
+        "collagen_image_alt": "一般的なコラーゲン、コラーゲンペプチド、超低分子900Daのサイズ比較イメージ",
+        "collagen_badge": "韓国特許を取得した独自の技術により可能に",
+        "collagen_title": "平均900ダルトン。\n小ささにこだわった、超低分子コラーゲン。",
+        "collagen_text": "<p>コラーゲンは配合量だけでなく、その大きさにもこだわることが大切です。m2は、韓国特許を取得した独自の技術により、<strong>平均分子量900ダルトンの超低分子コラーゲンを採用。</strong>より小さな形で摂取することで、体の中で分解する手間をなくし、そのままスムーズに吸収されます。</p>",
+        "collagen_link_label": "",
+        "show_pdrn": true,
+        "pdrn_eyebrow": "WHAT IS m2’s PDRN",
+        "pdrn_heading": "m2のPDRNは何が違う？",
+        "pdrn_image_alt": "PDRNを表現した透明な球体のイメージ",
+        "pdrn_badge": "美容大国韓国で注目される成分",
+        "pdrn_title": "世界でも数少ない技術を有する\n日本の大手企業とタッグを組んで生まれたPDRN",
+        "pdrn_text": "<p>世界でも数少ないPDRN原料製造技術を有する、日本の水産大手Maruha Nichiro（マルハニチロ）社の高純度原料を採用。天然サーモン精巣から、丁寧な精密抽出プロセスを経て得られる、透明性の高い供給ラインです。</p>",
+        "pdrn_link_label": ""
+      }
+    },
+    "recommend": {
+      "type": "m2-about-recommend",
       "blocks": {
-        "value_1": {
-          "type": "card",
-          "settings": {
-            "kicker": "BE YOU",
-            "heading": "自分らしく",
-            "text": "<p>決められた美しさではなく、自分が心地よいと思える選択を。</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "value_2": {
-          "type": "card",
-          "settings": {
-            "kicker": "YOUR RHYTHM",
-            "heading": "自分のリズムで",
-            "text": "<p>忙しい毎日の中でも、無理なく続けられる時間を大切に。</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "value_3": {
-          "type": "card",
-          "settings": {
-            "kicker": "MORE ME",
-            "heading": "もっと自由に",
-            "text": "<p>今日の自分を受け入れながら、未来へ続く習慣を育てます。</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
+        "product_1": { "type": "product", "settings": {} },
+        "product_2": { "type": "product", "settings": {} },
+        "product_3": { "type": "product", "settings": {} }
       },
-      "block_order": ["value_1", "value_2", "value_3"],
+      "block_order": ["product_1", "product_2", "product_3"],
       "settings": {
-        "eyebrow": "FOR YOU",
-        "heading": "あなたらしい毎日のために",
-        "text": "",
-        "columns": "3",
-        "show_numbers": true,
-        "background": "soft"
-      }
-    },
-    "ambassador": {
-      "type": "m2-editorial",
-      "disabled": true,
-      "settings": {
-        "eyebrow": "AMBASSADOR",
-        "heading": "ブランドアンバサダー",
-        "text": "",
-        "layout": "reverse",
-        "background": "paper",
-        "button_label": "",
-        "button_link": ""
-      }
-    },
-    "cta": {
-      "type": "m2-editorial",
-      "settings": {
-        "eyebrow": "PRODUCTS",
-        "heading": "毎日の美容習慣に。",
-        "text": "<p>M2の商品ラインナップをご覧ください。</p>",
-        "layout": "media-first",
-        "background": "dark",
-        "button_label": "VIEW PRODUCTS",
-        "button_link": "/collections/all"
+        "show_section": true,
+        "eyebrow": "RECOMMEND",
+        "heading": "おすすめ商品",
+        "show_description": true,
+        "unavailable_label": "coming soon",
+        "button_label": ""
       }
     }
   },
-  "order": ["hero", "concept", "values", "ambassador", "cta"]
+  "order": ["vision", "message", "science", "recommend"]
 }

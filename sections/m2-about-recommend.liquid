@@ -1,0 +1,66 @@
+{%- if section.settings.show_section -%}
+  <section class="m2-about-recommend" aria-labelledby="M2AboutRecommendHeading-{{ section.id }}">
+    <div class="m2-about-section-heading m2-about-section-heading--light">
+      {%- if section.settings.eyebrow != blank -%}<p>{{ section.settings.eyebrow | escape }}</p>{%- endif -%}
+      {%- if section.settings.heading != blank -%}<h2 id="M2AboutRecommendHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>{%- endif -%}
+    </div>
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="m2-about-recommend__grid">
+        {%- for block in section.blocks -%}
+          {%- assign fallback_product = collections.all.products[forloop.index0] -%}
+          {%- assign card_product = block.settings.product | default: fallback_product -%}
+          <div class="m2-about-recommend__item" {{ block.shopify_attributes }}>
+            {%- if card_product != blank -%}
+              {%- assign registered_description = card_product.metafields.custom.m2_card_description.value | default: card_product.description -%}
+              {%- assign registered_package = card_product.metafields.custom.m2_package_summary.value -%}
+              {% render 'm2-product-card',
+                card_product: card_product,
+                description_text: registered_description,
+                package_summary: registered_package,
+                show_description: section.settings.show_description,
+                show_feature_badge: false,
+                unavailable_label: section.settings.unavailable_label,
+                image_sizes: '(min-width: 1024px) 350px, 86vw'
+              %}
+            {%- elsif request.design_mode -%}
+              <div class="m2-about-recommend__placeholder">このブロックに商品を選択してください。</div>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+      <a class="m2-about-link m2-about-link--light" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+    {%- endif -%}
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "M2 ABOUT おすすめ商品",
+  "tag": "div",
+  "class": "m2-about-section-wrapper",
+  "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "セクションを表示", "default": true },
+    { "type": "text", "id": "eyebrow", "label": "英字ラベル", "default": "RECOMMEND" },
+    { "type": "text", "id": "heading", "label": "見出し", "default": "おすすめ商品" },
+    { "type": "checkbox", "id": "show_description", "label": "商品説明を表示", "default": true },
+    { "type": "text", "id": "unavailable_label", "label": "販売前・売り切れ表示", "default": "coming soon" },
+    { "type": "text", "id": "button_label", "label": "ボタン名" },
+    { "type": "url", "id": "button_link", "label": "ボタンリンク" }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "商品",
+      "settings": [
+        { "type": "product", "id": "product", "label": "商品" }
+      ]
+    }
+  ],
+  "max_blocks": 6,
+  "presets": [{ "name": "M2 ABOUT おすすめ商品", "blocks": [{ "type": "product" }, { "type": "product" }, { "type": "product" }] }]
+}
+{% endschema %}

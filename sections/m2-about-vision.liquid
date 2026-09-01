@@ -1,0 +1,102 @@
+{%- if section.settings.show_section -%}
+  <section class="m2-about-vision" aria-labelledby="M2AboutVisionHeading-{{ section.id }}">
+    {%- if section.settings.show_breadcrumb -%}
+      <nav class="m2-about-breadcrumb" aria-label="パンくずリスト">
+        <a href="{{ routes.root_url }}">{{ section.settings.breadcrumb_parent | escape }}</a>
+        <span aria-hidden="true">›</span>
+        <span aria-current="page">{{ section.settings.breadcrumb_current | escape }}</span>
+      </nav>
+    {%- endif -%}
+
+    <div class="m2-about-vision__layout{% unless section.settings.show_ambassador_visual %} m2-about-vision__layout--text-only{% endunless %}">
+      {%- if section.settings.show_ambassador_visual -%}
+        <div class="m2-about-vision__visual">
+          <span class="m2-about-vision__red" aria-hidden="true"></span>
+          <picture class="m2-about-vision__picture">
+            {%- if section.settings.mobile_image != blank -%}
+              <source
+                media="(max-width: 1023px)"
+                srcset="{{ section.settings.mobile_image | image_url: width: 480 }} 480w, {{ section.settings.mobile_image | image_url: width: 750 }} 750w, {{ section.settings.mobile_image | image_url: width: 1000 }} 1000w"
+                sizes="100vw"
+              >
+            {%- endif -%}
+            {%- if section.settings.image != blank -%}
+              {{
+                section.settings.image
+                | image_url: width: 2000
+                | image_tag:
+                  widths: '480, 750, 1000, 1400, 1800, 2000',
+                  sizes: '(min-width: 1024px) 47vw, 100vw',
+                  loading: 'eager',
+                  fetchpriority: 'high',
+                  alt: section.settings.image_alt
+              }}
+            {%- else -%}
+              <img
+                src="{{ 'm2-top-about.png' | asset_url }}"
+                alt="{{ section.settings.image_alt | escape }}"
+                width="1400"
+                height="2100"
+                loading="eager"
+                fetchpriority="high"
+              >
+            {%- endif -%}
+          </picture>
+
+          {%- if section.settings.ambassador_caption != blank or section.settings.ambassador_name != blank or section.settings.signature != blank or section.settings.show_default_signature -%}
+            <div class="m2-about-vision__ambassador">
+              {%- if section.settings.ambassador_caption != blank -%}<small>{{ section.settings.ambassador_caption | escape }}</small>{%- endif -%}
+              {%- if section.settings.ambassador_name != blank -%}<strong>{{ section.settings.ambassador_name | escape }}</strong>{%- endif -%}
+              {%- if section.settings.signature != blank -%}
+                {{ section.settings.signature | image_url: width: 400 | image_tag: widths: '160, 240, 320, 400', sizes: '14rem', loading: 'eager', alt: '' }}
+              {%- elsif section.settings.show_default_signature -%}
+                <img src="{{ 'm2-top-ambassador-signature.svg' | asset_url }}" alt="" width="133" height="66" loading="eager">
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      <div class="m2-about-vision__content">
+        <div class="m2-about-vision__heading">
+          {%- if section.settings.heading != blank -%}
+            <h1 id="M2AboutVisionHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h1>
+          {%- endif -%}
+          {%- if section.settings.subheading != blank -%}<p>{{ section.settings.subheading | escape }}</p>{%- endif -%}
+        </div>
+        {%- if section.settings.text != blank -%}<div class="m2-about-copy rte">{{ section.settings.text }}</div>{%- endif -%}
+        {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
+          <a class="m2-about-link" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "M2 ABOUT 理念",
+  "tag": "div",
+  "class": "m2-about-section-wrapper",
+  "settings": [
+    { "type": "checkbox", "id": "show_section", "label": "セクションを表示", "default": true },
+    { "type": "checkbox", "id": "show_breadcrumb", "label": "パンくずを表示", "default": true },
+    { "type": "text", "id": "breadcrumb_parent", "label": "パンくず親ラベル", "default": "TOP" },
+    { "type": "text", "id": "breadcrumb_current", "label": "パンくず現在地", "default": "ABOUT" },
+    { "type": "text", "id": "heading", "label": "英字見出し", "default": "Vision & Mission" },
+    { "type": "text", "id": "subheading", "label": "日本語見出し", "default": "美しさは「思いやり」から始まる" },
+    { "type": "richtext", "id": "text", "label": "本文" },
+    { "type": "checkbox", "id": "show_ambassador_visual", "label": "アンバサダービジュアルを表示", "info": "使用許諾を確認してから有効にしてください。", "default": false },
+    { "type": "image_picker", "id": "image", "label": "PC画像" },
+    { "type": "image_picker", "id": "mobile_image", "label": "スマートフォン画像" },
+    { "type": "text", "id": "image_alt", "label": "画像の代替テキスト", "default": "m2ブランドアンバサダー" },
+    { "type": "text", "id": "ambassador_caption", "label": "肩書き" },
+    { "type": "text", "id": "ambassador_name", "label": "氏名" },
+    { "type": "image_picker", "id": "signature", "label": "署名画像" },
+    { "type": "checkbox", "id": "show_default_signature", "label": "Figmaの署名画像を表示", "info": "使用許諾を確認してから有効にしてください。", "default": false },
+    { "type": "text", "id": "button_label", "label": "ボタン名" },
+    { "type": "url", "id": "button_link", "label": "ボタンリンク" }
+  ],
+  "presets": [{ "name": "M2 ABOUT 理念" }]
+}
+{% endschema %}
