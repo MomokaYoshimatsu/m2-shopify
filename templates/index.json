@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "m2_hero": {
@@ -28,7 +37,11 @@
           }
         }
       },
-      "block_order": ["slide_01", "slide_02", "slide_03"],
+      "block_order": [
+        "slide_01",
+        "slide_02",
+        "slide_03"
+      ],
       "settings": {
         "heading": "360度、\n自信に満ちた\n輝きへ。",
         "show_pagination": true,
@@ -64,17 +77,76 @@
     "m2_trust": {
       "type": "m2-trust",
       "blocks": {
-        "award_01": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 1" } },
-        "award_02": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 2" } },
-        "award_03": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 3" } },
-        "award_04": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 4" } },
-        "award_05": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 5" } },
-        "award_06": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 6" } },
-        "award_07": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 7" } },
-        "award_08": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 8" } },
-        "award_09": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 9" } },
-        "award_10": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 10" } },
-        "award_11": { "type": "award", "settings": { "alt": "受賞・認証ロゴ 11" } }
+        "award_01": {
+          "type": "award",
+          "settings": {
+            "image": "shopify://shop_images/M2_-22023_A.A._Taste_Awards_-_2_Stars_Award_Award_2023_Original-EN.png",
+            "alt": "受賞・認証ロゴ 1"
+          }
+        },
+        "award_02": {
+          "type": "award",
+          "settings": {
+            "image": "shopify://shop_images/m2_Jury_Recognition_Excellence_Distinction_label.png",
+            "alt": "受賞・認証ロゴ 2"
+          }
+        },
+        "award_03": {
+          "type": "award",
+          "settings": {
+            "image": "shopify://shop_images/m2_Most_Effective_Performance_label.png",
+            "alt": "受賞・認証ロゴ 3"
+          }
+        },
+        "award_04": {
+          "type": "award",
+          "settings": {
+            "image": "shopify://shop_images/2024_PB___v2.png",
+            "alt": "受賞・認証ロゴ 4"
+          }
+        },
+        "award_05": {
+          "type": "award",
+          "settings": {
+            "image": "shopify://shop_images/KNBA_1.png",
+            "alt": "受賞・認証ロゴ 5"
+          }
+        },
+        "award_06": {
+          "type": "award",
+          "settings": {
+            "image": "shopify://shop_images/2_v2.png",
+            "alt": "受賞・認証ロゴ 6"
+          }
+        },
+        "award_07": {
+          "type": "award",
+          "settings": {
+            "image": "shopify://shop_images/PAVONE-Premium-Quality-Award-Gold_2025.png",
+            "alt": "受賞・認証ロゴ 7"
+          }
+        },
+        "award_08": {
+          "type": "award",
+          "settings": {
+            "image": "shopify://shop_images/Monde_Selection_-_Gold_Quality_Award_2023_Color_version.png",
+            "alt": "受賞・認証ロゴ 8"
+          }
+        },
+        "award_09": {
+          "type": "award",
+          "settings": {
+            "image": "shopify://shop_images/1_4x_ed5265c1-33a3-4dba-a34b-5290cc8c3708.png",
+            "alt": "受賞・認証ロゴ 9"
+          }
+        },
+        "award_10": {
+          "type": "award",
+          "settings": {
+            "image": "shopify://shop_images/kbs_n_3.png",
+            "alt": "受賞・認証ロゴ 10"
+          }
+        }
       },
       "block_order": [
         "award_01",
@@ -86,8 +158,7 @@
         "award_07",
         "award_08",
         "award_09",
-        "award_10",
-        "award_11"
+        "award_10"
       ],
       "settings": {
         "eyebrow": "TRUST BY",
@@ -170,7 +241,11 @@
           }
         }
       },
-      "block_order": ["fallback_01", "fallback_02", "fallback_03"],
+      "block_order": [
+        "fallback_01",
+        "fallback_02",
+        "fallback_03"
+      ],
       "settings": {
         "eyebrow": "NEWS",
         "heading": "お知らせ",
@@ -184,14 +259,57 @@
     "m2_social": {
       "type": "m2-social",
       "blocks": {
-        "post_01": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 1" } },
-        "post_02": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 2" } },
-        "post_03": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 3" } },
-        "post_04": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 4" } },
-        "post_05": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 5" } },
-        "post_06": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 6" } }
+        "post_01": {
+          "type": "post",
+          "settings": {
+            "link": "",
+            "accessibility_label": "Instagram投稿 1"
+          }
+        },
+        "post_02": {
+          "type": "post",
+          "settings": {
+            "link": "",
+            "accessibility_label": "Instagram投稿 2"
+          }
+        },
+        "post_03": {
+          "type": "post",
+          "settings": {
+            "link": "",
+            "accessibility_label": "Instagram投稿 3"
+          }
+        },
+        "post_04": {
+          "type": "post",
+          "settings": {
+            "link": "",
+            "accessibility_label": "Instagram投稿 4"
+          }
+        },
+        "post_05": {
+          "type": "post",
+          "settings": {
+            "link": "",
+            "accessibility_label": "Instagram投稿 5"
+          }
+        },
+        "post_06": {
+          "type": "post",
+          "settings": {
+            "link": "",
+            "accessibility_label": "Instagram投稿 6"
+          }
+        }
       },
-      "block_order": ["post_01", "post_02", "post_03", "post_04", "post_05", "post_06"],
+      "block_order": [
+        "post_01",
+        "post_02",
+        "post_03",
+        "post_04",
+        "post_05",
+        "post_06"
+      ],
       "settings": {
         "eyebrow": "INSTAGRAM",
         "link": "",
