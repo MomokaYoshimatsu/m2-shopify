@@ -356,7 +356,9 @@
                     <span class="m2-pdp-related-card__badge">{{ related_page_content.badge.value | escape }}</span>
                   {%- endif -%}
                   <h3><a href="{{ related_product.url }}">{{ related_product.title | escape }}</a></h3>
-                  {%- if related_product.description != blank -%}
+                  {%- if related_page_content.card_description.value != blank -%}
+                    <p>{{ related_page_content.card_description.value | escape }}</p>
+                  {%- elsif related_product.description != blank -%}
                     <p>{{ related_product.description | strip_html | truncate: 110 }}</p>
                   {%- endif -%}
                   <div class="m2-pdp-related-card__meta">

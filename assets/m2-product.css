@@ -814,6 +814,7 @@
 
 .m2-pdp-related__grid {
   display: grid;
+  justify-content: center;
   gap: 2.5rem;
 }
 
@@ -824,6 +825,13 @@
   border-radius: 1.2rem;
   background: #fff;
   box-shadow: 0.4rem 0.4rem 0.5rem rgb(0 0 0 / 10%);
+}
+
+.m2-pdp-related-card:only-child {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 35rem;
+  justify-self: center;
 }
 
 .m2-pdp-related-card__feature {

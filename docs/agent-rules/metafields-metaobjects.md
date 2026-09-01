@@ -59,17 +59,17 @@ Metafield / Metaobjectの新設前に、次を確認します。
 
 ## M2 Product Page Content Contract
 
-ステータス: テーマ実装済み。検証ストアにMetaobject定義6種、商品Metafield定義、子エントリー19件、ルートエントリー1件を作成済み。画像設定・商品紐付け・テンプレート割り当ては未完了。
+ステータス: テーマ実装・検証ストアへのコンテンツ登録・対象商品へのテンプレート割り当てまで完了。
 
 2026-09-01 Admin API反映状況:
 
 - 対象ストア: `m2-test-zyzvnzan.myshopify.com`
 - `m2_product_page` と子Metaobject定義5種を作成し、Storefront accessを `PUBLIC_READ` に設定済み。
 - 商品Metafield定義 `custom.product_page_content` を作成し、参照先を `m2_product_page` に固定済み。
-- Figma記載テキストを子エントリー19件とルートエントリー1件へ登録済み。
-- APIクライアントに `write_files` がないため画像8点は未アップロード。画像フィールドは未設定。
-- 不完全な状態で商品ページへ表示しないため、対象商品のMetafield紐付けと `product.m2` 割り当ては未実施。
-- 検証ストアには対象商品以外の商品がないため、`related_products` は未設定。
+- Figma記載テキストを子エントリー19件と対象商品用ルートエントリーへ登録済み。
+- Figma指定画像8点をShopify Filesへアップロードし、各子Metaobjectへ設定済み。
+- 対象商品に `custom.product_page_content` を紐付け、商品テンプレート `product.m2` を割り当て済み。
+- 追加商品用の最小ルートエントリーを作成して商品へ紐付け、対象商品の `related_products` に設定済み。追加商品の商品ページテンプレートは標準のまま。
 
 商品側Metafield:
 
@@ -84,6 +84,7 @@ Metafield / Metaobjectの新設前に、次を確認します。
 | `name` | `single_line_text_field` | 単一 | 必須 | 管理画面のエントリー表示名（画面には出力しない） | 定義上必須 |
 | `badge` | `single_line_text_field` | 単一 | 任意 | 商品メインのラベル / `page_content.badge.value` | 非表示 |
 | `card_badge` | `multi_line_text_field` | 単一 | 任意 | 関連商品カードの円形訴求 / `related_page_content.card_badge.value` | 非表示 |
+| `card_description` | `multi_line_text_field` | 単一 | 任意 | 関連商品カードの説明文 / `related_page_content.card_description.value` | 商品説明を短縮表示。商品説明も空なら非表示 |
 | `package_summary` | `single_line_text_field` | 単一 | 任意 | 内容数などの補足 / `page_content.package_summary.value` | 非表示 |
 | `purchase_notes` | `list.single_line_text_field` | リスト | 任意 | 購入欄下の補足 / `page_content.purchase_notes.value` | リスト非表示 |
 | `overview_eyebrow` | `single_line_text_field` | 単一 | 任意 | 商品紹介の英字見出し | 見出し行を非表示 |
