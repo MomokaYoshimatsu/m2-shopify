@@ -2240,7 +2240,6 @@ body {
   font-weight: 500;
   letter-spacing: 0.07em;
   line-height: 1.8;
-  white-space: nowrap;
 }
 
 .m2-footer__nav {
@@ -2775,7 +2774,7 @@ body {
   }
 
   .m2-footer__main {
-    grid-template-columns: 22.3rem minmax(0, 71.3rem);
+    grid-template-columns: 22.4rem minmax(0, 71.3rem);
     justify-content: space-between;
     gap: 4rem;
   }
