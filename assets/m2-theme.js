@@ -91,3 +91,43 @@ class M2HeroSlider extends HTMLElement {
 if (!customElements.get('m2-hero-slider')) {
   customElements.define('m2-hero-slider', M2HeroSlider);
 }
+
+function initM2HeaderDrawer() {
+  const drawer = document.querySelector('.template-index header-drawer');
+  const details = drawer?.querySelector('#Details-menu-drawer-container');
+  const summary = details?.querySelector(':scope > summary');
+  const menu = details?.querySelector(':scope > #menu-drawer');
+
+  if (!drawer || !details || !summary || !menu) return;
+
+  let focusTimer;
+  const firstMenuItem = () => menu.querySelector('.menu-drawer__menu-item');
+
+  const updateMenuState = () => {
+    const isOpen = details.open;
+    summary.setAttribute('aria-expanded', String(isOpen));
+    summary.setAttribute('aria-label', isOpen ? summary.dataset.closeLabel : summary.dataset.openLabel);
+
+    window.clearTimeout(focusTimer);
+    if (!isOpen) return;
+
+    const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 260;
+    focusTimer = window.setTimeout(() => {
+      if (details.open && details.classList.contains('menu-opening')) firstMenuItem()?.focus();
+    }, delay);
+  };
+
+  details.addEventListener('toggle', updateMenuState);
+  menu.querySelectorAll('a[href]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (details.open) drawer.closeMenuDrawer(event, summary);
+    });
+  });
+  drawer.closest('.header')?.querySelectorAll('.header__icons a[href]').forEach((link) => {
+    link.addEventListener('click', (event) => {
+      if (details.open) drawer.closeMenuDrawer(event, summary);
+    });
+  });
+}
+
+initM2HeaderDrawer();

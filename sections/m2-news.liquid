@@ -7,7 +7,7 @@
       <h2 id="M2TopNewsHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
     </div>
     {%- if section.settings.show_view_all and selected_blog.url != blank -%}
-      <a class="m2-top-text-link" href="{{ selected_blog.url }}">{{ section.settings.view_all_label | escape }} <span aria-hidden="true">›</span></a>
+      <a class="m2-top-text-link m2-top-news__view-all m2-top-news__view-all--desktop" href="{{ selected_blog.url }}">{{ section.settings.view_all_label | escape }} <span aria-hidden="true">›</span></a>
     {%- endif -%}
   </div>
 
@@ -38,6 +38,10 @@
       {%- endfor -%}
     {%- endif -%}
   </div>
+
+  {%- if section.settings.show_view_all and selected_blog.url != blank -%}
+    <a class="m2-top-text-link m2-top-news__view-all m2-top-news__view-all--mobile" href="{{ selected_blog.url }}">{{ section.settings.view_all_label | escape }} <span aria-hidden="true">›</span></a>
+  {%- endif -%}
 </section>
 
 {% schema %}

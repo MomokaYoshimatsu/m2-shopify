@@ -247,14 +247,17 @@
 
     <div class="header__icons{% if section.settings.enable_country_selector or section.settings.enable_language_selector %} header__icons--localization header-localization{% endif %}">
       {%- if request.page_type == 'index' -%}
-        <img
-          class="m2-header-actions"
-          src="{{ 'm2-header-actions.svg' | asset_url }}"
-          alt=""
-          width="82"
-          height="23"
-          loading="eager"
-        >
+        <picture>
+          <source media="(max-width: 1023px)" srcset="{{ 'm2-header-actions-sp.svg' | asset_url }}">
+          <img
+            class="m2-header-actions"
+            src="{{ 'm2-header-actions.svg' | asset_url }}"
+            alt=""
+            width="82"
+            height="23"
+            loading="eager"
+          >
+        </picture>
       {%- endif -%}
       <div class="desktop-localization-wrapper">
         {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}

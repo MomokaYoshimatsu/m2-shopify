@@ -189,9 +189,10 @@
         "post_02": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 2" } },
         "post_03": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 3" } },
         "post_04": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 4" } },
-        "post_05": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 5" } }
+        "post_05": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 5" } },
+        "post_06": { "type": "post", "settings": { "accessibility_label": "Instagram投稿 6" } }
       },
-      "block_order": ["post_01", "post_02", "post_03", "post_04", "post_05"],
+      "block_order": ["post_01", "post_02", "post_03", "post_04", "post_05", "post_06"],
       "settings": {
         "eyebrow": "INSTAGRAM",
         "link": "",
