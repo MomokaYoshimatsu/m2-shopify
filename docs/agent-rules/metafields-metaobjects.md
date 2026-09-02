@@ -57,6 +57,40 @@ Metafield / Metaobjectの新設前に、次を確認します。
 - 新しい定義を導入したら、このファイルにnamespace / key / 型 / 用途 / Metaobject field構成 / 運用上の注意を追記する。
 - 管理画面で追加作業が残る場合は、設定場所、入力内容、注意点、確認方法をユーザーへ渡す。
 
+## M2 FAQ Page Content Contract
+
+ステータス: `page.m2-faq` 専用の共通FAQ管理構造。商品専用の `m2_product_faq` とは共有しない。
+
+ページ側Metafield:
+
+| namespace / key | 型 | 必須 | 用途 | 未入力時 |
+|---|---|---|---|---|
+| `custom.m2_faq_categories` | `list.metaobject_reference` → `m2_faq_category` | 任意 | FAQページに表示するカテゴリと並び順 | 問い合わせ導線付きの空状態を表示 |
+
+### `m2_faq_category`（FAQカテゴリ）
+
+| field key | データ型 | 必須 | 用途 / 未入力時 |
+|---|---|---|---|
+| `category_name` | `single_line_text_field` | 必須 | カテゴリ名と管理画面の表示名。未入力ならカテゴリを非表示 |
+| `anchor_id` | `single_line_text_field` | 任意 | 英小文字、数字、ハイフンで入力するアンカー識別子。未入力・無効・重複時はLiquidで一意なIDへフォールバック |
+| `faq_items` | `list.metaobject_reference` → `m2_faq_item` | 任意 | カテゴリ内のFAQと並び順。表示可能な項目が0件ならカテゴリを非表示 |
+
+### `m2_faq_item`（共通FAQ）
+
+| field key | データ型 | 必須 | 用途 / 未入力時 |
+|---|---|---|---|
+| `question` | `single_line_text_field` | 必須 | 質問と管理画面の表示名。未入力なら項目を非表示 |
+| `answer` | `rich_text_field` | 任意 | 回答。未入力なら空のアコーディオンを出さず、項目を非表示 |
+
+運用上の注意:
+
+- カテゴリはページMetafield `custom.m2_faq_categories` の参照順で表示する。
+- 質問は各カテゴリの `faq_items` の参照順で表示する。
+- `anchor_id` は `product-ingredients` のような英小文字、数字、ハイフンで入力し、先頭へLiquidが `faq-` を付与する。
+- 上部カテゴリメニューと本文カテゴリは同じ参照リストとアンカー生成規則を使う。本文見出しは、カテゴリ名に含まれていなければ末尾へ「について」を付ける。
+- Metaobject定義とエントリーはStorefrontから参照できるよう `PUBLIC_READ` にする。
+- 定義、エントリー、ページMetafieldの作成・更新は管理画面変更にあたるため、ユーザー承認後に行う。
+
 ## M2 Product Page Content Contract
 
 ステータス: 個別Metafield / Metaobject構造への移行、コンテンツ登録、対象商品へのテンプレート割り当てまで完了。

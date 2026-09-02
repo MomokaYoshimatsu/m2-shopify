@@ -1,121 +1,203 @@
-<section class="m2-section m2-section--{{ section.settings.background }}">
-  <div class="m2-container m2-container--narrow">
-    <div class="m2-section-header">
-      {%- if section.settings.eyebrow != blank -%}
-        <p class="m2-eyebrow">{{ section.settings.eyebrow | escape }}</p>
-      {%- endif -%}
-      {%- if section.settings.heading != blank -%}
-        <h2 class="m2-heading m2-heading--md">{{ section.settings.heading | escape }}</h2>
-      {%- endif -%}
-      {%- if section.settings.text != blank -%}
-        <div class="m2-copy">{{ section.settings.text }}</div>
-      {%- endif -%}
-      {%- if section.settings.show_page_content and page != blank and page.content != blank -%}
-        <div class="m2-copy">{{ page.content }}</div>
+{%- liquid
+  assign faq_categories = page.metafields.custom.m2_faq_categories.value
+  assign visible_category_count = 0
+
+  for faq_category in faq_categories
+    assign category_name = faq_category.category_name.value | strip
+    assign visible_item_count = 0
+    assign category_items = faq_category.faq_items.value
+
+    if category_name != blank
+      for faq_entry in category_items
+        if faq_entry.question.value != blank and faq_entry.answer.value != blank
+          assign visible_item_count = visible_item_count | plus: 1
+        endif
+      endfor
+    endif
+
+    if category_name != blank and visible_item_count > 0
+      assign visible_category_count = visible_category_count | plus: 1
+    endif
+  endfor
+-%}
+
+<section class="m2-faq-page" aria-labelledby="M2FaqHeading-{{ section.id }}">
+  {%- if section.settings.show_breadcrumb -%}
+    <nav class="m2-faq-page__breadcrumb" aria-label="パンくずリスト">
+      <a href="{{ routes.root_url }}">{{ section.settings.breadcrumb_parent | escape }}</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">{{ section.settings.breadcrumb_current | escape }}</span>
+    </nav>
+  {%- endif -%}
+
+  <header class="m2-faq-page__intro">
+    {%- if section.settings.eyebrow != blank -%}
+      <p class="m2-faq-page__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+    {%- endif -%}
+    {%- if section.settings.heading != blank -%}
+      <h1 id="M2FaqHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h1>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="m2-faq-page__lead rte">{{ section.settings.text }}</div>
+    {%- endif -%}
+  </header>
+
+  {%- if visible_category_count > 0 -%}
+    <nav class="m2-faq-page__category-nav" aria-label="FAQカテゴリ">
+      <div class="m2-faq-page__category-scroll">
+        {%- if section.settings.show_all_link and section.settings.all_label != blank -%}
+          <a class="m2-faq-page__category-link m2-faq-page__category-link--all" href="#M2FaqContent-{{ section.id }}">
+            {{- section.settings.all_label | escape -}}
+          </a>
+        {%- endif -%}
+
+        {%- assign used_nav_anchors = '|' -%}
+        {%- for faq_category in faq_categories -%}
+          {%- liquid
+            assign category_name = faq_category.category_name.value | strip
+            assign category_items = faq_category.faq_items.value
+            assign visible_item_count = 0
+
+            if category_name != blank
+              for faq_entry in category_items
+                if faq_entry.question.value != blank and faq_entry.answer.value != blank
+                  assign visible_item_count = visible_item_count | plus: 1
+                endif
+              endfor
+            endif
+          -%}
+          {%- if category_name != blank and visible_item_count > 0 -%}
+            {%- liquid
+              assign raw_anchor = faq_category.anchor_id.value | strip
+              assign safe_anchor = raw_anchor | handleize
+              assign category_anchor = ''
+
+              if raw_anchor != blank and raw_anchor == safe_anchor
+                assign category_anchor = 'faq-' | append: safe_anchor
+              endif
+
+              assign anchor_token = '|' | append: category_anchor | append: '|'
+              if category_anchor == blank or used_nav_anchors contains anchor_token
+                assign category_anchor = 'faq-category-' | append: forloop.index
+                assign anchor_token = '|' | append: category_anchor | append: '|'
+                if used_nav_anchors contains anchor_token
+                  assign category_anchor = category_anchor | append: '-' | append: section.id
+                endif
+              endif
+
+              assign used_nav_anchors = used_nav_anchors | append: category_anchor | append: '|'
+            -%}
+            <a class="m2-faq-page__category-link" href="#{{ category_anchor }}">{{ category_name | escape }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </nav>
+
+    <div id="M2FaqContent-{{ section.id }}" class="m2-faq-page__content">
+      <div class="m2-faq-page__groups">
+        {%- assign used_content_anchors = '|' -%}
+        {%- assign has_opened_default = false -%}
+        {%- for faq_category in faq_categories -%}
+          {%- liquid
+            assign category_name = faq_category.category_name.value | strip
+            assign category_items = faq_category.faq_items.value
+            assign visible_item_count = 0
+
+            if category_name != blank
+              for faq_entry in category_items
+                if faq_entry.question.value != blank and faq_entry.answer.value != blank
+                  assign visible_item_count = visible_item_count | plus: 1
+                endif
+              endfor
+            endif
+          -%}
+          {%- if category_name != blank and visible_item_count > 0 -%}
+            {%- liquid
+              assign raw_anchor = faq_category.anchor_id.value | strip
+              assign safe_anchor = raw_anchor | handleize
+              assign category_anchor = ''
+
+              if raw_anchor != blank and raw_anchor == safe_anchor
+                assign category_anchor = 'faq-' | append: safe_anchor
+              endif
+
+              assign anchor_token = '|' | append: category_anchor | append: '|'
+              if category_anchor == blank or used_content_anchors contains anchor_token
+                assign category_anchor = 'faq-category-' | append: forloop.index
+                assign anchor_token = '|' | append: category_anchor | append: '|'
+                if used_content_anchors contains anchor_token
+                  assign category_anchor = category_anchor | append: '-' | append: section.id
+                endif
+              endif
+
+              assign used_content_anchors = used_content_anchors | append: category_anchor | append: '|'
+
+              assign category_heading = category_name
+              unless category_heading contains 'について'
+                assign category_heading = category_heading | append: 'について'
+              endunless
+            -%}
+            <section id="{{ category_anchor }}" class="m2-faq-page__group" aria-labelledby="{{ category_anchor }}-heading">
+              <h2 id="{{ category_anchor }}-heading">{{ category_heading | escape }}</h2>
+              <div class="m2-faq-page__items">
+                {%- for faq_entry in category_items -%}
+                  {%- if faq_entry.question.value != blank and faq_entry.answer.value != blank -%}
+                    <details class="m2-faq-page__item"{% if section.settings.open_first_item and has_opened_default == false %} open{% endif %}>
+                      <summary>
+                        <span class="m2-faq-page__question-mark" aria-hidden="true">Q</span>
+                        <span class="m2-faq-page__question">{{ faq_entry.question.value | escape }}</span>
+                        <span class="m2-faq-page__icon" aria-hidden="true">
+                          {{- 'icon-caret.svg' | inline_asset_content -}}
+                        </span>
+                      </summary>
+                      <div class="m2-faq-page__answer">
+                        <span class="m2-faq-page__answer-mark" aria-hidden="true">A</span>
+                        <div class="m2-faq-page__answer-copy rte">{{ faq_entry.answer | metafield_tag }}</div>
+                      </div>
+                    </details>
+                    {%- if section.settings.open_first_item and has_opened_default == false -%}
+                      {%- assign has_opened_default = true -%}
+                    {%- endif -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              </div>
+            </section>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  {%- else -%}
+    <div class="m2-faq-page__empty">
+      {%- if section.settings.empty_heading != blank -%}<h2>{{ section.settings.empty_heading | escape }}</h2>{%- endif -%}
+      {%- if section.settings.empty_text != blank -%}<div class="rte">{{ section.settings.empty_text }}</div>{%- endif -%}
+      {%- if section.settings.contact_label != blank and section.settings.contact_link != blank -%}
+        <a href="{{ section.settings.contact_link }}">{{ section.settings.contact_label | escape }}</a>
       {%- endif -%}
     </div>
-
-    {%- assign current_category = '' -%}
-    {%- for block in section.blocks -%}
-      {%- if block.settings.question != blank and block.settings.answer != blank -%}
-        {%- if block.settings.category != blank and block.settings.category != current_category -%}
-          <h3 class="m2-faq-group__title">{{ block.settings.category | escape }}</h3>
-        {%- endif -%}
-        {%- assign current_category = block.settings.category -%}
-        <details class="m2-faq-item" {{ block.shopify_attributes }}>
-          <summary>{{ block.settings.question | escape }}</summary>
-          <div class="m2-faq-item__answer rte">{{ block.settings.answer }}</div>
-        </details>
-      {%- endif -%}
-    {%- endfor -%}
-
-    {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
-      <div class="m2-faq__action">
-        <a class="m2-link" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
-      </div>
-    {%- endif -%}
-  </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
 {
-  "name": "M2 FAQ",
+  "name": "M2 よくあるご質問",
   "tag": "div",
-  "class": "m2-section-wrapper",
+  "class": "m2-faq-section-wrapper",
   "settings": [
-    {
-      "type": "text",
-      "id": "eyebrow",
-      "label": "英字ラベル",
-      "default": "FAQ"
-    },
-    {
-      "type": "text",
-      "id": "heading",
-      "label": "見出し",
-      "default": "よくあるご質問"
-    },
-    {
-      "type": "richtext",
-      "id": "text",
-      "label": "導入文"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_page_content",
-      "label": "固定ページ本文を表示",
-      "default": false
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "ボタン名"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "ボタンリンク"
-    },
-    {
-      "type": "select",
-      "id": "background",
-      "label": "背景",
-      "options": [
-        { "value": "paper", "label": "白" },
-        { "value": "soft", "label": "ライトグレー" },
-        { "value": "sand", "label": "ベージュ" }
-      ],
-      "default": "paper"
-    }
+    { "type": "checkbox", "id": "show_breadcrumb", "label": "パンくずを表示", "default": true },
+    { "type": "text", "id": "breadcrumb_parent", "label": "パンくず親ラベル", "default": "TOP" },
+    { "type": "text", "id": "breadcrumb_current", "label": "パンくず現在地", "default": "よくあるご質問" },
+    { "type": "text", "id": "eyebrow", "label": "英字見出し", "default": "FAQ" },
+    { "type": "text", "id": "heading", "label": "日本語見出し", "default": "よくあるご質問" },
+    { "type": "richtext", "id": "text", "label": "導入文", "default": "<p>商品や配送、サービスについてお寄せいただくご質問をまとめました。</p>" },
+    { "type": "checkbox", "id": "show_all_link", "label": "「すべて」を表示", "default": true },
+    { "type": "text", "id": "all_label", "label": "すべての表示名", "default": "すべて" },
+    { "type": "checkbox", "id": "open_first_item", "label": "最初の回答を開いて表示", "default": true },
+    { "type": "header", "content": "FAQ未設定時" },
+    { "type": "text", "id": "empty_heading", "label": "空状態の見出し", "default": "よくあるご質問は準備中です" },
+    { "type": "richtext", "id": "empty_text", "label": "空状態の本文", "default": "<p>お急ぎの場合は、お問い合わせフォームよりご連絡ください。</p>" },
+    { "type": "text", "id": "contact_label", "label": "お問い合わせリンク名", "default": "お問い合わせ" },
+    { "type": "url", "id": "contact_link", "label": "お問い合わせリンク" }
   ],
-  "blocks": [
-    {
-      "type": "item",
-      "name": "質問と回答",
-      "settings": [
-        {
-          "type": "text",
-          "id": "category",
-          "label": "カテゴリ"
-        },
-        {
-          "type": "text",
-          "id": "question",
-          "label": "質問"
-        },
-        {
-          "type": "richtext",
-          "id": "answer",
-          "label": "回答"
-        }
-      ]
-    }
-  ],
-  "max_blocks": 30,
-  "presets": [
-    {
-      "name": "M2 FAQ"
-    }
-  ]
+  "presets": [{ "name": "M2 よくあるご質問" }]
 }
 {% endschema %}
