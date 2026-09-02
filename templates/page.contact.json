@@ -9,26 +9,19 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-page",
+    "contact": {
+      "type": "m2-contact-form",
       "settings": {
-        "padding_top": 36,
-        "padding_bottom": 36
-      }
-    },
-    "form": {
-      "type": "contact-form",
-      "settings": {
-        "heading": "",
-        "heading_size": "h1",
-        "color_scheme": "scheme-1",
-        "padding_top": 36,
-        "padding_bottom": 36
+        "show_breadcrumb": true,
+        "breadcrumb_parent": "TOP",
+        "breadcrumb_current": "お問い合わせ",
+        "eyebrow": "CONTACT",
+        "heading": "お問い合わせ",
+        "success_heading": "お問い合わせを受け付けました",
+        "success_text": "<p>お問い合わせいただきありがとうございます。<br>内容を確認の上、担当者より順次ご連絡いたします。今しばらくお待ちくださいませ。</p><p>ご入力いただいたメールアドレスに自動返信メールをお送りしております。<br>届かない場合は、迷惑メールフォルダをご確認いただくか、お手数ですがお電話にてお問い合わせください。</p>",
+        "home_label": "TOPに戻る"
       }
     }
   },
-  "order": [
-    "main",
-    "form"
-  ]
+  "order": ["contact"]
 }
