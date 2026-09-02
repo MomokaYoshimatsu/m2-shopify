@@ -322,12 +322,15 @@
   }
 
   .m2-faq-page__category-scroll {
+    width: min(100%, var(--m2-faq-width));
+    margin-inline: auto;
     justify-content: center;
     overflow: visible;
   }
 
   .m2-faq-page__category-link {
-    width: 22rem;
+    flex: 1 1 0;
+    width: auto;
     min-width: 0;
     font-size: 1.4rem;
   }
