@@ -1,29 +1,32 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
-    "hero": {
-      "type": "m2-hero",
-      "settings": {
-        "eyebrow": "FAQ",
-        "heading": "よくあるご質問",
-        "text": "<p>商品やご購入について、よくお寄せいただくご質問をご案内します。</p>",
-        "alignment": "center",
-        "height": "compact",
-        "button_label": "",
-        "button_link": ""
-      }
-    },
     "faq": {
       "type": "m2-faq",
       "settings": {
-        "eyebrow": "QUESTIONS & ANSWERS",
-        "heading": "ご質問をお選びください",
-        "text": "",
-        "show_page_content": true,
-        "button_label": "お問い合わせ",
-        "button_link": "/pages/contact",
-        "background": "paper"
+        "show_breadcrumb": true,
+        "breadcrumb_parent": "TOP",
+        "breadcrumb_current": "よくあるご質問",
+        "eyebrow": "FAQ",
+        "heading": "よくあるご質問",
+        "text": "<p>商品や配送、サービスについてお寄せいただくご質問をまとめました。</p>",
+        "show_all_link": true,
+        "all_label": "すべて",
+        "open_first_item": true,
+        "empty_heading": "よくあるご質問は準備中です",
+        "empty_text": "<p>お急ぎの場合は、お問い合わせフォームよりご連絡ください。</p>",
+        "contact_label": "お問い合わせ",
+        "contact_link": "/pages/contact"
       }
     }
   },
-  "order": ["hero", "faq"]
+  "order": ["faq"]
 }
