@@ -1,0 +1,70 @@
+{{ 'm2-news.css' | asset_url | stylesheet_tag }}
+
+<section class="m2-news-page m2-news-list-page" aria-labelledby="M2NewsListHeading-{{ section.id }}">
+  <nav class="m2-news-breadcrumb" aria-label="パンくずリスト">
+    <a href="{{ routes.root_url }}">{{ section.settings.breadcrumb_parent | escape }}</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">{{ blog.title | escape }}</span>
+  </nav>
+
+  <div class="m2-news-list-page__inner">
+    <header class="m2-news-page-heading">
+      <p class="m2-news-page-heading__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      <h1 id="M2NewsListHeading-{{ section.id }}">{{ blog.title | escape }}</h1>
+    </header>
+
+    {%- paginate blog.articles by section.settings.articles_per_page -%}
+      {%- if blog.articles_count > 0 -%}
+        <div class="m2-news-list" role="list">
+          {%- for article in blog.articles -%}
+            <article class="m2-news-list__item" role="listitem">
+              <a class="m2-news-list__link" href="{{ article.url }}">
+                <div class="m2-news-list__meta">
+                  <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+                    {{- article.published_at | date: '%Y.%m.%d' -}}
+                  </time>
+                  {%- if article.tags.size > 0 -%}
+                    <span class="m2-news-tags" aria-label="カテゴリー">
+                      {%- for tag in article.tags -%}
+                        <span class="m2-news-tag">{{ tag | escape }}</span>
+                      {%- endfor -%}
+                    </span>
+                  {%- endif -%}
+                </div>
+                <h2>{{ article.title | escape }}</h2>
+              </a>
+            </article>
+          {%- endfor -%}
+        </div>
+
+        {%- if paginate.pages > 1 -%}
+          {%- render 'm2-news-pagination',
+            paginate: paginate,
+            previous_label: section.settings.previous_label,
+            next_label: section.settings.next_label
+          -%}
+        {%- endif -%}
+      {%- else -%}
+        <div class="m2-news-empty" role="status">
+          <p>{{ section.settings.empty_text | escape }}</p>
+        </div>
+      {%- endif -%}
+    {%- endpaginate -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "M2 ニュース一覧",
+  "tag": "div",
+  "class": "m2-news-section-wrapper",
+  "settings": [
+    { "type": "text", "id": "breadcrumb_parent", "label": "パンくず親ラベル", "default": "TOP" },
+    { "type": "text", "id": "eyebrow", "label": "英字見出し", "default": "NEWS" },
+    { "type": "range", "id": "articles_per_page", "min": 5, "max": 20, "step": 1, "label": "1ページの記事数", "default": 10 },
+    { "type": "text", "id": "previous_label", "label": "前ページラベル", "default": "前へ" },
+    { "type": "text", "id": "next_label", "label": "次ページラベル", "default": "次へ" },
+    { "type": "text", "id": "empty_text", "label": "記事がない場合の表示", "default": "現在、お知らせはありません。" }
+  ]
+}
+{% endschema %}

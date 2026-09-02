@@ -1,0 +1,76 @@
+{{ 'm2-news.css' | asset_url | stylesheet_tag }}
+
+<article class="m2-news-page m2-news-article-page" aria-labelledby="M2NewsArticleHeading-{{ section.id }}">
+  <nav class="m2-news-breadcrumb m2-news-breadcrumb--article" aria-label="パンくずリスト">
+    <a href="{{ routes.root_url }}">{{ section.settings.breadcrumb_parent | escape }}</a>
+    <span aria-hidden="true">›</span>
+    <a href="{{ blog.url }}">{{ blog.title | escape }}</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">{{ article.title | escape }}</span>
+  </nav>
+
+  <div class="m2-news-article-page__inner">
+    <div class="m2-news-article-card">
+      <header class="m2-news-article-card__header">
+        <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+          {{- article.published_at | date: '%Y.%m.%d' -}}
+        </time>
+        <div class="m2-news-article-card__title-group">
+          {%- if article.tags.size > 0 -%}
+            <div class="m2-news-tags" aria-label="カテゴリー">
+              {%- for tag in article.tags -%}
+                <span class="m2-news-tag">{{ tag | escape }}</span>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+          <h1 id="M2NewsArticleHeading-{{ section.id }}">{{ article.title | escape }}</h1>
+        </div>
+      </header>
+
+      <hr class="m2-news-article-card__divider">
+
+      {%- if article.image -%}
+        <figure class="m2-news-article-card__media">
+          <img
+            srcset="
+              {%- if article.image.width >= 320 -%}{{ article.image | image_url: width: 320 }} 320w,{%- endif -%}
+              {%- if article.image.width >= 480 -%}{{ article.image | image_url: width: 480 }} 480w,{%- endif -%}
+              {%- if article.image.width >= 700 -%}{{ article.image | image_url: width: 700 }} 700w,{%- endif -%}
+              {%- if article.image.width >= 980 -%}{{ article.image | image_url: width: 980 }} 980w,{%- endif -%}
+              {{ article.image | image_url }} {{ article.image.width }}w
+            "
+            sizes="(min-width: 1024px) 700px, calc(100vw - 80px)"
+            src="{{ article.image | image_url: width: 700 }}"
+            width="{{ article.image.width }}"
+            height="{{ article.image.height }}"
+            alt="{{ article.image.alt | escape }}"
+            loading="eager"
+            fetchpriority="high"
+          >
+        </figure>
+      {%- endif -%}
+
+      <div class="m2-news-article-card__content rte">
+        {{ article.content }}
+      </div>
+    </div>
+
+    <a class="m2-news-back-link" href="{{ blog.url }}">{{ section.settings.back_label | escape }}</a>
+  </div>
+</article>
+
+<script type="application/ld+json">
+  {{ article | structured_data }}
+</script>
+
+{% schema %}
+{
+  "name": "M2 ニュース詳細",
+  "tag": "div",
+  "class": "m2-news-section-wrapper",
+  "settings": [
+    { "type": "text", "id": "breadcrumb_parent", "label": "パンくず親ラベル", "default": "TOP" },
+    { "type": "text", "id": "back_label", "label": "一覧に戻るラベル", "default": "一覧に戻る" }
+  ]
+}
+{% endschema %}
