@@ -413,7 +413,7 @@
 
 .m2-news-article-card__content img {
   display: block;
-  max-width: 100%;
+  max-width: min(100%, 70rem);
   height: auto;
   margin: 2.4em auto;
 }
