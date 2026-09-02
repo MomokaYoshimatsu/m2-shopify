@@ -1,3 +1,9 @@
+{%- liquid
+  assign is_policy_page = false
+  if request.path contains '/policies/'
+    assign is_policy_page = true
+  endif
+-%}
 <!doctype html>
 <html class="js" lang="{{ request.locale.iso_code }}">
   <head>
@@ -280,6 +286,7 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'm2-theme.css' | asset_url | stylesheet_tag }}
+    {{ 'm2-subpages.css' | asset_url | stylesheet_tag }}
     {%- if template.name == 'page' and template.suffix == 'm2-about' -%}
       {{ 'm2-about.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
@@ -342,11 +349,18 @@
 
     <main
       id="MainContent"
-      class="content-for-layout focus-none"
+      class="content-for-layout focus-none{% if is_policy_page %} m2-policy-layout{% endif %}"
       role="main"
       tabindex="-1"
       data-template="{{ template.name }}"
     >
+      {%- if is_policy_page -%}
+        <nav class="m2-policy-breadcrumb" aria-label="パンくずリスト">
+          <a href="{{ routes.root_url }}">TOP</a>
+          <span aria-hidden="true">›</span>
+          <span aria-current="page">{{ page_title | escape }}</span>
+        </nav>
+      {%- endif -%}
       {{ content_for_layout }}
     </main>
 
