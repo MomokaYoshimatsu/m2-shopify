@@ -32,7 +32,10 @@
       {{ 'product-apparel-2' | placeholder_svg_tag: 'm2-top-product__placeholder' }}
     {%- endif -%}
     {%- unless card_product.available -%}
-      <span class="m2-top-product__coming-soon">Coming Soon</span>
+      <span class="m2-top-product__coming-soon" aria-hidden="true">
+        <span>Coming</span>
+        <span>Soon</span>
+      </span>
     {%- endunless -%}
   </div>
 
@@ -56,6 +59,8 @@
       </span>
       {%- if card_product.available -%}
         {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+      {%- else -%}
+        <strong class="m2-top-product__unavailable">coming soon</strong>
       {%- endif -%}
     </div>
   </div>
