@@ -10,15 +10,15 @@
 {
   "sections": {
     "main": {
-      "type": "main-blog",
+      "type": "m2-news-list",
       "settings": {
-        "layout": "collage",
-        "show_image": true,
-        "image_height": "medium",
-        "show_date": true,
-        "show_author": false,
-        "padding_top": 36,
-        "padding_bottom": 36
+        "breadcrumb_parent": "TOP",
+        "eyebrow": "NEWS",
+        "heading": "お知らせ",
+        "articles_per_page": 10,
+        "previous_label": "前へ",
+        "next_label": "次へ",
+        "empty_text": "現在、お知らせはありません。"
       }
     }
   },

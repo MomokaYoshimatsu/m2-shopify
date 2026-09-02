@@ -1,0 +1,44 @@
+{% comment %}
+  M2ニュース一覧用のページネーション。
+
+  Accepts:
+  - paginate: {Object}
+  - previous_label: {String}
+  - next_label: {String}
+{% endcomment %}
+
+<nav class="m2-news-pagination" aria-label="ページネーション">
+  <ul role="list">
+    {%- if paginate.previous -%}
+      <li>
+        <a href="{{ paginate.previous.url }}" rel="prev" aria-label="前のページ">
+          {{- previous_label | escape -}}
+        </a>
+      </li>
+    {%- endif -%}
+
+    {%- for part in paginate.parts -%}
+      <li>
+        {%- if part.is_link -%}
+          <a href="{{ part.url }}" aria-label="{{ part.title }}ページ目">
+            {{- part.title -}}
+          </a>
+        {%- elsif part.title == paginate.current_page -%}
+          <span class="m2-news-pagination__current" aria-current="page" aria-label="{{ part.title }}ページ目、現在のページ">
+            {{- part.title -}}
+          </span>
+        {%- else -%}
+          <span class="m2-news-pagination__ellipsis" aria-hidden="true">{{ part.title }}</span>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
+
+    {%- if paginate.next -%}
+      <li>
+        <a href="{{ paginate.next.url }}" rel="next" aria-label="次のページ">
+          {{- next_label | escape -}}
+        </a>
+      </li>
+    {%- endif -%}
+  </ul>
+</nav>
