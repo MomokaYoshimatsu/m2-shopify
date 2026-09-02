@@ -1,16 +1,18 @@
 {{ 'm2-news.css' | asset_url | stylesheet_tag }}
 
+{%- assign page_heading = section.settings.heading | default: blog.title -%}
+
 <section class="m2-news-page m2-news-list-page" aria-labelledby="M2NewsListHeading-{{ section.id }}">
   <nav class="m2-news-breadcrumb" aria-label="パンくずリスト">
     <a href="{{ routes.root_url }}">{{ section.settings.breadcrumb_parent | escape }}</a>
     <span aria-hidden="true">›</span>
-    <span aria-current="page">{{ blog.title | escape }}</span>
+    <span aria-current="page">{{ page_heading | escape }}</span>
   </nav>
 
   <div class="m2-news-list-page__inner">
     <header class="m2-news-page-heading">
       <p class="m2-news-page-heading__eyebrow">{{ section.settings.eyebrow | escape }}</p>
-      <h1 id="M2NewsListHeading-{{ section.id }}">{{ blog.title | escape }}</h1>
+      <h1 id="M2NewsListHeading-{{ section.id }}">{{ page_heading | escape }}</h1>
     </header>
 
     {%- paginate blog.articles by section.settings.articles_per_page -%}
@@ -61,6 +63,7 @@
   "settings": [
     { "type": "text", "id": "breadcrumb_parent", "label": "パンくず親ラベル", "default": "TOP" },
     { "type": "text", "id": "eyebrow", "label": "英字見出し", "default": "NEWS" },
+    { "type": "text", "id": "heading", "label": "日本語見出し", "default": "お知らせ" },
     { "type": "range", "id": "articles_per_page", "min": 5, "max": 20, "step": 1, "label": "1ページの記事数", "default": 10 },
     { "type": "text", "id": "previous_label", "label": "前ページラベル", "default": "前へ" },
     { "type": "text", "id": "next_label", "label": "次ページラベル", "default": "次へ" },

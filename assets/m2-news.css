@@ -114,6 +114,7 @@
 
 .m2-news-list {
   margin-top: 7rem;
+  border-top: 0;
 }
 
 .m2-news-list__item {
@@ -175,8 +176,11 @@
 
 .m2-news-tag {
   display: inline-flex;
+  flex: 0 0 8.8rem;
   align-items: center;
   justify-content: center;
+  width: 8.8rem;
+  max-width: 100%;
   min-height: 2.4rem;
   padding: 0.4rem 1rem;
   border-radius: 4rem;
