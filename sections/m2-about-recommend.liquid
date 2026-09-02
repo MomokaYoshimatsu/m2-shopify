@@ -20,7 +20,6 @@
                 package_summary: registered_package,
                 show_description: section.settings.show_description,
                 show_feature_badge: false,
-                unavailable_label: section.settings.unavailable_label,
                 image_sizes: '(min-width: 1024px) 350px, 86vw'
               %}
             {%- elsif request.design_mode -%}
@@ -47,7 +46,6 @@
     { "type": "text", "id": "eyebrow", "label": "英字ラベル", "default": "RECOMMEND" },
     { "type": "text", "id": "heading", "label": "見出し", "default": "おすすめ商品" },
     { "type": "checkbox", "id": "show_description", "label": "商品説明を表示", "default": true },
-    { "type": "text", "id": "unavailable_label", "label": "販売前・売り切れ表示", "default": "coming soon" },
     { "type": "text", "id": "button_label", "label": "ボタン名" },
     { "type": "url", "id": "button_link", "label": "ボタンリンク" }
   ],

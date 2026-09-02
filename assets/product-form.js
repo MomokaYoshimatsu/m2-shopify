@@ -6,11 +6,11 @@ if (!customElements.get('product-form')) {
         super();
 
         this.form = this.querySelector('form');
-        this.variantIdInput.disabled = false;
-        this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
-        this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
         this.submitButton = this.querySelector('[type="submit"]');
         this.submitButtonText = this.submitButton.querySelector('span');
+        this.variantIdInput.disabled = this.dataset.m2Product === 'true' ? this.submitButton.disabled : false;
+        this.form.addEventListener('submit', this.onSubmitHandler.bind(this));
+        this.cart = document.querySelector('cart-notification') || document.querySelector('cart-drawer');
 
         if (document.querySelector('cart-drawer')) this.submitButton.setAttribute('aria-haspopup', 'dialog');
 
@@ -138,11 +138,15 @@ if (!customElements.get('product-form')) {
       toggleSubmitButton(disable = true, text) {
         if (disable) {
           this.submitButton.setAttribute('disabled', 'disabled');
+          this.submitButton.setAttribute('aria-disabled', 'true');
           if (text) this.submitButtonText.textContent = text;
         } else {
           this.submitButton.removeAttribute('disabled');
-          this.submitButtonText.textContent = window.variantStrings.addToCart;
+          this.submitButton.removeAttribute('aria-disabled');
+          this.submitButtonText.textContent = text || window.variantStrings.addToCart;
         }
+
+        if (this.dataset.m2Product === 'true') this.variantIdInput.disabled = disable;
       }
 
       createCartLinesUpdateEvent(variantId, quantity) {

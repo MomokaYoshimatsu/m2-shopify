@@ -10,7 +10,6 @@
   endif
   assign card_description = description_text | default: card_product.metafields.custom.m2_card_description.value | default: card_product.description
   assign card_package_summary = package_summary | default: card_product.metafields.custom.m2_package_summary.value
-  assign card_unavailable_label = unavailable_label | default: 'coming soon'
 -%}
 
 <article class="m2-top-product">
@@ -32,6 +31,12 @@
     {%- else -%}
       {{ 'product-apparel-2' | placeholder_svg_tag: 'm2-top-product__placeholder' }}
     {%- endif -%}
+    {%- unless card_product.available -%}
+      <span class="m2-top-product__coming-soon" aria-hidden="true">
+        <span>Coming</span>
+        <span>Soon</span>
+      </span>
+    {%- endunless -%}
   </div>
 
   <div class="m2-top-product__body">
@@ -55,7 +60,7 @@
       {%- if card_product.available -%}
         {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
       {%- else -%}
-        <strong class="m2-top-product__unavailable">{{ card_unavailable_label | escape }}</strong>
+        <strong class="m2-top-product__unavailable">coming soon</strong>
       {%- endif -%}
     </div>
   </div>

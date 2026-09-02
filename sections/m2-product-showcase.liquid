@@ -43,7 +43,6 @@
             description_text: product.description,
             show_description: section.settings.show_description,
             show_feature_badge: section.settings.show_feature_badges,
-            unavailable_label: section.settings.unavailable_label,
             image_sizes: '(min-width: 1024px) 350px, 82vw'
           %}
         {%- endfor -%}
@@ -74,7 +73,6 @@
     { "type": "checkbox", "id": "show_feature_badges", "label": "特徴バッジを表示", "default": true },
     { "type": "textarea", "id": "feature_badge_1", "label": "1商品目の特徴", "default": "高濃度\nコラーゲン\n6000mg" },
     { "type": "textarea", "id": "feature_badge_2", "label": "2商品目の特徴", "default": "コラーゲン\n＋\nPDRN" },
-    { "type": "text", "id": "unavailable_label", "label": "販売前・売り切れ表示", "default": "coming soon" },
     { "type": "checkbox", "id": "show_view_all", "label": "一覧リンクを表示", "default": false },
     { "type": "text", "id": "view_all_label", "label": "一覧リンク名", "default": "VIEW ALL" }
   ],
