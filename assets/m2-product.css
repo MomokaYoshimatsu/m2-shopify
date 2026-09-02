@@ -921,6 +921,10 @@
   line-height: 1.5;
 }
 
+.m2-pdp-spec-label-break {
+  display: none;
+}
+
 .m2-pdp-spec-row dd {
   min-width: 0;
   margin: 0;
@@ -1244,6 +1248,10 @@
     grid-template-columns: minmax(0, 1fr) 28.3rem;
     align-items: end;
     gap: 8rem;
+  }
+
+  .m2-pdp-spec-label-break {
+    display: inline;
   }
 
   .m2-pdp-overview__lead-row span {
