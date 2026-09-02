@@ -184,7 +184,7 @@
       "settings": {
         "eyebrow": "PRODUCTS",
         "heading": "商品ラインナップ",
-        "collection": "all",
+        "collection": "products",
         "products_to_show": 3,
         "show_description": true,
         "show_feature_badges": true,
