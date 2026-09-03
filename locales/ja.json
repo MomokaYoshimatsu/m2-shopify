@@ -285,11 +285,11 @@
       }
     },
     "cart": {
-      "title": "あなたのカート",
+      "title": "カート",
       "caption": "カートアイテム",
       "remove_title": "{{ title }}を削除する",
       "note": "注文に関する特別な指示・備考",
-      "checkout": "購入手続きに進む",
+      "checkout": "購入手続きへ",
       "empty": "カートの中身が空です",
       "product_disclosure": "商品の開示情報",
       "product_disclosures": "商品の開示情報",
@@ -298,7 +298,7 @@
       "headings": {
         "product": "商品",
         "price": "価格",
-        "total": "合計",
+        "total": "合計(税込)",
         "quantity": "数量",
         "image": "商品画像"
       },
@@ -307,12 +307,12 @@
         "title": "アカウントをお持ちですか?",
         "paragraph_html": "<a href=\"{{ link }}\" class=\"link underlined-link\">ログイン</a>することで、チェックアウトがスピーディーに行えます。"
       },
-      "estimated_total": "見積もり合計",
-      "new_estimated_total": "新たな推定総額",
+      "estimated_total": "合計金額(税込)",
+      "new_estimated_total": "新しい合計金額",
       "duties_and_taxes_included_shipping_at_checkout_with_policy_html": "関税と税金が含まれます。ディスカウントと<a href=\"{{ link }}\">配送料</a>はチェックアウト時に計算されます。",
       "duties_and_taxes_included_shipping_at_checkout_without_policy": "関税と税金が含まれます。ディスカウントと配送料はチェックアウト時に計算されます。",
-      "taxes_included_shipping_at_checkout_with_policy_html": "税込。ディスカウントと<a href=\"{{ link }}\">配送料</a>はチェックアウト時に計算されます。",
-      "taxes_included_shipping_at_checkout_without_policy": "税込。ディスカウントと配送料はチェックアウト時に計算されます。",
+      "taxes_included_shipping_at_checkout_with_policy_html": "送料はチェックアウト時に計算されます。",
+      "taxes_included_shipping_at_checkout_without_policy": "送料はチェックアウト時に計算されます。",
       "duties_included_taxes_at_checkout_shipping_at_checkout_with_policy_html": "関税込。税、ディスカウント、および<a href=\"{{ link }}\">配送料</a>はチェックアウト時に計算されます。",
       "duties_included_taxes_at_checkout_shipping_at_checkout_without_policy": "関税込。税、ディスカウント、および配送料はチェックアウト時に計算されます。",
       "taxes_at_checkout_shipping_at_checkout_with_policy_html": "税、ディスカウント、および<a href=\"{{ link }}\">配送料</a>はチェックアウト時に計算されます。",
