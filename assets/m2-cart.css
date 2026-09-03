@@ -9,6 +9,10 @@
   --m2-cart-line: #dedbd5;
 }
 
+.template-cart {
+  background: var(--m2-cart-bg);
+}
+
 .template-cart #MainContent,
 .template-cart cart-items,
 .template-cart #main-cart-footer {
