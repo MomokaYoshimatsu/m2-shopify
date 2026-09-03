@@ -2,24 +2,40 @@
 
 {%- style -%}
   .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    --m2-subpage-editor-padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    --m2-subpage-editor-padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
   }
 
-  @media screen and (min-width: 750px) {
+  @media screen and (min-width: 1024px) {
     .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
+      --m2-subpage-editor-padding-top: {{ section.settings.padding_top }}px;
+      --m2-subpage-editor-padding-bottom: {{ section.settings.padding_bottom }}px;
     }
   }
 {%- endstyle -%}
 
-<div class="page-width page-width--narrow section-{{ section.id }}-padding">
-  <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ page.title | escape }}
-  </h1>
-  <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-    {{ page.content }}
+<div class="m2-subpage section-{{ section.id }}-padding">
+  {%- if section.settings.show_breadcrumb -%}
+    <nav class="m2-subpage__breadcrumb" aria-label="パンくずリスト">
+      <a href="{{ routes.root_url }}">{{ section.settings.breadcrumb_parent | escape }}</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">{{ page.title | escape }}</span>
+    </nav>
+  {%- endif -%}
+
+  <div class="m2-subpage__inner">
+    <header class="m2-subpage__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="m2-subpage__eyebrow">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h1 id="M2SubpageHeading-{{ section.id }}" class="m2-subpage__title">
+        {{ page.title | escape }}
+      </h1>
+    </header>
+
+    <div class="m2-subpage__content rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+      {{ page.content }}
+    </div>
   </div>
 </div>
 
@@ -29,6 +45,24 @@
   "tag": "section",
   "class": "section",
   "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_breadcrumb",
+      "label": "パンくずを表示",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "breadcrumb_parent",
+      "label": "パンくず親ラベル",
+      "default": "TOP"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "英字見出し",
+      "default": "PAGE"
+    },
     {
       "type": "header",
       "content": "t:sections.all.padding.section_padding_heading"
