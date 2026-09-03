@@ -1,23 +1,19 @@
-<style type="text/css">
-  .template-404 .title + * {
-    margin-top: 1rem;
-  }
+<div class="template-404 m2-error-page">
+  <nav class="m2-storefront-breadcrumb" aria-label="パンくずリスト">
+    <a href="{{ routes.root_url }}">TOP</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">404</span>
+  </nav>
 
-  @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
-    }
-  }
-</style>
-
-<div class="template-404 page-width page-margin center">
-  <p>
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {{ 'templates.404.title' | t }}
-  </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
+  <div class="m2-error-page__inner page-width center">
+    <p class="m2-storefront-eyebrow">404 ERROR</p>
+    <h1 class="title">{{ 'templates.404.title' | t }}</h1>
+    <p class="m2-error-page__message">
+      お探しのページは削除されたか、URLが変更された可能性があります。
+    </p>
+    <div class="m2-error-page__actions">
+      <a href="{{ routes.root_url }}" class="m2-storefront-button m2-storefront-button--primary">TOPへ戻る</a>
+      <a href="{{ routes.all_products_collection_url }}" class="m2-storefront-button">商品一覧を見る</a>
+    </div>
+  </div>
 </div>

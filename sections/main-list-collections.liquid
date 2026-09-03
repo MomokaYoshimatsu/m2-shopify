@@ -1,10 +1,19 @@
 {{ 'component-card.css' | asset_url | stylesheet_tag }}
 {{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
 
-<div class="page-width">
-  <h1 class="title title--primary inline-richtext{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ section.settings.title }}
-  </h1>
+<div class="m2-storefront-page m2-collection-list page-width">
+  <nav class="m2-storefront-breadcrumb" aria-label="パンくずリスト">
+    <a href="{{ routes.root_url }}">TOP</a>
+    <span aria-hidden="true">›</span>
+    <span aria-current="page">{{ section.settings.title | escape }}</span>
+  </nav>
+
+  <header class="m2-storefront-header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+    <p class="m2-storefront-eyebrow">COLLECTIONS</p>
+    <h1 class="title title--primary inline-richtext">
+      {{ section.settings.title }}
+    </h1>
+  </header>
   {%- liquid
     case section.settings.sort
       when 'products_high', 'products_low'
