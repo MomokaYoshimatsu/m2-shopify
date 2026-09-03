@@ -30,15 +30,25 @@
   view-event-payload="{{ cart | standard_event_data: 'view', context: 'page' | escape }}"
 >
   <div class="page-width">
-    <div class="title-wrapper-with-link">
-      <h1 class="title title--primary">{{ 'sections.cart.title' | t }}</h1>
-      <a href="{{ routes.all_products_collection_url }}" class="underlined-link">
-        {{- 'general.continue_shopping' | t -}}
-      </a>
-    </div>
+    <nav class="m2-cart__breadcrumb" aria-label="パンくずリスト">
+      <a href="{{ routes.root_url }}">TOP</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">{{ 'templates.cart.cart' | t }}</span>
+    </nav>
+
+    <header class="m2-cart__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
+      <p class="m2-cart__eyebrow">CART</p>
+      <h1 class="m2-cart__title">{{ 'sections.cart.title' | t }}</h1>
+      {%- if cart != empty -%}
+        <a href="{{ routes.all_products_collection_url }}" class="m2-cart__continue">
+          {{- 'general.continue_shopping' | t -}}
+          <span aria-hidden="true">›</span>
+        </a>
+      {%- endif -%}
+    </header>
 
     <div class="cart__warnings">
-      <h1 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h1>
+      <h2 class="cart__empty-text">{{ 'sections.cart.empty' | t }}</h2>
       <a href="{{ routes.all_products_collection_url }}" class="button">
         {{ 'general.continue_shopping' | t }}
       </a>

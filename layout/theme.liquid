@@ -280,6 +280,7 @@
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
     {{ 'm2-theme.css' | asset_url | stylesheet_tag }}
+    {{ 'm2-cart.css' | asset_url | stylesheet_tag }}
     {%- if template.name == 'page' and template.suffix == 'm2-about' -%}
       {{ 'm2-about.css' | asset_url | stylesheet_tag }}
     {%- endif -%}
