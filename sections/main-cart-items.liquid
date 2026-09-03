@@ -39,12 +39,6 @@
     <header class="m2-cart__header{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
       <p class="m2-cart__eyebrow">CART</p>
       <h1 class="m2-cart__title">{{ 'sections.cart.title' | t }}</h1>
-      {%- if cart != empty -%}
-        <a href="{{ routes.all_products_collection_url }}" class="m2-cart__continue">
-          {{- 'general.continue_shopping' | t -}}
-          <span aria-hidden="true">›</span>
-        </a>
-      {%- endif -%}
     </header>
 
     <div class="cart__warnings">

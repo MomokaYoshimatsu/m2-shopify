@@ -117,6 +117,9 @@
                 >
                   {{ 'sections.cart.checkout' | t }}
                 </button>
+                <a class="m2-cart__continue-button" href="{{ routes.all_products_collection_url }}">
+                  {{- 'general.continue_shopping' | t -}}
+                </a>
               </div>
 
               {%- if additional_checkout_buttons -%}
