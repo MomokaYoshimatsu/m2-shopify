@@ -24,7 +24,8 @@
         "ambassador_caption": "",
         "ambassador_name": "",
         "show_default_signature": false,
-        "button_label": ""
+        "button_label": "",
+        "button_link": ""
       }
     },
     "message": {
@@ -34,6 +35,7 @@
         "eyebrow": "MESSAGE",
         "heading": "創業者からのメッセージ",
         "image_alt": "手紙を書く手元",
+        "signature": "shopify://shop_images/1.png",
         "show_default_signature": true,
         "text": "<p>成功とは「どれだけ早く結果を出せるか」ではなく、たとえ困難に直面しても、諦めずに前へ進み続けられるかということです。</p><p>「自分たちが良いと思うものをつくるだけでは、十分ではない。本当に人々が必要としているものを届けなければならない。」この気づきが、<strong>m2 Collagen</strong>の原点となりました。</p><p>科学へのこだわり、何度でも挑戦し続ける姿勢、そして「美しさは、内側から始まる」という信念。<br/>その想いをもとに、私たちはブランドを立ち上げました。<br/>そして今では、女性だけでなく男性にも、毎日をより健やかに、自信を持って、前向きに過ごしていただける製品を、28か国以上の方々にお届けできるまでになりました。</p><p>それでも、私たちが大切にしている想いは変わりません。自分自身を大切にすることは、人生をより豊かにすること。もっと愛に満ちた毎日を。もっと健やかで、自信に満ちた毎日を。<br/>そして、もっと自分らしく輝ける毎日を。<br/>それが、<strong>「m2」＝「Me and More」</strong>に込めた私たちの想いです。<br/>「m2」は、単なるブランド名ではありません。自分自身を大切にすること。<br/>そして、昨日の自分を超えて、これからも成長し続けること。<br/>そんな想いを、私たちはこの名前に込めています。</p><p>感謝を込めて<br/>Arron Yang</p>"
       }
@@ -51,6 +53,7 @@
         "collagen_title": "平均900ダルトン。\n小ささにこだわった、超低分子コラーゲン。",
         "collagen_text": "<p>コラーゲンは配合量だけでなく、その大きさにもこだわることが大切です。m2は、韓国特許を取得した独自の技術により、<strong>平均分子量900ダルトンの超低分子コラーゲンを採用。</strong>より小さな形で摂取することで、体の中で分解する手間をなくし、そのままスムーズに吸収されます。</p>",
         "collagen_link_label": "",
+        "collagen_link": "",
         "show_pdrn": true,
         "pdrn_eyebrow": "WHAT IS m2’s PDRN",
         "pdrn_heading": "m2のPDRNは何が違う？",
@@ -58,26 +61,51 @@
         "pdrn_badge": "美容大国韓国で注目される成分",
         "pdrn_title": "世界でも数少ない技術を有する\n日本の大手企業とタッグを組んで生まれたPDRN",
         "pdrn_text": "<p>世界でも数少ないPDRN原料製造技術を有する、日本の水産大手Maruha Nichiro（マルハニチロ）社の高純度原料を採用。天然サーモン精巣から、丁寧な精密抽出プロセスを経て得られる、透明性の高い供給ラインです。</p>",
-        "pdrn_link_label": ""
+        "pdrn_link_label": "",
+        "pdrn_link": ""
       }
     },
     "recommend": {
       "type": "m2-about-recommend",
       "blocks": {
-        "product_1": { "type": "product", "settings": {} },
-        "product_2": { "type": "product", "settings": {} },
-        "product_3": { "type": "product", "settings": {} }
+        "product_1": {
+          "type": "product",
+          "settings": {
+            "product": ""
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "product": ""
+          }
+        },
+        "product_3": {
+          "type": "product",
+          "settings": {
+            "product": ""
+          }
+        }
       },
-      "block_order": ["product_1", "product_2", "product_3"],
+      "block_order": [
+        "product_1",
+        "product_2",
+        "product_3"
+      ],
       "settings": {
         "show_section": true,
         "eyebrow": "RECOMMEND",
         "heading": "おすすめ商品",
         "show_description": true,
-        "unavailable_label": "coming soon",
-        "button_label": ""
+        "button_label": "",
+        "button_link": ""
       }
     }
   },
-  "order": ["vision", "message", "science", "recommend"]
+  "order": [
+    "vision",
+    "message",
+    "science",
+    "recommend"
+  ]
 }
