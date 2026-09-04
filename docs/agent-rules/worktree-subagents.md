@@ -8,6 +8,15 @@
 - サブエージェントは、ユーザーまたは有効な上位指示が明示的に依頼・許可した場合だけ使う。
 - worktreeやサブエージェントを使う場合は、目的、担当範囲、ブランチ、重複編集を避ける方法を作業開始時に説明する。
 
+## Worker Session And Sub-Agent
+
+- Worker Sessionは、Notionの1タスクを担当する別Codexセッションまたは明示的に委任された実装担当を指す。
+- Sub-Agentは、1つのセッション内で独立した補助調査を行う担当を指す。
+- Worker Sessionの役割と戻し方は `docs/main-commander-worker-flow.md` に従う。
+- Worker Session数とSub-Agent数を混同しない。
+- 別セッションやSub-Agentを自動で作成せず、ユーザーまたは実行環境の上位指示が明示した場合だけ利用する。
+- 複数Workerを使う場合は、Notionの `Dependency`、`Branch`、`Status`、`Next Action`を更新し、同一ファイルを同時編集させない。
+
 ## Worktree Recommended
 
 以下の場合はworktreeを検討する。
@@ -44,17 +53,22 @@
 ## Worktree Workflow
 
 1. `AGENTS.md` 確認
-2. `docs/codex-handoff.md` と最新作業ログ確認
-3. Git状態確認
-4. 起動中の `shopify theme dev` があれば停止
-5. `origin/develop` を最新化
-6. `git worktree add <path> -b <作業ブランチ> origin/develop`
-7. worktree内で変更・検証
-8. 関連変更だけをcommitしてpush
-9. 元の作業ツリーから差分、commit、push状態を確認
-10. 必要なローカルプレビューを起動
-11. ユーザー確認
-12. ユーザーOK後に `作業ブランチ -> develop` のPRを作成
+2. `docs/notion-task-source.md` と対象Notionタスク確認
+3. `docs/codex-handoff.md` と最新作業ログ確認
+4. Git状態確認
+5. 起動中の `shopify theme dev` があれば停止
+6. `origin/develop` を最新化
+7. Notionを `In Progress` に更新し、branchとNext Actionを記録
+8. `git worktree add <path> -b <作業ブランチ> origin/develop`
+9. worktree内で変更・検証
+10. 関連変更だけをcommitしてpush
+11. 元の作業ツリーから差分、commit、push状態を確認
+12. WorkerはGitHub Issueへ戻しレポートを記載
+13. Main Commanderが戻しレポートと差分をレビュー
+14. 必要なローカルプレビューを起動
+15. ユーザー確認
+16. ユーザーOK後にMain Commanderが `作業ブランチ -> develop` のPRを作成
+17. PR merge後にNotionを `Done` に更新
 
 ## Cleanup
 

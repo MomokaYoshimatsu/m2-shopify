@@ -3,6 +3,8 @@
 ## Start Of Day
 
 - 最初に `AGENTS.md` を読む。
+- `docs/notion-task-source.md` を読み、Notionの対象タスク、Status、Dependency、Next Actionを確認する。
+- Main Commander / Worker運用では `docs/ai-development-workflow.md` と `docs/main-commander-worker-flow.md` を確認する。
 - `docs/codex-handoff.md` があれば最優先で読み、あわせて `docs/work-log-*.md` の最新ファイルを確認する。
 - `git status --short --branch` で現在ブランチと作業状態を確認する。
 - タスクに関係する `docs/agent-rules/*.md` を読む。
@@ -50,6 +52,8 @@
 - `main` へ直接push、直接mergeしない。
 - PRタイトルは短く具体的な日本語にする。
 - ユーザーが目視確認でOKを出す前にPRを作成しない。
+- WorkerはPRを作成しない。commit / pushとGitHub Issueの戻しレポートまでを担当する。
+- Main Commanderは戻しレポートと差分をレビューし、ユーザーOK後にPRを作成する。
 - PR本文には以下を含める。
   - 変更内容
   - 変更したファイル
@@ -68,11 +72,14 @@
 7. 変更箇所をユーザーが確認できるlocal preview URLとShopify preview URLを提示する
 8. ユーザーが明示的にプレビュー不要またはPR作成優先を指示しない限り、表示変更の確認を飛ばしてPRを作成しない
 9. ブランチ切り替えや別タスクへ移る前に、起動中のプレビューサーバーを停止する
-10. ユーザーに目視確認を依頼するときは、プレビューURLだけで済ませず、以下をまとめて提示する
+10. Worker運用では、GitHub IssueへNotionタスクURL、branch、base commit、commit、push、変更ファイル、検証結果、Preview URL、未確認事項、次の一手を含む戻しレポートを記載する
+11. Main CommanderがIssueと実差分をレビューし、NotionのStatusとNext Actionを実態に合わせる
+12. ユーザーに目視確認を依頼するときは、プレビューURLだけで済ませず、以下をまとめて提示する
     - タスクIDとタスク名
     - タスク内容と今回の変更要約
     - 確認するURL/ページ/画面
     - 具体的な確認箇所
     - PC/SPや確認幅など、必要な確認観点
     - ユーザーOK後にPR作成へ進むこと
-11. ユーザーがOKを出したらPRを作成する
+13. ユーザーがOKを出したらMain CommanderがPRを作成し、Notionを `Review` にしてPR URLを記録する
+14. PR merge確認後にだけNotionを `Done` にする

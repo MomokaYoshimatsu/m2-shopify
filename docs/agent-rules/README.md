@@ -20,6 +20,9 @@
 - `../../AGENTS.md`: 毎回確認するプロジェクト共通ルール
 - `../../README.md`: ストア、テーマID、GitHub連携、基本セットアップ
 - `../../files/`: M2のワイヤーフレーム。実装済みコードや確定仕様ではなく、デザイン検討資料として扱う
+- `../ai-development-workflow.md`: Notion起点のタスク投入、WIP、戻しレポート、PR、完了管理
+- `../main-commander-worker-flow.md`: Main Commander / Workerの役割、投入文、Issue戻しレポート
+- `../notion-task-source.md`: M2タスクDB、Data Source ID、Status、読み書き方法
 - `../codex-handoff.md`: 存在する場合に最優先で読む引き継ぎログ
 - `../work-log-*.md`: 存在する場合に最新ファイルを読む作業ログ
 
@@ -43,3 +46,4 @@
 - 未実装の機能、未作成のMetafield / Metaobject、未導入のアプリを「既存前提」として書かない。
 - Figma、ワイヤーフレーム、管理画面の状態が食い違う場合は、勝手に一方を正として実装せず、差分を整理してユーザーへ確認する。
 - 絶対禁止や毎回必要なルールは `AGENTS.md` に置き、詳細手順や長い一覧はこのディレクトリに置く。
+- Notion DBのスキーマやviewが変わった場合は、実データソースをfetchしてから `docs/notion-task-source.md` を更新する。
