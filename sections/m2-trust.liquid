@@ -1,3 +1,29 @@
+{%- liquid
+  assign metric_1_label = section.settings.metric_1_label | escape
+  assign metric_2_label = section.settings.metric_2_label | escape
+  assign metric_3_label = section.settings.metric_3_label | escape
+
+  for note_number in (1..9) reversed
+    capture note_marker
+      echo '※' | append: note_number
+    endcapture
+    capture note_markup
+      echo '<span class="m2-top-trust__inline-note">' | append: note_marker | append: '</span>'
+    endcapture
+    assign metric_1_label = metric_1_label | replace: note_marker, note_markup
+    assign metric_2_label = metric_2_label | replace: note_marker, note_markup
+    assign metric_3_label = metric_3_label | replace: note_marker, note_markup
+  endfor
+
+  assign award_count = section.blocks.size
+  assign award_sequence_repeats = 1
+  if award_count > 0
+    assign award_sequence_repeats = 15 | plus: award_count | minus: 1 | divided_by: award_count
+  endif
+  assign award_slot_count = award_count | times: award_sequence_repeats
+  assign award_animation_duration = award_slot_count | times: 16 | divided_by: 5
+-%}
+
 <section class="m2-top-trust" aria-labelledby="M2TopTrustHeading-{{ section.id }}">
   <div class="m2-top-width">
     <div class="m2-top-heading m2-top-heading--center m2-top-heading--light">
@@ -7,21 +33,40 @@
 
     <div class="m2-top-trust__metrics">
       <div class="m2-top-trust__metric m2-top-trust__metric--wide">
-        <span>{{ section.settings.primary_label | escape | newline_to_br }}</span>
-        <strong>{{ section.settings.primary_value | escape }}</strong>
-        <small>{{ section.settings.primary_note | escape }}</small>
+        <span class="m2-top-trust__metric-label">{{ section.settings.primary_label | escape | newline_to_br }}</span>
+        <div class="m2-top-trust__metric-value-line">
+          <strong class="m2-top-trust__metric-value">{{ section.settings.primary_value | escape }}</strong>
+          {%- if section.settings.primary_note != blank -%}
+            <small class="m2-top-trust__metric-note">{{ section.settings.primary_note | escape }}</small>
+          {%- endif -%}
+        </div>
       </div>
       <div class="m2-top-trust__metric">
-        <div><strong>{{ section.settings.metric_1_value | escape }}</strong><small>{{ section.settings.metric_1_note | escape }}</small></div>
-        <span>{{ section.settings.metric_1_label | escape | newline_to_br }}</span>
+        <div class="m2-top-trust__metric-value-line">
+          <strong class="m2-top-trust__metric-value">{{ section.settings.metric_1_value | escape }}</strong>
+          {%- if section.settings.metric_1_note != blank -%}
+            <small class="m2-top-trust__metric-note">{{ section.settings.metric_1_note | escape }}</small>
+          {%- endif -%}
+        </div>
+        <span class="m2-top-trust__metric-label">{{ metric_1_label | newline_to_br }}</span>
       </div>
       <div class="m2-top-trust__metric">
-        <div><strong>{{ section.settings.metric_2_value | escape }}</strong><small>{{ section.settings.metric_2_note | escape }}</small></div>
-        <span>{{ section.settings.metric_2_label | escape | newline_to_br }}</span>
+        <div class="m2-top-trust__metric-value-line">
+          <strong class="m2-top-trust__metric-value">{{ section.settings.metric_2_value | escape }}</strong>
+          {%- if section.settings.metric_2_note != blank -%}
+            <small class="m2-top-trust__metric-note">{{ section.settings.metric_2_note | escape }}</small>
+          {%- endif -%}
+        </div>
+        <span class="m2-top-trust__metric-label">{{ metric_2_label | newline_to_br }}</span>
       </div>
       <div class="m2-top-trust__metric">
-        <div><strong>{{ section.settings.metric_3_value | escape }}</strong><small>{{ section.settings.metric_3_note | escape }}</small></div>
-        <span>{{ section.settings.metric_3_label | escape | newline_to_br }}</span>
+        <div class="m2-top-trust__metric-value-line">
+          <strong class="m2-top-trust__metric-value">{{ section.settings.metric_3_value | escape }}</strong>
+          {%- if section.settings.metric_3_note != blank -%}
+            <small class="m2-top-trust__metric-note">{{ section.settings.metric_3_note | escape }}</small>
+          {%- endif -%}
+        </div>
+        <span class="m2-top-trust__metric-label">{{ metric_3_label | newline_to_br }}</span>
       </div>
     </div>
     <div class="m2-top-trust__notes">{{ section.settings.notes }}</div>
@@ -29,18 +74,22 @@
 
   {%- if section.blocks.size > 0 -%}
     <div class="m2-top-trust__awards" aria-label="{{ section.settings.awards_label | escape }}">
-      <div class="m2-top-trust__track">
+      <div class="m2-top-trust__track" style="--m2-awards-duration: {{ award_animation_duration }}s;">
         {%- for duplicate in (1..2) -%}
           <div class="m2-top-trust__group"{% if duplicate == 2 %} aria-hidden="true"{% endif %}>
-            {%- for block in section.blocks -%}
-              {%- assign award_number = forloop.index | prepend: '0' | slice: -2, 2 -%}
-              {%- capture fallback_asset -%}m2-top-award-{{ award_number }}.png{%- endcapture -%}
-              <div class="m2-top-trust__award"{% if duplicate == 1 %} {{ block.shopify_attributes }}{% endif %}>
-                {%- if block.settings.image != blank -%}
-                  {{ block.settings.image | image_url: width: 240 | image_tag: widths: '100, 160, 240', sizes: '100px', loading: 'lazy', alt: block.settings.alt }}
-                {%- else -%}
-                  <img src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.alt | escape }}" width="100" height="100" loading="lazy">
-                {%- endif -%}
+            {%- for sequence in (1..award_sequence_repeats) -%}
+              <div class="m2-top-trust__sequence"{% unless duplicate == 1 and sequence == 1 %} aria-hidden="true"{% endunless %}>
+                {%- for block in section.blocks -%}
+                  {%- assign award_number = forloop.index | prepend: '0' | slice: -2, 2 -%}
+                  {%- capture fallback_asset -%}m2-top-award-{{ award_number }}.png{%- endcapture -%}
+                  <div class="m2-top-trust__award"{% if duplicate == 1 and sequence == 1 %} {{ block.shopify_attributes }}{% endif %}>
+                    {%- if block.settings.image != blank -%}
+                      {{ block.settings.image | image_url: width: 240 | image_tag: widths: '100, 160, 240', sizes: '100px', loading: 'lazy', alt: block.settings.alt }}
+                    {%- else -%}
+                      <img src="{{ fallback_asset | asset_url }}" alt="{{ block.settings.alt | escape }}" width="100" height="100" loading="lazy">
+                    {%- endif -%}
+                  </div>
+                {%- endfor -%}
               </div>
             {%- endfor -%}
           </div>

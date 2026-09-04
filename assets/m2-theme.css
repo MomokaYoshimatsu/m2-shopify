@@ -1712,6 +1712,9 @@ body {
 
 /* Trust */
 .m2-top-trust {
+  position: relative;
+  z-index: 1;
+  isolation: isolate;
   padding: 6rem 0;
   overflow: hidden;
   background: linear-gradient(90deg, var(--m2-top-red-dark), var(--m2-top-red-light));
@@ -1738,29 +1741,48 @@ body {
   text-align: center;
 }
 
-.m2-top-trust__metric strong {
+.m2-top-trust__metric-value-line {
+  display: inline-flex;
+  align-items: flex-end;
+  max-width: 100%;
+  min-width: 0;
+  flex: 0 0 auto;
+}
+
+.m2-top-trust__metric-value {
+  min-width: 0;
   color: var(--m2-top-yellow);
   font-family: Montserrat, var(--font-body-family);
   font-size: clamp(3rem, 9vw, 4.4rem);
   letter-spacing: 0.04em;
   line-height: 1.25;
+  overflow-wrap: anywhere;
 }
 
-.m2-top-trust__metric > div {
-  display: flex;
-  align-items: flex-end;
-}
-
-.m2-top-trust__metric span {
+.m2-top-trust__metric-label {
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   line-height: 1.5;
 }
 
-.m2-top-trust__metric small {
+.m2-top-trust__metric-note {
+  flex: 0 0 auto;
   margin-left: 0.3rem;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  transform: translateY(0.2rem);
+}
+
+@media screen and (max-width: 374px) {
+  .m2-top-trust__metric-note {
+    margin-left: 0.1rem;
+  }
+}
+
+.m2-top-trust__inline-note {
+  font-size: 1rem;
+  line-height: 1;
 }
 
 .m2-top-trust__metric--wide {
@@ -1781,19 +1803,31 @@ body {
 }
 
 .m2-top-trust__awards {
+  position: relative;
+  z-index: 2;
   margin-top: 4.5rem;
   overflow: hidden;
 }
 
 .m2-top-trust__track {
+  position: relative;
+  z-index: 1;
   display: flex;
   width: max-content;
-  animation: m2-awards-marquee 32s linear infinite;
+  animation: m2-awards-marquee var(--m2-awards-duration, 32s) linear infinite;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 .m2-top-trust__group {
   display: flex;
+  flex: 0 0 auto;
+}
+
+.m2-top-trust__sequence {
+  display: flex;
   align-items: center;
+  flex: 0 0 auto;
   gap: 4rem;
   padding-right: 4rem;
 }
@@ -1814,7 +1848,7 @@ body {
 }
 
 @keyframes m2-awards-marquee {
-  to { transform: translateX(-50%); }
+  to { transform: translate3d(-50%, 0, 0); }
 }
 
 /* Products */
@@ -2839,6 +2873,10 @@ body {
   }
 
   .m2-top-trust__group[aria-hidden='true'] {
+    display: none;
+  }
+
+  .m2-top-trust__sequence[aria-hidden='true'] {
     display: none;
   }
 }
