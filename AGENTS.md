@@ -6,11 +6,42 @@
 - 既存デザイン、Figma、これまでの作業ログ、Shopify管理画面での運用を前提に作業します。
 - 本番テーマやストア設定に影響する作業は慎重に扱います。
 
+## Rule Documents
+- `AGENTS.md` は毎回読む最小ルールです。
+- 詳細ルールの索引は `docs/agent-rules/README.md` を参照します。
+- AI開発の全体フローは `docs/ai-development-workflow.md` に従います。
+- Main Commander / Workerの役割分担は `docs/main-commander-worker-flow.md` に従います。
+- NotionタスクDBの接続先、スキーマ、Status定義、読み書きルールは `docs/notion-task-source.md` に従います。
+- ルールが矛盾する場合は、実行環境の上位指示、ユーザーの最新指示、このファイル、詳細ルールの順で優先し、同順位では本番・データ・既存変更の保護を優先します。
+
 ## Start Of Day Rule
 - 1日の作業を始める時は、最初に必ず `AGENTS.md` と作業ログを読む。
 - 作業ログは `docs/codex-handoff.md` があれば最優先で読み、あわせて `docs/work-log-*.md` の最新ファイルも確認する。
+- タスク投入、実装開始、WIP確認、確認待ち確認、戻しレビューでは `docs/notion-task-source.md` を読み、Notionの `M2 タスク一覧` と対象タスクを確認する。
+- 対象タスクがある場合は、Task ID、タスクURL、Status、Dependency、Next Actionを確認する。
 - 作業ログを読んだうえで、直近の変更内容、未完了タスク、注意点を把握してから作業に入る。
 - 作業ログが存在しない場合は、その旨をユーザーに伝え、Git履歴や差分から状況を確認する。
+- Notion、作業ログ、Git、Issue / PR、Figma、Shopifyの事実が矛盾する場合は、実装を開始せず差分をユーザーへ報告する。
+
+## Notion Task Rule
+- タスクの正本はNotionの `M2 タスク一覧` とする。
+- Database URL: `https://app.notion.com/p/9843b44a1ff7457f804b113472261610`
+- Data Source URL: `collection://43ab4097-0d32-4e5a-bd13-936ae0251d07`
+- ユーザーが「タスク化」「Notionへ追加」「タスク一覧で管理」と依頼した場合は、既存タスクを検索して重複を避けたうえで作成・更新してよい。
+- 実装開始時は `In Progress`、ユーザー判断待ちは `Waiting PM`、ブロックは `Blocked`、PR作成後は `Review`、PR merge後は `Done` を基本とする。
+- Status更新時は `Branch`、`PR URL`、`Preview URL`、`Blocked Reason`、`Next Action`も実態に合わせて更新する。
+- `Done` はPR merge済み、またはコード変更を伴わない成果物が明確に完了した場合だけ設定する。
+- DBスキーマ、プロパティ、ビュー、既存タスクの一括変更、削除・アーカイブは、ユーザーの個別指示なしに行わない。
+- Notionへ接続できない場合は、接続できなかったDB、実行予定だった操作、暫定判断を報告し、書き込み済みと扱わない。
+
+## Main Commander / Worker Rule
+- Main CommanderはNotion、作業ログ、Git、GitHub Issue / PRを確認し、タスク選定、投入文、戻しレビュー、ユーザー確認、PR作成、Done更新を担当する。
+- Workerは原則1タスク、1branch、1worktreeで調査、実装、検証、commit、pushを担当する。
+- WorkerはPR、merge、本番反映を行わず、完了時にGitHub Issueへ戻しレポートを記載する。
+- Main Commanderは戻しレポートと実差分をレビューし、ユーザーへdevelopment themeのプレビューを提示する。ユーザーOK後にだけPRを作成する。
+- 単一セッションが両役割を兼ねる場合も、Notion更新、作業branch、戻しレビュー、ユーザー確認、PRのゲートを省略しない。
+- 別の作業者セッションやサブエージェントは、ユーザーまたは実行環境の上位指示が明示した場合だけ利用する。
+- `In Progress`は原則5件、`Waiting PM`は原則4件までとし、確認待ちが上限に達したら新規投入より確認消化を優先する。
 
 ## Store
 - ストアURL: `m2-test-zyzvnzan.myshopify.com`
@@ -42,6 +73,8 @@
   5. `shopify theme dev` でローカルプレビューを起動する
   6. ユーザーに目視確認を依頼する
   7. ユーザーがOKを出したらPRを作成する
+- Worker運用では、commit / push後にGitHub Issueへ `戻しレポート: <Task ID> <タスク名>` の形式で戻しレポートを記載し、PRを作成せずMain Commanderへ返す。Task IDは `M2-1` のようにNotionの自動採番値をそのまま使う。
+- 戻しレポートにはNotionタスクURL、branch、base commit、commit、push状態、変更ファイル、検証結果、Preview URL、未確認事項、次の一手を含める。
 - ユーザーから明示的に「コミットしないで」と指示された場合のみ、コミットしない。
 - コミットメッセージとPRタイトルは、日本語で変更内容を要約したタイトルにする。
 - PRタイトルは短く具体的にし、例として「管理画面作業ルールを追加」「商品ページの表示崩れを修正」のように書く。
@@ -162,3 +195,5 @@ Codexが直接作業できない場合、またはログイン・権限・2段�
 - 不要なアプリ追加や課金操作。
 - ユーザー承認なしのShopify管理画面変更。
 - テーマエディター設定や画像設定を意図せず上書きするpush。
+- ユーザー指示なしのNotion DBスキーマ、プロパティ、ビュー、既存タスクの一括変更、削除・アーカイブ。
+- PR merge前にNotionタスクを `Done` にすること。
