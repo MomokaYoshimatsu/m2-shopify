@@ -71,26 +71,26 @@
         "product_1": {
           "type": "product",
           "settings": {
-            "product": ""
-          }
-        },
-        "product_2": {
-          "type": "product",
-          "settings": {
-            "product": ""
+            "product": "super-collagen-drink-6000mg"
           }
         },
         "product_3": {
           "type": "product",
           "settings": {
-            "product": ""
+            "product": "premium-collagen-3000mg-pdrn"
+          }
+        },
+        "product_2": {
+          "type": "product",
+          "settings": {
+            "product": "プレミアムコラーゲンゼリー2000-pdrn"
           }
         }
       },
       "block_order": [
         "product_1",
-        "product_2",
-        "product_3"
+        "product_3",
+        "product_2"
       ],
       "settings": {
         "show_section": true,
