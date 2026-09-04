@@ -64,15 +64,24 @@
 {%- endstyle -%}
 
 {% paginate search.results by 24 %}
-  <div class="template-search{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
+  <div class="template-search m2-storefront-page m2-search-page{% unless search.performed and search.results_count > 0 %} template-search--empty{% endunless %} section-{{ section.id }}-padding">
+    <nav class="m2-storefront-breadcrumb page-width" aria-label="パンくずリスト">
+      <a href="{{ routes.root_url }}">TOP</a>
+      <span aria-hidden="true">›</span>
+      <span aria-current="page">{{ 'general.search.search' | t }}</span>
+    </nav>
+
     <div class="template-search__header page-width{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      <h1 class="h2 center">
-        {%- if search.performed -%}
-          {{- 'templates.search.title' | t -}}
-        {%- else -%}
-          {{- 'general.search.search' | t -}}
-        {%- endif -%}
-      </h1>
+      <header class="m2-storefront-header">
+        <p class="m2-storefront-eyebrow">SEARCH</p>
+        <h1 class="h2 center">
+          {%- if search.performed -%}
+            {{- 'templates.search.title' | t -}}
+          {%- else -%}
+            {{- 'general.search.search' | t -}}
+          {%- endif -%}
+        </h1>
+      </header>
       <div class="template-search__search">
         {%- if settings.predictive_search_enabled -%}
           <predictive-search data-loading-text="{{ 'accessibility.loading' | t }}">
@@ -141,7 +150,10 @@
           {%- endif -%}
         {%- endunless -%}
         {%- if search.results_count == 0 and search.filters == empty -%}
-          <p role="status">{{ 'templates.search.no_results' | t: terms: search.terms }}</p>
+          <div class="m2-search-empty">
+            <p role="status">{{ 'templates.search.no_results' | t: terms: search.terms }}</p>
+            <a href="{{ routes.all_products_collection_url }}" class="m2-storefront-button">商品一覧を見る</a>
+          </div>
         {%- endif -%}
       {%- endif -%}
     </div>
@@ -264,7 +276,7 @@
                   {%- endif -%}
 
                   <li
-                    class="grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+                    class="grid__item m2-search-result m2-search-result--{{ item.object_type }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
                     {% if settings.animations_reveal_on_scroll %}
                       data-cascade
                     {% endif %}
