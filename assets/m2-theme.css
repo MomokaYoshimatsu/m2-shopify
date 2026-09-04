@@ -1769,14 +1769,13 @@ body {
 .m2-top-trust__metric-note {
   flex: 0 0 auto;
   margin-left: 0.3rem;
+  margin-bottom: 0.4rem;
   font-size: 1rem;
-  line-height: 1.5;
-  transform: translateY(0.2rem);
 }
 
 @media screen and (max-width: 374px) {
-  .m2-top-trust__metric-note {
-    margin-left: 0.1rem;
+  .m2-top-trust__metric--wide .m2-top-trust__metric-value {
+    letter-spacing: 0.03em;
   }
 }
 
