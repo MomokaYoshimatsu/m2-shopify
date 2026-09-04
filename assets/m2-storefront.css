@@ -102,7 +102,6 @@ body.template-404 {
 }
 
 .m2-storefront-header .title,
-.m2-storefront-hero .collection-hero__title,
 .m2-error-page .title {
   margin: 1.6rem 0 0;
   color: var(--m2-ink);
@@ -149,8 +148,8 @@ body.template-404 {
 }
 
 /* Collection header */
-.m2-storefront-hero {
-  padding-top: 2rem;
+.collection-hero.m2-storefront-hero {
+  padding-top: 4rem;
   background: var(--m2-storefront-bg);
 }
 
@@ -169,6 +168,17 @@ body.template-404 {
   align-items: center;
   padding: 0;
   text-align: center;
+}
+
+.m2-storefront-hero .collection-hero__title {
+  margin: 3rem 0 0;
+  color: var(--m2-storefront-accent);
+  font-family: var(--font-heading-family);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  line-height: 1.67;
+  overflow-wrap: anywhere;
 }
 
 .m2-storefront-hero .collection-hero__description {
@@ -198,10 +208,10 @@ body.template-404 {
 
 /* Product grids, filters and cards */
 .m2-storefront-grid {
-  --grid-desktop-horizontal-spacing: 2rem;
-  --grid-desktop-vertical-spacing: 3rem;
+  --grid-desktop-horizontal-spacing: 2.5rem;
+  --grid-desktop-vertical-spacing: 2.5rem;
   --grid-mobile-horizontal-spacing: 1.2rem;
-  --grid-mobile-vertical-spacing: 2rem;
+  --grid-mobile-vertical-spacing: 5rem;
   background: var(--m2-storefront-bg);
 }
 
@@ -258,6 +268,15 @@ body.template-404 {
 .m2-storefront-grid .product-grid,
 .m2-search-page .product-grid {
   margin-top: 0;
+}
+
+.m2-storefront-grid .collection.page-width {
+  max-width: calc(var(--m2-top-width) + (var(--m2-top-gutter) * 2));
+}
+
+.m2-storefront-grid .m2-top-product,
+.m2-storefront-grid product-component {
+  height: 100%;
 }
 
 .m2-storefront-grid .product-grid > .grid__item,
@@ -614,13 +633,18 @@ body.template-404 {
   margin-top: 4rem;
 }
 
+@media screen and (min-width: 1024px) {
+  .collection-hero.m2-storefront-hero {
+    padding-top: 6rem;
+  }
+}
+
 @media screen and (max-width: 1023px) {
   .m2-storefront-eyebrow {
     font-size: 2rem;
   }
 
   .m2-storefront-header .title,
-  .m2-storefront-hero .collection-hero__title,
   .m2-error-page .title {
     font-size: 2.8rem;
   }
