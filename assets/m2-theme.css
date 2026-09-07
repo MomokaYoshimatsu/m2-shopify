@@ -1333,7 +1333,7 @@ body {
 }
 
 .m2-top-hero__media img {
-  object-fit: cover;
+  object-fit: contain;
   object-position: 64% center;
 }
 
