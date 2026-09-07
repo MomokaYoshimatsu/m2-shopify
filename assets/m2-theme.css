@@ -1297,20 +1297,19 @@ body {
 .m2-top-hero {
   position: relative;
   display: block;
-  min-height: 63.9rem;
+  aspect-ratio: 750 / 1278;
   overflow: hidden;
   background: var(--m2-top-red);
 }
 
 .m2-top-hero__slides {
-  position: relative;
-  min-height: inherit;
+  position: absolute;
+  inset: 0;
 }
 
 .m2-top-hero__slide {
   position: absolute;
   inset: 0;
-  min-height: inherit;
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
@@ -1321,14 +1320,6 @@ body {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
-}
-
-.m2-top-hero__slide::after {
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  background: linear-gradient(90deg, rgb(117 0 14 / 45%) 0%, rgb(150 0 20 / 28%) 48%, transparent 78%);
-  content: '';
 }
 
 .m2-top-hero__media,
@@ -1343,37 +1334,6 @@ body {
 .m2-top-hero__media img {
   object-fit: cover;
   object-position: 64% center;
-}
-
-.m2-top-hero__inner {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  min-height: inherit;
-  padding: 3.5rem 3.4rem 0 3.5rem;
-}
-
-.m2-top-hero__heading {
-  width: 100%;
-  margin: 0;
-  color: #fff;
-  font-family: 'Noto Serif JP', serif;
-  font-size: clamp(4.2rem, 13.333vw, 5rem);
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  line-height: 1.4;
-}
-
-.m2-top-hero__heading span {
-  display: block;
-  white-space: nowrap;
-}
-
-.m2-top-hero__inner .m2-top-button {
-  margin-top: 3rem;
 }
 
 .m2-top-hero__pagination {
@@ -1404,10 +1364,6 @@ body {
 }
 
 @media screen and (max-width: 1023px) {
-  .m2-top-hero__slide::after {
-    display: none;
-  }
-
   .m2-top-hero__media img {
     object-position: center;
   }
@@ -2491,28 +2447,11 @@ body {
   }
 
   .m2-top-hero {
-    min-height: min(69.6rem, 48.333vw);
-  }
-
-  .m2-top-hero__slide::after {
-    display: none;
+    aspect-ratio: 2880 / 1392;
   }
 
   .m2-top-hero__media img {
     object-position: center;
-  }
-
-  .m2-top-hero__inner {
-    justify-content: center;
-    padding: 5rem var(--m2-top-gutter) 8rem;
-    padding-left: max(var(--m2-top-gutter), calc((100vw - 110rem) / 2));
-  }
-
-  .m2-top-hero__heading {
-    width: 46rem;
-    font-size: clamp(5rem, 5.14vw, 7.4rem);
-    line-height: 1.4;
-    text-shadow: 0 0.2rem 1.2rem rgb(80 0 0 / 36%);
   }
 
   .m2-top-hero__pagination {
