@@ -527,17 +527,6 @@ cart-notification .product-option {
   line-height: 1.6;
 }
 
-cart-notification .cart-notification__links .button--secondary {
-  border: 0.1rem solid var(--m2-cart-accent);
-  background: #fff;
-  color: var(--m2-cart-accent);
-}
-
-cart-notification .cart-notification__links .button--secondary:hover {
-  background: #fff4f6;
-  color: var(--m2-cart-accent-dark);
-}
-
 /* Cart drawer */
 cart-drawer .drawer {
   background: rgba(29, 29, 27, 0.46);

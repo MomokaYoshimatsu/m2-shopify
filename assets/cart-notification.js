@@ -108,7 +108,7 @@ class CartNotification extends HTMLElement {
   isSuccessfulCartAdd(parsedState) {
     if (!parsedState || parsedState.status || !parsedState.key || !parsedState.sections) return false;
 
-    return ['cart-notification-product', 'cart-notification-button', 'cart-icon-bubble'].every(
+    return ['cart-notification-product', 'cart-icon-bubble'].every(
       (sectionId) => typeof parsedState.sections[sectionId] === 'string'
     );
   }
@@ -147,9 +147,6 @@ class CartNotification extends HTMLElement {
       {
         id: 'cart-notification-product',
         selector: `[id="cart-notification-product-${this.cartItemKey}"]`,
-      },
-      {
-        id: 'cart-notification-button',
       },
       {
         id: 'cart-icon-bubble',
