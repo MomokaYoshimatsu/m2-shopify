@@ -459,6 +459,10 @@ cart-notification .cart-notification {
   font-family: var(--m2-font-family);
 }
 
+cart-notification .cart-notification[hidden] {
+  display: none;
+}
+
 cart-notification .cart-notification.focused,
 cart-notification .cart-notification:focus-visible {
   box-shadow: 0 1.2rem 3.2rem rgba(38, 38, 36, 0.16);

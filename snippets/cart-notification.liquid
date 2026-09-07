@@ -16,6 +16,9 @@
       class="cart-notification focus-inset{% if color_scheme %} color-{{ color_scheme }} gradient{% endif %}"
       aria-modal="true"
       aria-label="{{ 'general.cart.item_added' | t }}"
+      aria-hidden="true"
+      inert
+      hidden
       role="dialog"
       tabindex="-1"
     >
