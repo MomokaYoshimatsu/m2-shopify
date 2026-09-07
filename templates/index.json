@@ -190,7 +190,6 @@
         "show_feature_badges": true,
         "feature_badge_1": "高濃度\nコラーゲン\n6000mg",
         "feature_badge_2": "コラーゲン\n＋\nPDRN",
-        "unavailable_label": "coming soon",
         "show_view_all": false,
         "view_all_label": "VIEW ALL"
       }
@@ -217,36 +216,12 @@
           "type": "shop",
           "settings": {
             "label": "ドン・キホーテ",
-            "link": ""
-          }
-        },
-        "shop_02": {
-          "type": "shop",
-          "settings": {
-            "label": "ドン・キホーテ",
-            "link": ""
-          }
-        },
-        "shop_03": {
-          "type": "shop",
-          "settings": {
-            "label": "ドン・キホーテ",
-            "link": ""
-          }
-        },
-        "shop_04": {
-          "type": "shop",
-          "settings": {
-            "label": "ドン・キホーテ",
-            "link": ""
+            "link": "https://www.donki.com/store/shop_list.php"
           }
         }
       },
       "block_order": [
-        "shop_01",
-        "shop_02",
-        "shop_03",
-        "shop_04"
+        "shop_01"
       ],
       "settings": {
         "eyebrow": "SHOP LIST",
