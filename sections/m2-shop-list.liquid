@@ -1,0 +1,95 @@
+{{ 'm2-shop-list.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign has_complete_shop = false
+
+  for block in section.blocks
+    if block.settings.label != blank and block.settings.link != blank
+      assign has_complete_shop = true
+      break
+    endif
+  endfor
+-%}
+
+<section
+  class="m2-top-shop-list m2-top-width"
+  id="shop-list"
+  aria-labelledby="M2TopShopListHeading-{{ section.id }}"
+>
+  <header class="m2-top-shop-list__header">
+    <div class="m2-top-heading m2-top-shop-list__heading">
+      {%- if section.settings.eyebrow != blank -%}
+        <p class="m2-top-label">{{ section.settings.eyebrow | escape }}</p>
+      {%- endif -%}
+      <h2 id="M2TopShopListHeading-{{ section.id }}">{{ section.settings.heading | escape }}</h2>
+    </div>
+
+    {%- if section.settings.description != blank -%}
+      <p class="m2-top-shop-list__description">{{ section.settings.description | escape | newline_to_br }}</p>
+    {%- endif -%}
+  </header>
+
+  {%- if has_complete_shop or request.design_mode -%}
+    <ul class="m2-top-shop-list__items" role="list">
+      {%- for block in section.blocks -%}
+        {%- if block.settings.label != blank and block.settings.link != blank -%}
+          <li class="m2-top-shop-list__item" {{ block.shopify_attributes }}>
+            <a class="m2-top-shop-list__button" href="{{ block.settings.link }}">
+              {{- block.settings.label | escape -}}
+            </a>
+          </li>
+        {%- elsif request.design_mode -%}
+          <li class="m2-top-shop-list__item" {{ block.shopify_attributes }}>
+            <p class="m2-top-shop-list__incomplete">
+              「ボタンテキスト」と「リンクURL」の両方を設定してください。
+            </p>
+          </li>
+        {%- endif -%}
+      {%- else -%}
+        <li class="m2-top-shop-list__empty">
+          <p class="m2-top-editor-note">ショップボタンを追加してください。</p>
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "M2 TOP SHOP LIST",
+  "tag": "div",
+  "class": "m2-section-wrapper",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "英字見出し", "default": "SHOP LIST" },
+    { "type": "text", "id": "heading", "label": "日本語見出し", "default": "ショップリスト" },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "説明文",
+      "default": "一部お取扱のない店舗もございます。在庫については店舗様へ直接お問い合わせください。"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "shop",
+      "name": "ショップボタン",
+      "settings": [
+        { "type": "text", "id": "label", "label": "ボタンテキスト", "default": "ドン・キホーテ" },
+        { "type": "url", "id": "link", "label": "リンクURL" }
+      ]
+    }
+  ],
+  "max_blocks": 12,
+  "presets": [
+    {
+      "name": "M2 TOP SHOP LIST",
+      "blocks": [
+        { "type": "shop" },
+        { "type": "shop" },
+        { "type": "shop" },
+        { "type": "shop" }
+      ]
+    }
+  ]
+}
+{% endschema %}

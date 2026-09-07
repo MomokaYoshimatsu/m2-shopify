@@ -210,6 +210,50 @@
         "button_link": "shopify://pages/about"
       }
     },
+    "m2_shop_list": {
+      "type": "m2-shop-list",
+      "blocks": {
+        "shop_01": {
+          "type": "shop",
+          "settings": {
+            "label": "ドン・キホーテ",
+            "link": ""
+          }
+        },
+        "shop_02": {
+          "type": "shop",
+          "settings": {
+            "label": "ドン・キホーテ",
+            "link": ""
+          }
+        },
+        "shop_03": {
+          "type": "shop",
+          "settings": {
+            "label": "ドン・キホーテ",
+            "link": ""
+          }
+        },
+        "shop_04": {
+          "type": "shop",
+          "settings": {
+            "label": "ドン・キホーテ",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "shop_01",
+        "shop_02",
+        "shop_03",
+        "shop_04"
+      ],
+      "settings": {
+        "eyebrow": "SHOP LIST",
+        "heading": "ショップリスト",
+        "description": "一部お取扱のない店舗もございます。在庫については店舗様へ直接お問い合わせください。"
+      }
+    },
     "m2_news": {
       "type": "m2-news",
       "blocks": {
@@ -324,6 +368,7 @@
     "m2_trust",
     "m2_products",
     "m2_science",
+    "m2_shop_list",
     "m2_news",
     "m2_social"
   ]
