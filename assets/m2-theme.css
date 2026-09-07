@@ -1297,20 +1297,19 @@ body {
 .m2-top-hero {
   position: relative;
   display: block;
-  min-height: 63.9rem;
+  aspect-ratio: 750 / 1278;
   overflow: hidden;
   background: var(--m2-top-red);
 }
 
 .m2-top-hero__slides {
-  position: relative;
-  min-height: inherit;
+  position: absolute;
+  inset: 0;
 }
 
 .m2-top-hero__slide {
   position: absolute;
   inset: 0;
-  min-height: inherit;
   opacity: 0;
   pointer-events: none;
   visibility: hidden;
@@ -1333,7 +1332,7 @@ body {
 }
 
 .m2-top-hero__media img {
-  object-fit: contain;
+  object-fit: cover;
   object-position: 64% center;
 }
 
@@ -2448,7 +2447,7 @@ body {
   }
 
   .m2-top-hero {
-    min-height: min(69.6rem, 48.333vw);
+    aspect-ratio: 2880 / 1392;
   }
 
   .m2-top-hero__media img {
