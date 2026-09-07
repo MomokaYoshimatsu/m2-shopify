@@ -1,7 +1,11 @@
 {%- liquid
   assign is_policy_page = false
+  assign is_legal_notice_page = false
   if request.path contains '/policies/'
     assign is_policy_page = true
+  endif
+  if request.path contains '/policies/legal-notice'
+    assign is_legal_notice_page = true
   endif
 -%}
 <!doctype html>
@@ -338,7 +342,7 @@
     </script>
   </head>
 
-  <body class="gradient m2-site-shell template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}--{{ template.suffix }}{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
+  <body class="gradient m2-site-shell template-{{ template.name }}{% if template.suffix %} template-{{ template.name }}--{{ template.suffix }}{% endif %}{% if is_legal_notice_page %} m2-policy--legal-notice{% endif %}{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
     <a class="skip-to-content-link button visually-hidden" href="#MainContent">
       {{ 'accessibility.skip_to_text' | t }}
     </a>

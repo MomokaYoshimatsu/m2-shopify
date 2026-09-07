@@ -281,6 +281,44 @@
   font-weight: 700;
 }
 
+.m2-policy--legal-notice .shopify-policy__body table {
+  display: table;
+  width: 100% !important;
+  height: auto !important;
+  margin-inline: auto;
+  overflow: visible;
+  table-layout: fixed;
+}
+
+.m2-policy--legal-notice .shopify-policy__body table tr,
+.m2-policy--legal-notice .shopify-policy__body table :is(th, td) {
+  height: auto !important;
+}
+
+.m2-policy--legal-notice .shopify-policy__body table :is(th, td) {
+  width: auto !important;
+  min-width: 0;
+  box-sizing: border-box;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.m2-policy--legal-notice .shopify-policy__body table pre {
+  max-width: 100%;
+  margin: 0;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.m2-policy--legal-notice .shopify-policy__body table th {
+  width: 30% !important;
+}
+
+.m2-policy--legal-notice .shopify-policy__body table td {
+  width: 70% !important;
+}
+
 .m2-subpage__content .button {
   min-height: 5rem;
   padding: 1.4rem 3.2rem;
@@ -330,6 +368,20 @@
 .shopify-policy__body .rte {
   color: inherit;
   font: inherit;
+}
+
+@media (max-width: 1023px) {
+  .m2-policy--legal-notice .shopify-policy__body table :is(th, td) {
+    padding: 1.2rem 1rem;
+  }
+
+  .m2-policy--legal-notice .shopify-policy__body table th {
+    width: 38% !important;
+  }
+
+  .m2-policy--legal-notice .shopify-policy__body table td {
+    width: 62% !important;
+  }
 }
 
 @media (min-width: 1024px) {
