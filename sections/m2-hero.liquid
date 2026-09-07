@@ -10,10 +10,7 @@
       {%- for block in section.blocks -%}
         {%- liquid
           assign desktop_image = block.settings.image | default: section.settings.image
-          assign mobile_image = block.settings.mobile_image | default: section.settings.mobile_image | default: desktop_image
-          assign slide_heading = block.settings.heading | default: section.settings.heading
-          assign button_label = block.settings.button_label | default: section.settings.button_label
-          assign button_link = block.settings.button_link | default: section.settings.button_link
+          assign mobile_image = block.settings.mobile_image | default: section.settings.mobile_image
           assign image_loading = 'lazy'
           assign image_fetchpriority = 'auto'
           if forloop.first
@@ -38,7 +35,7 @@
                 sizes="100vw"
               >
             {%- else -%}
-              <source media="(max-width: 1023px)" srcset="{{ 'm2-top-hero-sp.jpg' | asset_url }}">
+              <source media="(max-width: 1023px)" srcset="{{ 'kv01_sp.jpg' | asset_url }}">
             {%- endif -%}
             {%- if desktop_image != blank -%}
               {{
@@ -52,7 +49,7 @@
               }}
             {%- else -%}
               <img
-                src="{{ 'm2-top-hero.jpg' | asset_url }}"
+                src="{{ 'kv01_pc.jpg' | asset_url }}"
                 alt=""
                 width="2880"
                 height="1392"
@@ -62,28 +59,12 @@
             {%- endif -%}
           </picture>
 
-          <div class="m2-top-hero__inner">
-            {%- if slide_heading != blank -%}
-              {%- assign heading_lines = slide_heading | newline_to_br | split: '<br />' -%}
-              <h2 class="m2-top-hero__heading">
-                {%- for heading_line in heading_lines -%}
-                  <span>{{ heading_line | strip | escape }}</span>
-                {%- endfor -%}
-              </h2>
-            {%- endif -%}
-            {%- if button_label != blank and button_link != blank -%}
-              <a class="m2-top-button m2-top-button--light" href="{{ button_link }}">
-                {{ button_label | escape }}
-              </a>
-            {%- endif -%}
-          </div>
         </article>
       {%- endfor -%}
     {%- else -%}
       {%- liquid
         assign desktop_image = section.settings.image
-        assign mobile_image = section.settings.mobile_image | default: desktop_image
-        assign heading_lines = section.settings.heading | newline_to_br | split: '<br />'
+        assign mobile_image = section.settings.mobile_image
       -%}
       <article class="m2-top-hero__slide is-active" data-m2-hero-slide aria-hidden="false">
         <picture class="m2-top-hero__media" aria-hidden="true">
@@ -94,24 +75,14 @@
               sizes="100vw"
             >
           {%- else -%}
-            <source media="(max-width: 1023px)" srcset="{{ 'm2-top-hero-sp.jpg' | asset_url }}">
+            <source media="(max-width: 1023px)" srcset="{{ 'kv01_sp.jpg' | asset_url }}">
           {%- endif -%}
           {%- if desktop_image != blank -%}
             {{ desktop_image | image_url: width: 2880 | image_tag: widths: '1024, 1280, 1440, 1920, 2400, 2880', sizes: '100vw', loading: 'eager', fetchpriority: 'high' }}
           {%- else -%}
-            <img src="{{ 'm2-top-hero.jpg' | asset_url }}" alt="" width="2880" height="1392" loading="eager" fetchpriority="high">
+            <img src="{{ 'kv01_pc.jpg' | asset_url }}" alt="" width="2880" height="1392" loading="eager" fetchpriority="high">
           {%- endif -%}
         </picture>
-        <div class="m2-top-hero__inner">
-          {%- if section.settings.heading != blank -%}
-            <h2 class="m2-top-hero__heading">
-              {%- for heading_line in heading_lines -%}<span>{{ heading_line | strip | escape }}</span>{%- endfor -%}
-            </h2>
-          {%- endif -%}
-          {%- if section.settings.button_label != blank and section.settings.button_link != blank -%}
-            <a class="m2-top-button m2-top-button--light" href="{{ section.settings.button_link }}">{{ section.settings.button_label | escape }}</a>
-          {%- endif -%}
-        </div>
       </article>
     {%- endif -%}
   </div>
@@ -137,16 +108,10 @@
   "class": "m2-section-wrapper",
   "settings": [
     {
-      "type": "textarea",
-      "id": "heading",
-      "label": "共通の見出し",
-      "default": "360度、\n自信に満ちた\n輝きへ。"
-    },
-    {
       "type": "image_picker",
       "id": "image",
       "label": "共通のPC画像",
-      "info": "各スライドで画像が未設定の場合に使用します。未設定時はFigmaのキービジュアルを表示します。"
+      "info": "各スライドで画像が未設定の場合に使用します。未設定時はkv01_pc.jpgを表示します。"
     },
     {
       "type": "image_picker",
@@ -174,16 +139,6 @@
       "unit": "秒",
       "label": "スライド切り替え間隔",
       "default": 5
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": "共通のボタン名"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": "共通のボタンリンク"
     }
   ],
   "blocks": [
@@ -192,10 +147,7 @@
       "name": "スライド",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "PC画像" },
-        { "type": "image_picker", "id": "mobile_image", "label": "スマートフォン画像" },
-        { "type": "textarea", "id": "heading", "label": "見出し", "default": "360度、\n自信に満ちた\n輝きへ。" },
-        { "type": "text", "id": "button_label", "label": "ボタン名" },
-        { "type": "url", "id": "button_link", "label": "ボタンリンク" }
+        { "type": "image_picker", "id": "mobile_image", "label": "スマートフォン画像" }
       ]
     }
   ],
