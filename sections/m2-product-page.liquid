@@ -17,7 +17,7 @@
 
 {%- if has_page_content -%}
   <script src="{{ 'm2-product.js' | asset_url }}" defer="defer"></script>
-  <div class="m2-pdp" data-m2-product-content>
+  <div class="m2-pdp" data-m2-product-content data-product-handle="{{ product.handle | escape }}">
     {%- if overview.eyebrow.value != blank
       or overview.heading.value != blank
       or overview.body.value != blank
