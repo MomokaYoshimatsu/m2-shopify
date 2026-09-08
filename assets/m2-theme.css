@@ -2222,7 +2222,6 @@ body {
 
 /* 全ページでFigma準拠のM2共通フッターを適用する。 */
 .m2-site-shell .shopify-section-group-footer-group {
-  padding-top: 120px;
   background: #2b2b2b;
 }
 
