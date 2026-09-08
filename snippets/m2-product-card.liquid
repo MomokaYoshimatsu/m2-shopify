@@ -58,7 +58,10 @@
         {%- endunless -%}
       </span>
       {%- if card_product.available -%}
-        {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+        <div class="m2-top-product__price-group">
+          {% render 'price', product: card_product, price_class: '', show_compare_at_price: true %}
+          <span class="m2-top-product__tax-label">(税込)</span>
+        </div>
       {%- else -%}
         <strong class="m2-top-product__unavailable">coming soon</strong>
       {%- endif -%}

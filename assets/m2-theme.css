@@ -1967,10 +1967,28 @@ body {
   min-width: 0;
 }
 
+.m2-top-product__price-group {
+  display: flex;
+  min-width: 0;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
 .m2-top-product .price {
   font-family: Montserrat, var(--font-body-family);
   font-size: 2.6rem;
   font-weight: 700;
+}
+
+.m2-top-product__tax-label {
+  flex: 0 0 auto;
+  color: var(--m2-top-ink);
+  font-family: 'Noto Sans JP', var(--font-body-family);
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.4;
+  white-space: nowrap;
 }
 
 .m2-top-product__unavailable {
@@ -2660,7 +2678,7 @@ body {
   }
 
   .m2-top-product .price {
-    font-size: 1.8rem;
+    font-size: 2rem;
   }
 
   .m2-top-product__feature {
