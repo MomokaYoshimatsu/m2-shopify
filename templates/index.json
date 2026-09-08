@@ -15,20 +15,10 @@
         "slide_01": {
           "type": "slide",
           "settings": {}
-        },
-        "slide_02": {
-          "type": "slide",
-          "settings": {}
-        },
-        "slide_03": {
-          "type": "slide",
-          "settings": {}
         }
       },
       "block_order": [
-        "slide_01",
-        "slide_02",
-        "slide_03"
+        "slide_01"
       ],
       "settings": {
         "show_pagination": true,
