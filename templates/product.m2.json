@@ -35,6 +35,11 @@
             "swatch_shape": "circle"
           }
         },
+        "go_sub_gosub_product_block_HHtzG9": {
+          "type": "shopify://apps/go-sub/blocks/gosub-product-block/87efaa1b-acee-458e-9de2-d43423c133fa",
+          "disabled": true,
+          "settings": {}
+        },
         "quantity-selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -53,11 +58,6 @@
             "inventory_threshold": 10,
             "show_inventory_quantity": true
           }
-        },
-        "go_sub_gosub_product_block_6W9TVR": {
-          "type": "shopify://apps/go-sub/blocks/gosub-product-block/87efaa1b-acee-458e-9de2-d43423c133fa",
-          "disabled": true,
-          "settings": {}
         }
       },
       "block_order": [
@@ -65,10 +65,10 @@
         "title",
         "price",
         "variant-picker",
+        "go_sub_gosub_product_block_HHtzG9",
         "quantity-selector",
         "buy_buttons",
-        "product-inventory",
-        "go_sub_gosub_product_block_6W9TVR"
+        "product-inventory"
       ],
       "settings": {
         "enable_sticky_info": true,
