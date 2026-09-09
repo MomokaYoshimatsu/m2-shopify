@@ -1,0 +1,5 @@
+{%- comment -%}
+  商品ページのプレーンテキスト専用。
+  値全体をエスケープした後、許可した br 表記と通常の改行だけを HTML 改行として出力する。
+{%- endcomment -%}
+{{- value | escape | newline_to_br | replace: '&lt;br&gt;', '<br>' | replace: '&lt;br/&gt;', '<br>' | replace: '&lt;br /&gt;', '<br>' -}}

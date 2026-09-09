@@ -1,0 +1,5 @@
+{%- comment -%}
+  商品ページの rich_text_field 専用。
+  Shopify の metafield_tag が生成する HTML を維持し、テキスト内の許可した br 表記だけを復元する。
+{%- endcomment -%}
+{{- value | metafield_tag | replace: '&lt;br&gt;', '<br>' | replace: '&lt;br/&gt;', '<br>' | replace: '&lt;br /&gt;', '<br>' -}}
