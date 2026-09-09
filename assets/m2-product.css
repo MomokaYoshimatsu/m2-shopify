@@ -139,10 +139,6 @@
   gap: 1rem;
 }
 
-.m2-product-main__brand {
-  display: block;
-}
-
 .m2-product-main .product__info-container > .m2-product-main__package {
   margin: 3rem 0 0;
   color: var(--m2-pdp-ink);
