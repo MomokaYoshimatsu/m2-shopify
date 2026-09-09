@@ -678,7 +678,8 @@
   max-height: none;
 }
 
-.m2-pdp[data-product-handle='super-collagen-drink-6000mg'] .m2-pdp-overview__media img {
+.m2-pdp[data-product-handle='super-collagen-drink-6000mg'] .m2-pdp-overview__media img,
+.m2-pdp[data-product-handle='super-collagen-drink-48000'] .m2-pdp-overview__media img {
   top: 0;
   left: 0;
   width: 100%;
