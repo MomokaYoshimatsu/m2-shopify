@@ -106,7 +106,10 @@
         </div>
 
         {%- if m2_show_footer_navigation -%}
-          <nav class="m2-footer__nav" aria-label="フッターナビゲーション">
+          <nav
+            class="m2-footer__nav{% if m2_show_legacy_navigation or m2_populated_group_count == 4 %} m2-footer__nav--four-groups{% endif %}"
+            aria-label="フッターナビゲーション"
+          >
             {%- if m2_show_legacy_navigation -%}
               <div class="m2-footer__group">
                 <h2>ABOUT</h2>

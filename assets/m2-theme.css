@@ -2814,6 +2814,10 @@ body {
     grid-template-columns: repeat(auto-fit, minmax(min(14rem, 100%), 1fr));
   }
 
+  .m2-footer__nav--four-groups {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) minmax(19rem, 1.4fr);
+  }
+
   .m2-footer__group a {
     font-size: 1.4rem;
   }
