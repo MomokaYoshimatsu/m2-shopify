@@ -35,11 +35,6 @@
             "swatch_shape": "circle"
           }
         },
-        "go_sub_gosub_product_block_HHtzG9": {
-          "type": "shopify://apps/go-sub/blocks/gosub-product-block/87efaa1b-acee-458e-9de2-d43423c133fa",
-          "disabled": true,
-          "settings": {}
-        },
         "quantity-selector": {
           "type": "quantity_selector",
           "settings": {}
@@ -58,6 +53,21 @@
             "inventory_threshold": 10,
             "show_inventory_quantity": true
           }
+        },
+        "subscriptions_app_block_exagfQ": {
+          "type": "shopify://apps/subscriptions/blocks/app-block/a3bfe9ec-96f8-4508-a003-df608a36d2ad",
+          "disabled": true,
+          "settings": {
+            "widget_style": "card",
+            "widget_style_card_selector": "radio_button",
+            "subscription_policy_url": "",
+            "color_text_body": "#6D7175",
+            "dividers_color": "#8F8D8D",
+            "background_color": "#FFFFFF",
+            "border_thickness": 1,
+            "border_radius": 0,
+            "product": "{{product}}"
+          }
         }
       },
       "block_order": [
@@ -65,10 +75,10 @@
         "title",
         "price",
         "variant-picker",
-        "go_sub_gosub_product_block_HHtzG9",
         "quantity-selector",
         "buy_buttons",
-        "product-inventory"
+        "product-inventory",
+        "subscriptions_app_block_exagfQ"
       ],
       "settings": {
         "enable_sticky_info": true,
