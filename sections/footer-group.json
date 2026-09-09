@@ -13,6 +13,42 @@
   "sections": {
     "footer": {
       "type": "footer",
+      "blocks": {
+        "m2_footer_about": {
+          "type": "link_list",
+          "settings": {
+            "heading": "ABOUT",
+            "menu": "m2-footer-about"
+          }
+        },
+        "m2_footer_products": {
+          "type": "link_list",
+          "settings": {
+            "heading": "PRODUCTS",
+            "menu": "m2-footer-products"
+          }
+        },
+        "m2_footer_support": {
+          "type": "link_list",
+          "settings": {
+            "heading": "SUPPORT",
+            "menu": "m2-footer-support"
+          }
+        },
+        "m2_footer_policy": {
+          "type": "link_list",
+          "settings": {
+            "heading": "POLICY",
+            "menu": "m2-footer-policy"
+          }
+        }
+      },
+      "block_order": [
+        "m2_footer_about",
+        "m2_footer_products",
+        "m2_footer_support",
+        "m2_footer_policy"
+      ],
       "settings": {
         "m2_footer_tagline": "飲む、次世代美容。\n韓国美容の最先端インナーケア。",
         "m2_copyright": "© 2026 Shiny Brands Japan. All Rights Reserved.",

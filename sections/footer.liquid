@@ -61,6 +61,40 @@
       assign m2_privacy_link = m2_privacy_link | default: routes.root_url
       assign m2_terms_link = m2_terms_link | default: routes.root_url
       assign m2_shipping_link = m2_shipping_link | default: routes.root_url
+
+      assign m2_link_list_block_count = 0
+      assign m2_populated_group_count = 0
+
+      for block in section.blocks
+        if block.type == 'link_list'
+          assign m2_link_list_block_count = m2_link_list_block_count | plus: 1
+          assign m2_block_link_count = 0
+
+          if block.settings.menu != blank
+            for link in block.settings.menu.links
+              if link.url != blank
+                assign m2_block_link_count = m2_block_link_count | plus: 1
+              endif
+            endfor
+          endif
+
+          if m2_block_link_count > 0
+            assign m2_populated_group_count = m2_populated_group_count | plus: 1
+          endif
+        endif
+      endfor
+
+      assign m2_show_legacy_navigation = false
+      assign m2_show_footer_navigation = false
+
+      if m2_link_list_block_count == 0
+        assign m2_show_legacy_navigation = true
+        assign m2_show_footer_navigation = true
+      elsif m2_populated_group_count > 0
+        assign m2_show_footer_navigation = true
+      elsif request.design_mode
+        assign m2_show_footer_navigation = true
+      endif
     -%}
     <div class="m2-footer">
       <div class="m2-footer__main">
@@ -71,41 +105,95 @@
           <p>{{ section.settings.m2_footer_tagline | escape | newline_to_br }}</p>
         </div>
 
-        <nav class="m2-footer__nav" aria-label="フッターナビゲーション">
-          <div class="m2-footer__group">
-            <h2>ABOUT</h2>
-            <ul>
-              <li><a href="{{ m2_about_link }}">ブランドについて</a></li>
-              <li><a href="{{ m2_clinical_link }}">臨床データ</a></li>
-            </ul>
-          </div>
-          <div class="m2-footer__group">
-            <h2>PRODUCTS</h2>
-            <ul>
-              <li><a href="{{ m2_product_1_link }}">コラーゲン 6000</a></li>
-              <li><a href="{{ m2_product_2_link }}">PDRN 3000+</a></li>
-              <li><a href="{{ m2_product_3_link }}">ゼリー（近日）</a></li>
-            </ul>
-          </div>
-          <div class="m2-footer__group">
-            <h2>SUPPORT</h2>
-            <ul>
-              <li><a href="{{ m2_faq_link }}">FAQ</a></li>
-              <li><a href="{{ m2_contact_link }}">お問い合わせ</a></li>
-              <li><a href="{{ m2_shop_list_link }}">SHOP LIST</a></li>
-              <li><a href="{{ m2_news_link }}">NEWS</a></li>
-            </ul>
-          </div>
-          <div class="m2-footer__group">
-            <h2>POLICY</h2>
-            <ul>
-              <li><a href="{{ m2_legal_link }}">特定商取引法に基づく表記</a></li>
-              <li><a href="{{ m2_privacy_link }}">プライバシーポリシー</a></li>
-              <li><a href="{{ m2_terms_link }}">利用規約</a></li>
-              <li><a href="{{ m2_shipping_link }}">配送・返品について</a></li>
-            </ul>
-          </div>
-        </nav>
+        {%- if m2_show_footer_navigation -%}
+          <nav
+            class="m2-footer__nav{% if m2_show_legacy_navigation or m2_populated_group_count == 4 %} m2-footer__nav--four-groups{% endif %}"
+            aria-label="フッターナビゲーション"
+          >
+            {%- if m2_show_legacy_navigation -%}
+              <div class="m2-footer__group">
+                <h2>ABOUT</h2>
+                <ul>
+                  <li><a href="{{ m2_about_link }}">ブランドについて</a></li>
+                  <li><a href="{{ m2_clinical_link }}">臨床データ</a></li>
+                </ul>
+              </div>
+              <div class="m2-footer__group">
+                <h2>PRODUCTS</h2>
+                <ul>
+                  <li><a href="{{ m2_product_1_link }}">コラーゲン 6000</a></li>
+                  <li><a href="{{ m2_product_2_link }}">PDRN 3000+</a></li>
+                  <li><a href="{{ m2_product_3_link }}">ゼリー（近日）</a></li>
+                </ul>
+              </div>
+              <div class="m2-footer__group">
+                <h2>SUPPORT</h2>
+                <ul>
+                  <li><a href="{{ m2_faq_link }}">FAQ</a></li>
+                  <li><a href="{{ m2_contact_link }}">お問い合わせ</a></li>
+                  <li><a href="{{ m2_shop_list_link }}">SHOP LIST</a></li>
+                  <li><a href="{{ m2_news_link }}">NEWS</a></li>
+                </ul>
+              </div>
+              <div class="m2-footer__group">
+                <h2>POLICY</h2>
+                <ul>
+                  <li><a href="{{ m2_legal_link }}">特定商取引法に基づく表記</a></li>
+                  <li><a href="{{ m2_privacy_link }}">プライバシーポリシー</a></li>
+                  <li><a href="{{ m2_terms_link }}">利用規約</a></li>
+                  <li><a href="{{ m2_shipping_link }}">配送・返品について</a></li>
+                </ul>
+              </div>
+            {%- else -%}
+              {%- for block in section.blocks -%}
+                {%- if block.type == 'link_list' -%}
+                  {%- liquid
+                    assign m2_menu = block.settings.menu
+                    assign m2_block_link_count = 0
+
+                    if m2_menu != blank
+                      for link in m2_menu.links
+                        if link.url != blank
+                          assign m2_block_link_count = m2_block_link_count | plus: 1
+                        endif
+                      endfor
+                    endif
+
+                    assign m2_group_heading = block.settings.heading
+                    if m2_group_heading == blank and m2_menu != blank
+                      assign m2_group_heading = m2_menu.title
+                    endif
+                  -%}
+                  {%- if m2_block_link_count > 0 -%}
+                    <div class="m2-footer__group" {{ block.shopify_attributes }}>
+                      {%- if m2_group_heading != blank -%}
+                        <h2>{{ m2_group_heading }}</h2>
+                      {%- endif -%}
+                      <ul>
+                        {%- for link in m2_menu.links -%}
+                          {%- if link.url != blank -%}
+                            <li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  {%- elsif request.design_mode -%}
+                    <div class="m2-footer__group m2-footer__group--placeholder" {{ block.shopify_attributes }}>
+                      <h2>{{ m2_group_heading | default: 'フッターメニュー' }}</h2>
+                      <p class="m2-footer__menu-placeholder">
+                        {%- if m2_menu == blank -%}
+                          「メニュー」から表示するメニューを選択してください。
+                        {%- else -%}
+                          選択したメニューにリンクを追加してください。
+                        {%- endif -%}
+                      </p>
+                    </div>
+                  {%- endif -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {%- endif -%}
+          </nav>
+        {%- endif -%}
       </div>
       <p class="m2-footer__copyright">{{ section.settings.m2_copyright | escape }}</p>
     </div>
@@ -522,6 +610,14 @@
       "id": "m2_copyright",
       "label": "コピーライト",
       "default": "© 2026 Shiny Brands Japan. All Rights Reserved."
+    },
+    {
+      "type": "header",
+      "content": "移行用フォールバックリンク"
+    },
+    {
+      "type": "paragraph",
+      "content": "リンクリストブロックが0件のときだけ使用します。通常は各リンクリストブロックと「コンテンツ > メニュー」を編集してください。"
     },
     {
       "type": "url",
