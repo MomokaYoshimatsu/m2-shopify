@@ -308,6 +308,7 @@
         "post_05",
         "post_06"
       ],
+      "disabled": true,
       "settings": {
         "eyebrow": "INSTAGRAM",
         "link": "",
