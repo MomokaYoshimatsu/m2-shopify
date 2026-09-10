@@ -286,7 +286,7 @@
 
 @media screen and (max-width: 1023px) {
   .m2-about-message__picture {
-    width: min(84vw, 28rem);
+    width: calc(100% - 1.5rem);
     margin-inline: auto;
   }
 
