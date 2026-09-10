@@ -11,6 +11,14 @@
         {%- liquid
           assign desktop_image = block.settings.image | default: section.settings.image
           assign mobile_image = block.settings.mobile_image | default: section.settings.mobile_image
+          assign slide_link = block.settings.link
+          assign slide_link_label = desktop_image.alt | default: mobile_image.alt
+          if slide_link_label == blank
+            capture slide_link_label
+              echo 'スライド '
+              echo forloop.index
+            endcapture
+          endif
           assign image_loading = 'lazy'
           assign image_fetchpriority = 'auto'
           if forloop.first
@@ -27,6 +35,14 @@
           {% unless forloop.first %}inert{% endunless %}
           {{ block.shopify_attributes }}
         >
+          {%- if slide_link != blank -%}
+            <a
+              class="m2-top-hero__link"
+              href="{{ slide_link }}"
+              aria-label="{{ slide_link_label | strip | escape }}"
+              data-m2-hero-link
+            >
+          {%- endif -%}
           <picture class="m2-top-hero__media" aria-hidden="true">
             {%- if mobile_image != blank -%}
               <source
@@ -58,6 +74,9 @@
               >
             {%- endif -%}
           </picture>
+          {%- if slide_link != blank -%}
+            </a>
+          {%- endif -%}
 
         </article>
       {%- endfor -%}
@@ -147,7 +166,8 @@
       "name": "スライド",
       "settings": [
         { "type": "image_picker", "id": "image", "label": "PC画像" },
-        { "type": "image_picker", "id": "mobile_image", "label": "スマートフォン画像" }
+        { "type": "image_picker", "id": "mobile_image", "label": "スマートフォン画像" },
+        { "type": "url", "id": "link", "label": "遷移先URL" }
       ]
     }
   ],

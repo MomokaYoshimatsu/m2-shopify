@@ -1305,6 +1305,8 @@ body {
 .m2-top-hero__slides {
   position: absolute;
   inset: 0;
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .m2-top-hero__slide {
@@ -1322,6 +1324,18 @@ body {
   visibility: visible;
 }
 
+.m2-top-hero__link {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.m2-top-hero__link:focus-visible {
+  z-index: 1;
+  outline: 0.3rem solid #fff;
+  outline-offset: -0.6rem;
+}
+
 .m2-top-hero__media,
 .m2-top-hero__media img {
   position: absolute;
@@ -1334,6 +1348,7 @@ body {
 .m2-top-hero__media img {
   object-fit: cover;
   object-position: 64% center;
+  -webkit-user-drag: none;
 }
 
 .m2-top-hero__pagination {
