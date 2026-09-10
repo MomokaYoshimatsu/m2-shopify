@@ -2902,7 +2902,6 @@ body.m2-site-shell :is(
   .m2-link,
   .m2-top-button:not(.m2-top-button--disabled),
   .m2-top-text-link,
-  .m2-top-hero__media,
   .m2-top-hero__pagination button:not(:disabled),
   .m2-top-movie__poster,
   .m2-top-product,
@@ -3018,9 +3017,6 @@ body.m2-site-shell :is(
     opacity: var(--m2-hover-opacity);
   }
 
-  body.m2-site-shell .m2-top-hero__link:hover .m2-top-hero__media {
-    opacity: var(--m2-hover-opacity);
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
