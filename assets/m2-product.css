@@ -1070,9 +1070,14 @@
   color: var(--m2-pdp-red);
 }
 
-.m2-pdp-faq-item summary:hover,
 .m2-pdp-faq-item summary:focus-visible {
   color: var(--m2-pdp-red);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .m2-pdp-faq-item summary:hover {
+    color: var(--m2-pdp-red);
+  }
 }
 
 .m2-pdp-faq-item__answer {

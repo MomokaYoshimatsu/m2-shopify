@@ -53,13 +53,6 @@
   white-space: nowrap;
 }
 
-.m2-subpage__breadcrumb a:hover,
-.m2-policy-breadcrumb a:hover {
-  color: var(--m2-accent);
-  text-decoration: underline;
-  text-underline-offset: 0.3rem;
-}
-
 .m2-subpage__breadcrumb a:focus-visible,
 .m2-policy-breadcrumb a:focus-visible,
 .m2-subpage__content a:focus-visible,
@@ -218,12 +211,6 @@
   text-underline-offset: 0.35rem;
 }
 
-.m2-subpage__content a:hover,
-.shopify-policy__body a:hover {
-  color: var(--m2-accent-dark);
-  text-decoration-thickness: 0.2rem;
-}
-
 .m2-subpage__content blockquote,
 .shopify-policy__body blockquote {
   display: block;
@@ -332,10 +319,22 @@
   text-decoration: none;
 }
 
-.m2-subpage__content .button:hover,
 .m2-subpage__content .button:focus-visible {
   background: var(--m2-accent-dark);
   color: var(--m2-paper);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .m2-subpage__content a:hover,
+  .shopify-policy__body a:hover {
+    color: var(--m2-accent-dark);
+    text-decoration-thickness: 0.2rem;
+  }
+
+  .m2-subpage__content .button:hover {
+    background: var(--m2-accent-dark);
+    color: var(--m2-paper);
+  }
 }
 
 .m2-policy-layout {

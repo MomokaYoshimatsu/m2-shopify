@@ -85,6 +85,9 @@
   --m2-content: 120rem;
   --m2-gutter: 2rem;
   --m2-section-space: 7.2rem;
+  --m2-hover-duration: 180ms;
+  --m2-hover-easing: ease;
+  --m2-hover-opacity: 0.6;
 }
 
 html {
@@ -209,7 +212,6 @@ body {
   transition: background-color 180ms ease, color 180ms ease;
 }
 
-.m2-link:hover,
 .m2-link:focus-visible {
   background: var(--m2-ink);
   color: #fff;
@@ -219,7 +221,6 @@ body {
   color: #fff;
 }
 
-.m2-section--dark .m2-link:hover,
 .m2-section--dark .m2-link:focus-visible {
   background: #fff;
   color: var(--m2-dark);
@@ -231,7 +232,6 @@ body {
   border-width: 0 0 0.1rem;
 }
 
-.m2-link--text:hover,
 .m2-link--text:focus-visible {
   background: transparent;
   color: var(--m2-muted);
@@ -954,7 +954,6 @@ body {
   transition: background-color 180ms ease, transform 180ms ease;
 }
 
-.m2-top-button:hover,
 .m2-top-button:focus-visible {
   background: var(--m2-top-red-dark);
   color: #fff;
@@ -1031,6 +1030,34 @@ body {
   display: none;
 }
 
+/*
+ * The branded cart/account artwork is supplied as one decorative SVG behind
+ * two separate links. Repaint each icon inside its own hit area so the shared
+ * header hover treatment can animate the visible artwork independently.
+ */
+.m2-site-shell .shopify-section-group-header-group .header__icon--cart::after,
+.m2-site-shell .shopify-section-group-header-group .header__icon--account::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  display: block;
+  height: 2.25rem;
+  background: url('m2-header-actions.svg') no-repeat;
+  background-size: 8.221rem 2.25rem;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.m2-site-shell .shopify-section-group-header-group .header__icon--cart::after {
+  width: 2.519rem;
+  background-position: left center;
+}
+
+.m2-site-shell .shopify-section-group-header-group .header__icon--account::after {
+  width: 1.7rem;
+  background-position: right center;
+}
+
 .m2-site-shell .shopify-section-group-header-group .header__menu-item {
   font-family: Montserrat, var(--font-body-family);
   font-size: 1.1rem;
@@ -1039,7 +1066,6 @@ body {
   transition: opacity 180ms ease;
 }
 
-.m2-site-shell .shopify-section-group-header-group .header__menu-item:hover,
 .m2-site-shell .shopify-section-group-header-group .header__menu-item:focus-visible {
   opacity: 0.6;
 }
@@ -1140,8 +1166,17 @@ body {
     width: 6.22rem;
     height: 2.25rem;
     object-fit: contain;
+    opacity: 0;
     pointer-events: none;
     transform: translateY(-50%);
+  }
+
+  .m2-site-shell .shopify-section-group-header-group .header__icon--cart::after {
+    right: 0;
+  }
+
+  .m2-site-shell .shopify-section-group-header-group .header__icon--account::after {
+    right: 1.1rem;
   }
 
   .m2-site-shell .shopify-section-group-header-group .header__icon--cart,
@@ -1655,7 +1690,6 @@ body {
   transition: transform 180ms ease;
 }
 
-.m2-top-movie__poster:hover .m2-top-movie__play,
 .m2-top-movie__poster:focus-visible .m2-top-movie__play {
   transform: translate(-50%, -50%) scale(1.06);
 }
@@ -2351,7 +2385,6 @@ body {
   overflow-wrap: anywhere;
 }
 
-.m2-footer__group a:hover,
 .m2-footer__group a:focus-visible {
   color: #fff;
   text-decoration: underline;
@@ -2450,7 +2483,16 @@ body {
     display: block;
     width: 8.221rem;
     height: 2.25rem;
+    opacity: 0;
     pointer-events: none;
+  }
+
+  .m2-site-shell .shopify-section-group-header-group .header__icon--cart::after {
+    left: 0;
+  }
+
+  .m2-site-shell .shopify-section-group-header-group .header__icon--account::after {
+    right: 0;
   }
 
   .m2-site-shell .shopify-section-group-header-group .header__icon--cart,
@@ -2717,7 +2759,7 @@ body {
   }
 
   .m2-top-science {
-    padding: 10rem 0;
+    padding: 10rem 0 13rem;
     background: linear-gradient(to bottom, var(--m2-top-red) 0 43.2rem, var(--m2-top-bg) 43.2rem 100%);
   }
 
@@ -2778,7 +2820,7 @@ body {
 
   .m2-top-news {
     padding-top: 0;
-    padding-bottom: 10rem;
+    padding-bottom: 15rem;
   }
 
   .m2-top-news__view-all--desktop {
@@ -2843,7 +2885,149 @@ body {
   :root { --m2-top-gutter: 6rem; }
 }
 
+/*
+ * M2 interaction motion
+ * Keep component-specific color/background states, while sharing the header's
+ * 180ms ease timing. The opacity treatment is limited to controls that did not
+ * already have a component-specific hover animation.
+ */
+body.m2-site-shell :is(
+  .shopify-section-group-header-group .header__heading-link,
+  .shopify-section-group-header-group .header__menu-item,
+  .shopify-section-group-header-group .header__icon,
+  header-drawer .menu-drawer__menu-item,
+  header-drawer .menu-drawer__close-button,
+  .m2-footer__brand a,
+  .m2-footer__group a,
+  .m2-link,
+  .m2-top-button:not(.m2-top-button--disabled),
+  .m2-top-text-link,
+  .m2-top-hero__media,
+  .m2-top-hero__pagination button:not(:disabled),
+  .m2-top-movie__poster,
+  .m2-top-product,
+  .m2-top-news__item h3 a,
+  .m2-top-social__card,
+  .m2-top-shop-list__button,
+  .m2-about-breadcrumb a,
+  .m2-about-text-link,
+  .m2-about-link,
+  .m2-faq-page__breadcrumb a,
+  .m2-faq-page__category-link,
+  .m2-faq-page__item summary,
+  .m2-faq-page__empty a,
+  .m2-news-breadcrumb a,
+  .m2-news-list__link,
+  .m2-news-pagination a,
+  .m2-news-article-card__content a,
+  .m2-news-back-link,
+  .m2-contact-page__breadcrumb a,
+  .m2-contact-server-error a,
+  .m2-contact-consent a,
+  .m2-contact-button:not(:disabled),
+  .m2-cart__breadcrumb a,
+  .template-cart .cart-item__name,
+  .template-cart cart-remove-button .button:not([disabled]),
+  .template-cart .cart__warnings > .button:not([disabled]),
+  .template-cart .cart__checkout-button:not([disabled]),
+  cart-notification .cart-notification__links :is(.button:not([disabled]), .link),
+  cart-drawer .cart__checkout-button:not([disabled]),
+  cart-drawer .m2-cart__continue-button,
+  cart-drawer .cart-drawer__empty-content > .button:not([disabled]),
+  cart-drawer cart-remove-button .button:not([disabled]),
+  .m2-subpage__breadcrumb a,
+  .m2-policy-breadcrumb a,
+  .m2-subpage__content a,
+  .shopify-policy__body a,
+  .m2-storefront-breadcrumb a,
+  .m2-storefront-button,
+  .m2-storefront-grid .card-wrapper,
+  .m2-search-page .card-wrapper,
+  .m2-collection-list .card-wrapper,
+  .m2-storefront-grid .pagination__item,
+  .m2-search-page .pagination__item,
+  .m2-collection-list .pagination__item,
+  .m2-product-card,
+  .m2-news-item__title a,
+  .m2-social-card,
+  .m2-faq-item summary,
+  .m2-pdp-faq-item summary,
+  .template-product--m2 .product-form__submit:not([disabled]),
+  .template-product--m2 .quantity__button:not([disabled]),
+  .template-product--m2 .product__media-toggle,
+  .template-product--m2 .slider-button:not([disabled]),
+  .template-product--m2 .share-button__button
+) {
+  transition-duration: var(--m2-hover-duration);
+  transition-timing-function: var(--m2-hover-easing);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body.m2-site-shell .m2-link:hover {
+    background: var(--m2-ink);
+    color: #fff;
+  }
+
+  body.m2-site-shell .m2-section--dark .m2-link:hover {
+    background: #fff;
+    color: var(--m2-dark);
+  }
+
+  body.m2-site-shell .m2-link--text:hover {
+    background: transparent;
+    color: var(--m2-muted);
+  }
+
+  body.m2-site-shell .m2-top-button:hover {
+    background: var(--m2-top-red-dark);
+    color: #fff;
+    transform: translateY(-0.1rem);
+  }
+
+  body.m2-site-shell .m2-top-movie__poster:hover .m2-top-movie__play {
+    transform: translate(-50%, -50%) scale(1.06);
+  }
+
+  body.m2-site-shell :is(
+    .shopify-section-group-header-group .header__heading-link,
+    .shopify-section-group-header-group .header__menu-item,
+    .shopify-section-group-header-group .header__icon,
+    header-drawer .menu-drawer__menu-item,
+    header-drawer .menu-drawer__close-button,
+    .m2-footer__brand a,
+    .m2-footer__group a,
+    .m2-top-text-link,
+    .m2-top-news__item h3 a,
+    .m2-about-breadcrumb a,
+    .m2-about-text-link,
+    .m2-faq-page__breadcrumb a,
+    .m2-news-breadcrumb a,
+    .m2-contact-page__breadcrumb a,
+    .m2-contact-server-error a,
+    .m2-contact-consent a,
+    .m2-cart__breadcrumb a,
+    .m2-subpage__breadcrumb a,
+    .m2-policy-breadcrumb a,
+    .m2-storefront-breadcrumb a,
+    .m2-news-item__title a
+  ):hover,
+  body.m2-site-shell .m2-top-product:has(h3 a:hover),
+  body.m2-site-shell .m2-top-social__card:has(a:hover),
+  body.m2-site-shell .m2-product-card:has(a:hover),
+  body.m2-site-shell .m2-social-card:has(a:hover) {
+    opacity: var(--m2-hover-opacity);
+  }
+
+  body.m2-site-shell .m2-top-hero__link:hover .m2-top-hero__media {
+    opacity: var(--m2-hover-opacity);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  :root {
+    --m2-hover-duration: 0.01ms;
+  }
+
   .m2-top-button,
   .m2-top-movie__play,
   .m2-top-hero__slide {

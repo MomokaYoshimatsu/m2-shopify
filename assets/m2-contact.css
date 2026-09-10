@@ -48,7 +48,6 @@
   text-decoration: none;
 }
 
-.m2-contact-page__breadcrumb a:hover,
 .m2-contact-page__breadcrumb a:focus-visible {
   text-decoration: underline;
   text-underline-offset: 0.3rem;
@@ -253,11 +252,6 @@
   -webkit-text-fill-color: var(--m2-contact-copy);
 }
 
-.m2-contact-field input:hover,
-.m2-contact-field textarea:hover {
-  border-color: #9fa6aa;
-}
-
 .m2-contact-field input:focus-visible,
 .m2-contact-field textarea:focus-visible {
   border-color: var(--m2-contact-red);
@@ -367,7 +361,6 @@
   transition: background-color 180ms ease, transform 180ms ease;
 }
 
-.m2-contact-button:hover:not(:disabled),
 .m2-contact-button:focus-visible:not(:disabled) {
   background: var(--m2-contact-red-dark);
   color: #fff;
@@ -383,9 +376,25 @@
   background: #a0a0a0;
 }
 
-.m2-contact-button--secondary:hover,
 .m2-contact-button--secondary:focus-visible {
   background: #777;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .m2-contact-field input:hover,
+  .m2-contact-field textarea:hover {
+    border-color: #9fa6aa;
+  }
+
+  .m2-contact-button:hover:not(:disabled) {
+    background: var(--m2-contact-red-dark);
+    color: #fff;
+    transform: translateY(-0.1rem);
+  }
+
+  .m2-contact-button--secondary:hover:not(:disabled) {
+    background: #777;
+  }
 }
 
 .m2-contact-confirm__panel {
