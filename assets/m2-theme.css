@@ -1030,6 +1030,34 @@ body {
   display: none;
 }
 
+/*
+ * The branded cart/account artwork is supplied as one decorative SVG behind
+ * two separate links. Repaint each icon inside its own hit area so the shared
+ * header hover treatment can animate the visible artwork independently.
+ */
+.m2-site-shell .shopify-section-group-header-group .header__icon--cart::after,
+.m2-site-shell .shopify-section-group-header-group .header__icon--account::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  display: block;
+  height: 2.25rem;
+  background: url('m2-header-actions.svg') no-repeat;
+  background-size: 8.221rem 2.25rem;
+  pointer-events: none;
+  transform: translateY(-50%);
+}
+
+.m2-site-shell .shopify-section-group-header-group .header__icon--cart::after {
+  width: 2.519rem;
+  background-position: left center;
+}
+
+.m2-site-shell .shopify-section-group-header-group .header__icon--account::after {
+  width: 1.7rem;
+  background-position: right center;
+}
+
 .m2-site-shell .shopify-section-group-header-group .header__menu-item {
   font-family: Montserrat, var(--font-body-family);
   font-size: 1.1rem;
@@ -1138,8 +1166,17 @@ body {
     width: 6.22rem;
     height: 2.25rem;
     object-fit: contain;
+    opacity: 0;
     pointer-events: none;
     transform: translateY(-50%);
+  }
+
+  .m2-site-shell .shopify-section-group-header-group .header__icon--cart::after {
+    right: 0;
+  }
+
+  .m2-site-shell .shopify-section-group-header-group .header__icon--account::after {
+    right: 1.1rem;
   }
 
   .m2-site-shell .shopify-section-group-header-group .header__icon--cart,
@@ -2446,7 +2483,16 @@ body {
     display: block;
     width: 8.221rem;
     height: 2.25rem;
+    opacity: 0;
     pointer-events: none;
+  }
+
+  .m2-site-shell .shopify-section-group-header-group .header__icon--cart::after {
+    left: 0;
+  }
+
+  .m2-site-shell .shopify-section-group-header-group .header__icon--account::after {
+    right: 0;
   }
 
   .m2-site-shell .shopify-section-group-header-group .header__icon--cart,
