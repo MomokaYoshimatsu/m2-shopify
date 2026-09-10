@@ -288,12 +288,16 @@
   .m2-about-message__picture {
     width: calc(100% - 1.5rem);
     margin-inline: auto;
+    overflow: hidden;
+    aspect-ratio: 715 / 353;
+    border-radius: 1rem;
   }
 
   .m2-about-message__picture img {
-    height: auto;
+    height: 100%;
     aspect-ratio: auto;
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center;
   }
 }
 
