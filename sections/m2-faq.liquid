@@ -96,7 +96,6 @@
     <div id="M2FaqContent-{{ section.id }}" class="m2-faq-page__content">
       <div class="m2-faq-page__groups">
         {%- assign used_content_anchors = '|' -%}
-        {%- assign has_opened_default = false -%}
         {%- for faq_category in faq_categories -%}
           {%- liquid
             assign category_name = faq_category.category_name.value | strip
@@ -142,7 +141,7 @@
               <div class="m2-faq-page__items">
                 {%- for faq_entry in category_items -%}
                   {%- if faq_entry.question.value != blank and faq_entry.answer.value != blank -%}
-                    <details class="m2-faq-page__item"{% if section.settings.open_first_item and has_opened_default == false %} open{% endif %}>
+                    <details class="m2-faq-page__item">
                       <summary>
                         <span class="m2-faq-page__question-mark" aria-hidden="true">Q</span>
                         <span class="m2-faq-page__question">{{ faq_entry.question.value | escape }}</span>
@@ -155,9 +154,6 @@
                         <div class="m2-faq-page__answer-copy rte">{{ faq_entry.answer | metafield_tag }}</div>
                       </div>
                     </details>
-                    {%- if section.settings.open_first_item and has_opened_default == false -%}
-                      {%- assign has_opened_default = true -%}
-                    {%- endif -%}
                   {%- endif -%}
                 {%- endfor -%}
               </div>
@@ -191,7 +187,6 @@
     { "type": "richtext", "id": "text", "label": "導入文", "default": "<p>商品や配送、サービスについてお寄せいただくご質問をまとめました。</p>" },
     { "type": "checkbox", "id": "show_all_link", "label": "「すべて」を表示", "default": true },
     { "type": "text", "id": "all_label", "label": "すべての表示名", "default": "すべて" },
-    { "type": "checkbox", "id": "open_first_item", "label": "最初の回答を開いて表示", "default": true },
     { "type": "header", "content": "FAQ未設定時" },
     { "type": "text", "id": "empty_heading", "label": "空状態の見出し", "default": "よくあるご質問は準備中です" },
     { "type": "richtext", "id": "empty_text", "label": "空状態の本文", "default": "<p>お急ぎの場合は、お問い合わせフォームよりご連絡ください。</p>" },

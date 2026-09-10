@@ -42,9 +42,7 @@
   text-decoration: none;
 }
 
-.m2-about-breadcrumb a:hover,
 .m2-about-breadcrumb a:focus-visible,
-.m2-about-text-link:hover,
 .m2-about-text-link:focus-visible {
   text-decoration: underline;
   text-underline-offset: 0.3rem;
@@ -195,7 +193,6 @@
   text-decoration: none;
 }
 
-.m2-about-link:hover,
 .m2-about-link:focus-visible {
   background: var(--m2-about-red);
   color: #fff;
@@ -440,10 +437,21 @@
   color: #fff;
 }
 
-.m2-about-link--light:hover,
 .m2-about-link--light:focus-visible {
   background: #fff;
   color: var(--m2-about-red);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .m2-about-link:hover {
+    background: var(--m2-about-red);
+    color: #fff;
+  }
+
+  .m2-about-link--light:hover {
+    background: #fff;
+    color: var(--m2-about-red);
+  }
 }
 
 @media screen and (min-width: 1024px) {
