@@ -855,9 +855,9 @@
 
 .m2-pdp-free-formula ul {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.6rem;
-  max-width: 91rem;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 1.2rem 0.4rem;
+  max-width: 42rem;
   margin: 0 auto;
   padding: 0;
   list-style: none;
@@ -865,16 +865,28 @@
 
 .m2-pdp-free-formula li {
   display: grid;
+  grid-column: span 2;
   place-items: center;
+  min-width: 0;
+  padding: 0.6rem;
   aspect-ratio: 1;
   border-radius: 50%;
   background: var(--m2-pdp-red);
   color: #fff;
-  font-size: 1.8rem;
+  font-size: clamp(1.1rem, 3.5vw, 1.4rem);
   font-weight: 700;
-  letter-spacing: 0.08em;
-  line-height: 3rem;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
   text-align: center;
+}
+
+.m2-pdp-free-formula li:nth-last-child(2):nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.m2-pdp-free-formula li:last-child:nth-child(5) {
+  grid-column: 4 / span 2;
 }
 
 .m2-pdp-how-to {
@@ -883,12 +895,25 @@
 }
 
 .m2-pdp-how-to__grid {
-  display: grid;
-  gap: 4rem;
+  display: flex;
+  gap: 1.6rem;
+  padding-bottom: 0.4rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.m2-pdp-how-to__grid::-webkit-scrollbar {
+  display: none;
 }
 
 .m2-pdp-how-to-card {
+  flex: 0 0 min(70vw, 26rem);
   min-width: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
   text-align: center;
 }
 
@@ -1193,14 +1218,9 @@
   }
 
   .m2-pdp-recommended ul,
-  .m2-pdp-how-to__grid,
   .m2-pdp-related__grid,
   .m2-pdp-support__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .m2-pdp-free-formula ul {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .m2-pdp-spec-list {
@@ -1336,11 +1356,31 @@
     grid-template-columns: repeat(5, 15.8rem);
     justify-content: center;
     gap: 2.5rem;
+    max-width: 91rem;
+  }
+
+  .m2-pdp-free-formula li,
+  .m2-pdp-free-formula li:nth-last-child(2):nth-child(4),
+  .m2-pdp-free-formula li:last-child:nth-child(5) {
+    grid-column: auto;
+    padding: 0;
+    font-size: 1.8rem;
+    letter-spacing: 0.08em;
+    line-height: 3rem;
   }
 
   .m2-pdp-how-to__grid {
+    display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 5.1rem;
+    padding-bottom: 0;
+    overflow-x: visible;
+    scroll-snap-type: none;
+  }
+
+  .m2-pdp-how-to-card {
+    scroll-snap-align: none;
+    scroll-snap-stop: normal;
   }
 
   .m2-pdp-how-to .m2-pdp-heading {

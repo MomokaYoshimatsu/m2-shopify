@@ -1,5 +1,6 @@
 .m2-top-shop-list {
   padding-top: 6rem;
+  scroll-margin-top: calc(var(--header-height, 4.4rem) + 1.6rem);
 }
 
 .m2-top-shop-list__header {
