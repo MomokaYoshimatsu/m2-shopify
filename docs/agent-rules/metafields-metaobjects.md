@@ -135,6 +135,14 @@ Metafield / Metaobjectの新設前に、次を確認します。
 | `tags` | `list.single_line_text_field` | 任意 | タイプ・フレーバー等のタグ |
 | `body` | `rich_text_field` | 任意 | 商品紹介本文 |
 | `recommended_items` | `list.single_line_text_field` | 任意 | 「こんな方におすすめ」の項目 |
+| `image` | `file_reference`（画像） | 任意 | 商品概要専用画像。未設定時は画像エリアを非表示にし、商品画像へフォールバックしない |
+
+商品概要画像の運用:
+
+- 商品ごとの専用PNGを `image` に設定する。商品メディア、商品サムネイル、`product.featured_image` は商品概要では参照しない。
+- 画像は透過と縦横比を維持し、SP 280px / PC 334pxの固定高さ内でクロップせず中央表示する。
+- altは既存の `image_alt` フィールドがストア定義に存在する場合のみその値を優先し、未設定時はShopify Filesの画像alt、商品名の順で補う。
+- `image` の定義追加と各エントリーへの画像設定は管理画面変更にあたるため、ユーザー承認後にAdmin APIで行う。
 
 ### 廃止済みの旧集約構造（移行履歴）
 
