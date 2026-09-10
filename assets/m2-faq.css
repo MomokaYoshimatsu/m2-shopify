@@ -41,7 +41,6 @@
   text-decoration: none;
 }
 
-.m2-faq-page__breadcrumb a:hover,
 .m2-faq-page__breadcrumb a:focus-visible {
   text-decoration: underline;
   text-underline-offset: 0.3rem;
@@ -141,13 +140,11 @@
   color: #fff;
 }
 
-.m2-faq-page__category-link:hover,
 .m2-faq-page__category-link:focus-visible {
   background: #f8e8eb;
   color: var(--m2-faq-red);
 }
 
-.m2-faq-page__category-link--all:hover,
 .m2-faq-page__category-link--all:focus-visible {
   background: var(--m2-faq-red-dark);
   color: #fff;
@@ -240,7 +237,6 @@
   transform: rotate(180deg);
 }
 
-.m2-faq-page__item summary:hover,
 .m2-faq-page__item summary:focus-visible,
 .m2-faq-page__item[open] summary {
   color: var(--m2-faq-red);
@@ -302,9 +298,28 @@
   text-decoration: none;
 }
 
-.m2-faq-page__empty a:hover,
 .m2-faq-page__empty a:focus-visible {
   background: var(--m2-faq-red-dark);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .m2-faq-page__category-link:hover {
+    background: #f8e8eb;
+    color: var(--m2-faq-red);
+  }
+
+  .m2-faq-page__category-link--all:hover {
+    background: var(--m2-faq-red-dark);
+    color: #fff;
+  }
+
+  .m2-faq-page__item summary:hover {
+    color: var(--m2-faq-red);
+  }
+
+  .m2-faq-page__empty a:hover {
+    background: var(--m2-faq-red-dark);
+  }
 }
 
 @media screen and (min-width: 1024px) {

@@ -20,7 +20,6 @@
         "text": "<p>商品や配送、サービスについてお寄せいただくご質問をまとめました。</p>",
         "show_all_link": true,
         "all_label": "すべて",
-        "open_first_item": true,
         "empty_heading": "よくあるご質問は準備中です",
         "empty_text": "<p>お急ぎの場合は、お問い合わせフォームよりご連絡ください。</p>",
         "contact_label": "お問い合わせ",
