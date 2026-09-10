@@ -2506,7 +2506,7 @@ body {
 
   .m2-top-hero__pagination {
     bottom: 3.8rem;
-    left: max(var(--m2-top-gutter), calc((100vw - 110rem) / 2));
+    left: 4%;
   }
 
   .m2-top-about {
