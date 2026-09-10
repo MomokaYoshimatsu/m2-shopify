@@ -1,5 +1,7 @@
 {%- liquid
   assign overview = product.metafields.custom.m2_overview.value
+  assign overview_image = overview.image.value
+  assign overview_image_alt = overview.image_alt.value | default: overview_image.alt | default: product.title
   assign features = product.metafields.custom.m2_features.value
   assign support_items = product.metafields.custom.m2_support_items.value
   assign free_formula_items = product.metafields.custom.m2_free_formula_items.value
@@ -34,7 +36,7 @@
             {%- endif -%}
           </header>
 
-          <div class="m2-pdp-overview__grid">
+          <div class="m2-pdp-overview__grid{% if overview_image == blank %} m2-pdp-overview__grid--text-only{% endif %}">
             <div class="m2-pdp-overview__content">
               {%- if overview.badge.value != blank
                 or overview.kicker.value != blank
@@ -79,15 +81,16 @@
               {%- endif -%}
             </div>
 
-            {%- if product.featured_image != blank -%}
-              {%- assign overview_image_alt = product.featured_image.alt | default: product.title -%}
+            {%- if overview_image != blank -%}
               <div class="m2-pdp-overview__media">
                 {{
-                  product.featured_image
+                  overview_image
                   | image_url: width: 900
                   | image_tag:
-                    widths: '320, 480, 640, 760, 900',
-                    sizes: '(min-width: 1024px) 28rem, 70vw',
+                    widths: '160, 240, 283, 320, 480, 566, 760, 900',
+                    sizes: '(min-width: 1024px) 283px, (max-width: 322px) calc(100vw - 40px), 283px',
+                    width: overview_image.width,
+                    height: overview_image.height,
                     loading: 'lazy',
                     alt: overview_image_alt
                 }}
