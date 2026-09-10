@@ -14,7 +14,11 @@
       "blocks": {
         "slide_01": {
           "type": "slide",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/kv01_pc.jpg",
+            "mobile_image": "shopify://shop_images/kv01_sp.jpg",
+            "link": "shopify://products/super-collagen-drink-48000"
+          }
         }
       },
       "block_order": [
