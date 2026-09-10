@@ -284,6 +284,19 @@
   margin-bottom: 2.4rem;
 }
 
+@media screen and (max-width: 1023px) {
+  .m2-about-message__picture {
+    width: min(84vw, 28rem);
+    margin-inline: auto;
+  }
+
+  .m2-about-message__picture img {
+    height: auto;
+    aspect-ratio: auto;
+    object-fit: contain;
+  }
+}
+
 .m2-about-science__intro {
   display: flex;
   align-items: center;
