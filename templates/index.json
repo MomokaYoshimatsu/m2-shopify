@@ -19,10 +19,19 @@
             "mobile_image": "shopify://shop_images/kv01_sp.jpg",
             "link": "shopify://products/super-collagen-drink-48000"
           }
+        },
+        "slide_cbCR7h": {
+          "type": "slide",
+          "settings": {
+            "image": "shopify://shop_images/kv_pdrn.jpg",
+            "mobile_image": "shopify://shop_images/kv_pdrn_sp.jpg",
+            "link": "shopify://products/premium-collagen-3000-pdrn"
+          }
         }
       },
       "block_order": [
-        "slide_01"
+        "slide_01",
+        "slide_cbCR7h"
       ],
       "settings": {
         "show_pagination": true,
