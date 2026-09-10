@@ -12,13 +12,6 @@
     "m2_hero": {
       "type": "m2-hero",
       "blocks": {
-        "slide_6EETaq": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/ChatGPT_Image_2026_9_8_15_30_33.png",
-            "link": ""
-          }
-        },
         "slide_01": {
           "type": "slide",
           "settings": {
@@ -29,7 +22,6 @@
         }
       },
       "block_order": [
-        "slide_6EETaq",
         "slide_01"
       ],
       "settings": {
